@@ -1,0 +1,40 @@
+In this section we will present some background information about the topics that the project consist of. We'll star by introducing search engines and more specifically how page rank can be used to make a search engine better. After this we will give a short introduction to Twitter, the social media that is the domain of the project. The section will finish with a presentation of some related work and a subsection of your motivation for doing the project. The next section describes the methods that we used.
+
+
+\subsection{Search Engines}
+\begin{quote}Information retrieval deals with the representation, storage, organization of, and access to information items \citep[p.1]{Baeza-Yates2011}.\end{quote} It should be done in such a way that users easily can access the information they are looking for. There are many factors contributing to a information retrieval system. Our application is a kind of search engine for Twitter. It has two focus points related to the information retrieval process. The first is ranking of the search results and the second is presenting the results.  
+
+
+
+{\bf Ranking}
+Ranking of results is an integral part of any search engine, no less in ours. But how exactly does one rank search results? “A second critical challenge is the identification of quality content in the Web. Evidence of quality can be indicated by several signals such as domain names [...], text content, and various counts (such as the number of word occurrences), links (like PageRank), and Web page access patterns as monitored by the search engine” \citep[p.468]{Baeza-Yates2011}
+\citet{Baeza-Yates2011} go on to describe different types of signals that can be used to improve ranking of web results. These will be briefly described here. Content signals refers to the content of the document, mainly text. The signal in the content type refers to things such as word counts, vector space model-based scores and so forth. Structural signals, according to \citet{Baeza-Yates2011}, includes signals such as the links on a page, the text in anchor elements, and in and out-links to a page. The last signal type describes is the web usage signals. User clicks is one often used signal where the relevance of a result is affected by the number of clicks it receives. Other signals mentioned are geographical location, language, technological context and temporal context (that is web usage over time gathered through cookies or user profiles)\citep{Baeza-Yates2011}.
+
+Link-based ranking is based on using structural signals (i.e. counting the number of outgoing and incoming links on a page) to rank a page or document. One ranking algorithm based on this  principle is the Google PageRank algorithm \citep{Page1999}.
+
+\subsubsection{Page Rank}
+The goal of the PageRank ranking algorithm is stated as follows: “This ranking called PageRank helps search engines and users quickly make sense of the vast heterogeneity of the World Wide Web” \citep[p. 1]{Page1999}. The PageRank algorithm exploits the structure of the web by looking at the number of backlinks and out links a web page has. The World Wide Web can thus be viewed as a graph with directed edges (backlinks and forward or outgoing links) between nodes (web pages). \citet{Page1999} note that giving high ranks just by looking at the number of backlinks (incoming links) is problematic because a site might get many backlinks from various web pages that are not very important. They provide a solution to this by proposing that not only the number of backlinks, but also the rank of the web pages for these backlinks can be used when ranking a web page. Given this solution, as shown by \citet{Page1999}, a page receives a high page rank if the sum of the sum of the page ranks of the backlinks is high.
+
+\subsubsection{User Interface}
+
+{\bf Interaction design principles and user-centered design}\newline
+In addition to exploring ranking algorithms we are going to develop a novel interface to display tweets and their rankings. In the book Interaction Design: Beyond Human-Computer Interaction Sharp et al (2007) present several factors who are paramount to good interaction design. In order to design good interaction one should take into account the usability principles as presented in the book. These are visibility (whether the functions/input mechanisms are visible or hidden), feedback (the interface should show that the system has received and used the input given), constraints (avoiding facilitating invalid user input for given contexts), consistency (similar operations use the same kinds of elements) and affordance (whether users can use familiarisation from experience in order to naturally understand what the interface element does). In addition to this the book also provides a set of metrics which can be utilised to measure the usability of an artefact.\newline
+
+{\bf \noindent Classic search engine result pages}\newline
+\citet[p.480]{Baeza-Yates2011} argues that existing search engines are heavily influenced by what they call a extreme simplicity rule. Basically this rule states that search engine user experience must be simplistic enough in nature that users understand it without any previous knowledge, or else they will simply switch to another search engine. This has lead to a very prominent interface paradigm where all the most prominent search engines use the classic search engine result page (SERP) \citep{Baeza-Yates2011}. 
+As search engines have started to search several different content types the need to display several different media types in one unified result page have also emerged. This has resulted in two innovations: the “onebox” \citep{Baeza-Yates2011}, which displays specific information from one knowledge domain (e.g weather reports) and universal search results where one combines several different searches into one search result page.
+
+\subsection{Twitter}
+Twitter is a microblogging service available for more than 20 languages \citep{Twitter2012}. User post messages, called tweets, about what they find interesting which are read by other users. As Twitter has become popular it has received a broad user group. The difference between Twitter and other social networks is the way  that it defines the relationships in the network. On Twitters a user is following other user and is being followed by other users. The difference is that the relationship doesn't have to be reciprocal. Being a follower means you receive all the tweets of the users you follow. \citep{Kwak2010} finds that 77.9\% of the followers relationships on Twitter are non reciprocal. This is one of the features we will take advantage of in order to rank tweets. 
+
+Twitter also has other features that can be used in ranking. Important words in the text of a tweet can be marked with a hash tags ("\#" ). Tweets can be retweeted which is a mechanism that empowers the spreading of the tweet. \citep{Kwak2010} finds that a retweeted tweet reaches an average of 1000 users no matter what the number of followers the author of the original tweet has. 
+
+We used the Twitter REST API to retrieve tweets and user information. More on how we used it can be found in section \ref{} \nameref{} 
+
+\subsection{Related Work}
+{\bf trst.me} \newline
+trst.me \citet{Infochimps2012b} is tool for measuring a Twitter user's reputation. The measure is two dimensional and consists of the Trstrank and the Trstquitient. The Trstrank is a implementation of Google's page rank \citep{Infochimps2012a}, the same rank the FeedJam uses for the userRank. The Trstrank gives a score between 0 and 10 which gives many users the same rank. To differentiate between the users trst.me uses the Trstquotient. It is "an integer between 0 and 100 that quantifies the relationship between a user's Trstrank and their followers count"\citep{Infochimps2012}. The quotient is used to separate spammers from quality users. 
+
+trst.me compared to FeedJam is just a service for finding a Twitter user's trustworthiness. It allows users to enter the screen name of a Twitter user and returns their rank along with other related metrics.  
+
+\subsection{Motivation}

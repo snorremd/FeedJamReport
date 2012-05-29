@@ -1,0 +1,12 @@
+Why PageRank?
+
+TweetRank
+includs retweets
+\cite{Kwak2010} show that once a tweet is retweeted the tweet reach an average of 1000 users no matter what the number of followers the author of the original tweet has. 
+
+gui
+Most modern textual search engine result pages use the same representation of results. Basically a sorted list with the document title and a short extract of the content within the returned link. This has proven to be an efficient layout for search results where the documents returned have varying length and varying contents. 
+
+Within the scope of this project however there are several problems prohibiting this particular layout. Firstly we do not have access to Twitter’s full database, only to their API which severely limits the content that can be extracted. Firstly we are only able to retrieve 100 tweets per API request. Secondly these are sorted by Twitter internally, probably using time as the most important sorting metric. In addition to this, Tweets are time sensitive suggesting that they should be sorted by time. Another aspect to take into consideration is the sheer amount of tweets added each minute.
+
+Since the goal of this project is to rank Tweets and their users we need an interface that displays tweets chronologically at the same time that the ranks are prevalently visible, thus making the conversation easier to follow.

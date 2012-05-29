@@ -1,0 +1,74 @@
+\listfiles
+\documentclass[a4paper,pt12]{article}
+\usepackage[utf8x]{inputenc}
+
+\usepackage[english]{babel}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{anysize} 
+\usepackage{subfig}
+\usepackage{graphicx}
+\marginsize{2,5 cm}{2,5 cm}{2,5 cm}{2,5 cm}
+\usepackage[numbers]{natbib}
+\bibpunct{(}{)}{;}{a}{,}{,}
+\usepackage[colorlinks=true,allcolors=black,draft=true,debug=true]{hyperref}
+
+\usepackage{booktabs}
+\usepackage{numprint}
+
+\usepackage{harvard}
+
+
+\begin{document}
+
+\title{FeedJam}
+
+\author{Snorre Davøen, Lisa Halvorsen, Torstein Thune}
+ 
+\maketitle
+\begin{abstract}
+The aim of the project is to implement a version of the PageRank rating algorithm to Twitter tweets, and present the result in a novel way. The software development method we will be using to develop the project is Kanban. We will develop a high fidelity working prototype using the Spring framework. It will retrieve tweets based on the user’s search query, rank the results using the PageRank algorithm and display the results in a website.     
+
+\end{abstract}
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+\input{Introduction}
+
+
+\section{Goals}
+\input{Goals}
+
+\section{Background}
+\input{Background}
+
+
+\section{Method}
+\input{Method}
+
+\section{Development}
+\input{Development}
+
+\section{The application}
+\input{TheApplication}
+
+\section{Level of reached goals}
+\input{LevelOfReachedGoals}
+
+\section{Evaluation}
+\input{Evaluation}
+
+\section{Furture Research}
+\input{FutureResearch}
+
+\section{Conclusion}
+\input{Conclusion}
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
