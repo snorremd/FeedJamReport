@@ -2,9 +2,41 @@
 FeedJam is a Twitter application that uses the Twitter REST API to retrieve data from Twitter. When entering the page the user can use the search field to search for their interests. The trending topics of the last 24 hours is also presented on the front page. Once the users has entered a search term the API's search method to retrieve tweets based on a query term. 
 The system responds with relevant tweets from the last two weeks. It also retrieves information about the user that wrote the tweet. The application stores tweets, user information and trending topics in a database. 
 
+%Sections
+\subseciton{Structure}
+\subsubsection{MVC} %torstein view delen, lisa model og contoller
+%hva MVC er
+%hvor ting er
+\subsubsection{Interaction between view and controller} %snorre
+
+\subsubsection{Interaction between controller and model} %lisa
+%information flow, hvordan ting skjer
+%brukt desingn patterns 
+{\bf packages}
+\begin{itemize}
+  \item uib.info323.twitterAWSM contains the controllers
+  \item uib.info323.twitterAWSM.exceptions contains exceptions
+  \item uib.info323.twitterAWSM.io contains interfaces for interacting with persistence layer (postfixed -DAO), interfaces for searching the Twitter API (postfixed -SearchFactory) and interfaces for crating model object (postfixed -Factory).
+  \item uib.info323.twitterAWSM.io.impl contains MySql implementations, Json implementations and model implementations. 
+  \item uib.info323.twitterAWSM.io.rowmapper contains rowmappers used in accessing persistence layer
+  \item uib.info323.twitterAWSM.model.impl contains model implementations
+  \item uib.info323.twitterAWSM.model.interfaces contains model interfaces
+  \item uib.info323.twitterAWSM.model.impl contains model implementations
+  \item uib.info323.twitterAWSM.pagerank contains PageRank/UserRank implementation
+  \item uib.info323.twitterAWSM.model.utils contains parsers etc.
+\end{itemize}
+
+
+
+\subseciton{Layout} %torstein
+%beskriver layout, hvordan ting ser ut, hvorfor det ser sånn ut.
+
+
+
+
 %Frontend: include buzzwords :P
 \subsection{Frontend}
-\subsubsection{Design}
+\subsubsection{Design} 
 The front end consists of a modern web-application using a design created with the design principles for good user experience as described by \citet{Sharp2007} in mind.
 
 When visiting the FeedJam application homepage the users are presented with a clean layout consisting of a header containing a search form, a list of trending topics and a footer containing information about us, the creators. 
@@ -30,26 +62,13 @@ The application is developed in Spring MVC framework. FeedJam has tree controlle
 AjajController handles all search requests. When the client has retrieved search results from Twitter, the Json response is posted to AjajController. Using the MySQLUserFactory, it queries the database to check if user information of the tweet owners is cached. If some users don't exist in the database, a response is sent to the view. It contains a Json array of users the client needs to retrieve information about. 
 The AjajConntroller then receives a POST containing the the information on the remaining users information. New users and the Tweets are inserted to the database and a TweetSearchResult object is created. The result contains the requested Tweets with associated user information. The result is then sent as a response to the view. When the client has received the response from the server it requests the users followers and following. The list containing these users is sent to AjajController which uses MySQLUserFactory to inserts them to the database. 
 
-The SearchController is now used as a back up. It originally handled server side requests to Twitter. %more on this?
+The SearchController is now used as a back up. It originally handled server side requests to Twitter. %more on this? json ++
 
-\subsubsection{Structure}
 
-{\bf packages}
-\begin{itemize}
-  \item uib.info323.twitterAWSM contains the controllers
-  \item uib.info323.twitterAWSM.exceptions contains exceptions
-  \item uib.info323.twitterAWSM.io contains interfaces for interacting with persistence layer (postfixed -DAO), interfaces for searching the Twitter API (postfixed -SearchFactory) and interfaces for crating model object (postfixed -Factory).
-  \item uib.info323.twitterAWSM.io.impl contains MySql implementations, Json implementations and model implementations. 
-  \item uib.info323.twitterAWSM.io.rowmapper contains rowmappers used in accessing persistence layer
-  \item uib.info323.twitterAWSM.model.impl contains model implementations
-  \item uib.info323.twitterAWSM.model.interfaces contains model interfaces
-  \item uib.info323.twitterAWSM.model.impl contains model implementations
-  \item uib.info323.twitterAWSM.pagerank contains PageRank/UserRank implementation
-  \item uib.info323.twitterAWSM.model.utils contains parsers etc.
-\end{itemize}
+
 
 %Ranking: implementation, reference
-\subsection{Ranking}
+\subsection{Ranking} %lisa
 \label{ranking}
 When a user enters a search term FeedJam collects response from the Twitter search API. This API has some restrictions (read more on )%using search
 The consequences of this is that FeedJam only can present new tweets. Because of the limitations on the information that is possible to receive from the Twitter API the FeedJam TweetRanking function is very simple. The idea is that Tweets containing specific markup are more valuble, but if a Tweet contains to many markups it probably is a spam Tweet \citep{}.%Find spam ref
@@ -58,9 +77,10 @@ A Tweet receives zero points i
 
 The results are ranked by the FeedJam Rank which is a combination of User Rank (based on Page Rank) and TweetRank. The UserRank uses the information about the tweeters followers and the users the tweeter follows. The relation between user/follower/following represents the link relation between pages in PageRank. The idea is that tweeters with many followers are interesting. They get many followers because they have something interesting to tweet about. 
 
-%caching DB
-\subsection{Database}
+%caching DB 
+\subsection{Database} %lisa
 \label{feedJamDatabase}
+
 
 
 
@@ -75,19 +95,3 @@ Av de 100
 TweetRank = sum(retweeters follwers rank)
 log skala
 
-Technologies
-
-Javascript/jQuery
-HTML 5
-CSS 3
-Media Queries
-AJAX
-Git
-Java
-Spring
-Jetty/Tomcat
-MySQL
-Workflow
-
-Git/GitHub
-Kanban
