@@ -11,6 +11,11 @@ Ranking of results is an integral part of any search engine, no less in ours. Bu
 \citet{Baeza-Yates2011} go on to describe different types of signals that can be used to improve ranking of web results. These will be briefly described here. Content signals refers to the content of the document, mainly text. The signal in the content type refers to things such as word counts, vector space model-based scores and so forth. Structural signals, according to \citet{Baeza-Yates2011}, includes signals such as the links on a page, the text in anchor elements, and in and out-links to a page. The last signal type describes is the web usage signals. User clicks is one often used signal where the relevance of a result is affected by the number of clicks it receives. Other signals mentioned are geographical location, language, technological context and temporal context (that is web usage over time gathered through cookies or user profiles)\citep{Baeza-Yates2011}.
 %signals kan være ting som vi trekker inn i tweet ranken (content based signals). Hashtags, firefox plugin greie--->skriv om det.
 
+In FeedJam we use content based signals in the TweetRank. Mentions indicate some kind of communication between users. %maybe this can be an indication of the friend user. Maybe we dont want to emphasis these tweets? 
+HashTags...
+Retweets...
+ See more about the implementation in section \ref{} \nameref{}
+
 Link-based ranking is based on using structural signals (i.e. counting the number of outgoing and incoming links on a page) to rank a page or document. One ranking algorithm based on this  principle is the Google PageRank algorithm \citep{Page1999}.
 
 \subsubsection{Page Rank}
@@ -33,7 +38,12 @@ As search engines have started to search several different content types the nee
 %litt om hvordan twitter kan være vanskelig å få oversikt over en strøm. finn statistikk om megden tweets i døgnet.
 %vi kan tilby noe mer enn twitter search enginen gir. Vi tilbyr en mer oversiktlig tjeneste. 
 %se om det finnes noe som sier noe om hvordna brukere bruekr twitter. 
+When deciding what information retrieval (IR) techniques we could apply to Twitter we found that when searching for Tweets it not easy to see what tweets are important and which are not. If you search for at certain topic on Twitter you get at feed of all tweets that match the search query. It can be some users personal diary, a conversation between users, information sharing or spam. Following we wanted to use IR techniques to make it easier to see what Tweets are important. 
+
 Twitter is a microblogging service available for more than 20 languages \citep{Twitter2012}. User post messages, called tweets, about what they find interesting which are read by other users. As Twitter has become popular it has received a broad user group. The difference between Twitter and other social networks is the way  that it defines the relationships in the network. On Twitters a user is following other user and is being followed by other users. The difference is that the relationship doesn't have to be reciprocal. Being a follower means you receive all the tweets of the users you follow. \citep{Kwak2010} finds that 77.9\% of the followers relationships on Twitter are non reciprocal. This is one of the features we will take advantage of in order to rank tweets. 
+
+%Dette var noe jeg fant i en artikkel. OG det er ikke så vanskelig å implementer noe som sier om en bruker er venn, deler eller søker. Kanskje vi skal gjøre det?
+Users use Twitter in different ways. \citet{Akshay2007} finds three man user categories: Information source, Friend and Information Seeker. Information sources are user that updates their status with regular intervals and has many followers. The number of followers is due to the value of the information they give through the Tweets. The Information Seeker is a user who rarely post Tweets, but follows other users on a regular basis. A Friend is a users with many reciprocal relationships. We may use these user categories in the UserRank. 
 
 Twitter also has other features that can be used in ranking. Important words in the text of a tweet can be marked with a hash tags ("\#" ). Tweets can be retweeted which is a mechanism that empowers the spreading of the tweet. \citep{Kwak2010} finds that a retweeted tweet reaches an average of 1000 users no matter what the number of followers the author of the original tweet has. 
 
@@ -48,8 +58,11 @@ This section gives a short presentation of the techonologies we used in the proj
 \subsubsection{Spring} %lisa
 To develop the project we used the Spring Framework. It is a Java based open source application framework. We chose this framework because it has many modules that easily takes care of the "plumbing" of the application and makes our work easier \citep{SpringSourcec}. Some of the group members has used it before, and all wanted to get to know it better because it one of the big enterprise frameworks. The application is set up using Spring MVC architecture which allows for easy communication between the web view and the controller (more on this in section \ref{} \nameref{}) \citep{SpringSourcee}. FeedJam uses Spring's REST module for client-side HTTP access to Twitter's API. We also make user of Spring's data access module for connection to the database.
 
-\subsubsection{Jetty/Tomcat} %lisa
-\subsubsection{MySQL} %lisa
+\subsubsection{Jetty/Tomcat} %lisa Jeg ver ikke helt hva jeg skal skrive her
+In the development we have used Jetty WebServer and Apache Tomcat to test run the application. Jetty is a open source HTTP server, HTTP client and Java servlet container \citep{MortBayConsultinga}. 
+
+\subsubsection{MySQL} %lisa Jeg vet ikke helt hva jeg skal skrive her
+MySQL is the worlds most popular open source database \citep{OracleCorporationand/oritsaffiliates}.
 
 \subsection{Related Work}
 {\bf trst.me} \newline
@@ -58,6 +71,9 @@ trst.me \citet{Infochimps2012b} is tool for measuring a Twitter user's reputatio
 trst.me compared to FeedJam is just a service for finding a Twitter user's trustworthiness. It allows users to enter the screen name of a Twitter user and returns their rank along with other related metrics.  
 
 \subsection{Motivation} %lisa
-%personlig: sociale media er i winden. det vil være inteeressant å  gjøre noe med ir for sosiale medier. 
+%personlig: sociale media er i winden. det vil være inteeressant å  gjøre noe med ir for sosiale medier.
+The personal motivation for doing this assignment is that we got the chance to acquire new programming skills. We feel it is easier and more inspiring to learn about techniques in information retrieval field when we can use the theories in a practical sense. Twitter was chosen as a domain because social media and microbloging is a poplar research field. And we wanted to explore their API and see if we could make some interesting and enhance the application using theories from the information retrieval field. 
 
-%faglig: løre mer om vhordan søkemotorer ranker ting, presentasjon. Lære med om verktøy som brukes. 
+%faglig: lære mer om hvordan søkemotorer ranker ting, presentasjon. Lære med om verktøy som brukes. Er det et behov for å gjøre dette?
+Social media are growing in popularity...
+
