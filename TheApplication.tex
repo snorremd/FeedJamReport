@@ -5,6 +5,13 @@ The system responds with relevant tweets from the last two weeks. It also retrie
 %Sections
 \subsection{Structure}
 \subsubsection{MVC} %torstein view delen, lisa model og contoller
+
+\subsubsubsection{The View}
+The view is the component of MVC-applications which receives input from the user and displays output from the controllers and model. While the model and the controllers contain logic in order to do database interactions and data manipulation the view in general only contains logic in the form of simple if-statements and loops in order to display the content assigned by the controller. The view is also the component which, in web applications, contains the HTML markup, CSS-styling and javascript needed to provide users with the intentioned graphical design and user experience.
+
+Within the context of Spring views are written in a language called JSP. JSP, Java Server Pages, is an alternative form of Java intended to be used within HTML and then compiled server side. While it is possible to write entire applications in JSP it is generally not considered good practice to do any logic outside logic specifically needed in order to display content within the objects assigned to the view. 
+
+
 %hva MVC er
 %hvor ting er
 \subsubsection{Interaction between view and controller} %snorre
@@ -30,6 +37,21 @@ The system responds with relevant tweets from the last two weeks. It also retrie
 \subsection{Layout} %torstein
 %beskriver layout, hvordan ting ser ut, hvorfor det ser sånn ut.
 
+\subsubsection{Defining the concept}
+Since FeedJam is an effort to ease the consumption of tweets and Twitter conversations through the use of Page Rank and tweet ranking we needed a good way of displaying the results of said rankings graphically. Normally search engines are able to sort the output of searches after relevance due to their non-restricted access to their own database. However, in the case of Twitter we only have access to a severely limited number of tweets through their public API. In addition to this we believe that the shere amount of new tweets every minute would be a too large amount to effectively process for our computers and server even if we were able to fully access the Twitter database. Therefore a normal sorted listing of search results were rendered effectively impossible. Another aspect to take into consideration is the conversational nature of many tweets. It was decided that the FeedJam layout would somehow follow the conversation without sorting tweets but simultaniously helping users skim through large conversations quickly and help users see important tweets.
+
+Normally when browsing through lists of unsorted rated content we are explicitly shown the content's rating. This is true for instance in the case of movie or music listings where a grade is displayed, often in the form of a dice or a number. While we did want to display our rating we also wanted to provide the user with more powerfull visual cues to the generated importance measure of tweets in order to follow our layout goal of easing skimming of large conversations. Hence we decided on the use of purely visual cues in the form of colours or transparency in order to differentiate between rankings.
+
+\subsubsection{Early efforts}
+
+
+\subsubsection{The final layout}
+When visiting the FeedJam application homepage the users are presented with a clean layout consisting of a header containing a search form, a list of trending topics and a footer containing information about us, the creators. 
+
+The search form consists of a standard, though large, search input field and a search button, thus providing both good visibility, since the form is very prominent, and affordance, since users are used to the concept of a search box and thus knows how to use it.
+
+When entering a search term and clicking the search button (or when clicking a trending topic) the front page fades out, and a loading bar appears displaying information about what is being done. While the site exhibits unusual form behaviour, e.g not causing a page reload when clicking submit, this loading bar, with its connected loading messages shows the user that something has happened and that something is still happening, thus fulfilling the feedback design principle.
+
 
 
 
@@ -38,11 +60,7 @@ The system responds with relevant tweets from the last two weeks. It also retrie
 \subsubsection{Design} 
 The front end consists of a modern web-application using a design created with the design principles for good user experience as described by \citet{Sharp2007} in mind.
 
-When visiting the FeedJam application homepage the users are presented with a clean layout consisting of a header containing a search form, a list of trending topics and a footer containing information about us, the creators. 
 
-The search form consists of a standard, though large, search input field and a search button, thus providing both good visibility, since the form is very prominent, and affordance, since users are used to the concept of a search box and thus knows how to use it.
-
-When entering a search term and clicking the search button (or when clicking a trending topic) the front page fades out, and a loading bar appears displaying information about what is being done. While the site exhibits unusual form behaviour, e.g not causing a page reload when clicking submit, this loading bar, with its connected loading messages shows the user that something has happened and that something is still happening, thus fulfilling the feedback design principle.
 
 \subsubsection{Frontend coding}
 The frontend is coded using standard HTML5 for markup, CSS3 for styling and Javascript for front-end logic. In addition we use JSPs, which are in essence compiled template files which are used to generate the views presented to the user.
