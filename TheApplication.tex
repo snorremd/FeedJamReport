@@ -6,11 +6,10 @@ The system responds with relevant tweets from the last two weeks. It also retrie
 \subsection{Structure}
 \subsubsection{MVC} %torstein view delen, lisa model og contoller
 
-\subsubsubsection{The View}
+\subsubsection{The View}
 The view is the component of MVC-applications which receives input from the user and displays output from the controllers and model. While the model and the controllers contain logic in order to do database interactions and data manipulation the view in general only contains logic in the form of simple if-statements and loops in order to display the content assigned by the controller. The view is also the component which, in web applications, contains the HTML markup, CSS-styling and javascript needed to provide users with the intentioned graphical design and user experience.
 
 Within the context of Spring views are written in a language called JSP. JSP, Java Server Pages, is an alternative form of Java intended to be used within HTML and then compiled server side. While it is possible to write entire applications in JSP it is generally not considered good practice to do any logic outside logic specifically needed in order to display content within the objects assigned to the view. 
-
 
 %hva MVC er
 %hvor ting er
@@ -50,6 +49,28 @@ Since FeedJam is an effort to ease the consumption of tweets and Twitter convers
 Normally when browsing through lists of unsorted rated content we are explicitly shown the content's rating. This is true for instance in the case of movie or music listings where a grade is displayed, often in the form of a dice or a number. While we did want to display our rating we also wanted to provide the user with more powerfull visual cues to the generated importance measure of tweets in order to follow our layout goal of easing skimming of large conversations. Hence we decided on the use of purely visual cues in the form of colours or transparency in order to differentiate between rankings.
 
 \subsubsection{Early efforts}
+Early concepts placed tweets in a list format. The thinking behind using a simple list format is that Twitter in its current iteration use a similar design to display tweets. This did however prove to be an inefficient use of the available space in the browser, and was quickly scrapped in favour of a grid-based layout.
+
+\begin{figure}[ht]
+    \begin{minipage}[b]{0.5\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/twitter_list}
+        \caption{Twitter in its current iteration.}
+        \label{fig:Twitter}
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}[b]{0.5\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/layout_colour_borders}
+        \caption{Early FeedJam concept}
+        \label{fig:FeedJamColours}
+    \end{minipage}
+\end{figure}
+
+We did also experiment with using colours to display the importance of tweets. Early thoughts used a traffic light metaphor where green signalised a good ranking, yellow a neutral ranking and red a bad ranking. The colours were used as border colours.
+
+
+
 
 
 \subsubsection{The final layout}
@@ -60,16 +81,7 @@ The search form consists of a standard, though large, search input field and a s
 When entering a search term and clicking the search button (or when clicking a trending topic) the front page fades out, and a loading bar appears displaying information about what is being done. While the site exhibits unusual form behaviour, e.g not causing a page reload when clicking submit, this loading bar, with its connected loading messages shows the user that something has happened and that something is still happening, thus fulfilling the feedback design principle.
 
 
-
-
-%Frontend: include buzzwords :P
-\subsection{Frontend}
-\subsubsection{Design} 
-The front end consists of a modern web-application using a design created with the design principles for good user experience as described by \citet{Sharp2007} in mind.
-
-
-
-\subsubsection{Frontend coding}
+\subsubsection{Coding of the layout}
 The frontend is coded using standard HTML5 for markup, CSS3 for styling and Javascript for front-end logic. In addition we use JSPs, which are in essence compiled template files which are used to generate the views presented to the user.
 
 The frontend is organised in several views. Roughly we can divide these views into two categories: main views and views which are included into other views. FeedJam has one main view called home.jsp. This view is generates the markup which the user is presented with when he/she first visits the feedjam website. The home view also uses the views footer.jsp which contains the markup for the footer (bottom of page), htmlheader.jsp which contains javascript declarations and jQuery initialisation and header.jsp which contains the search form. Other views is the tweetList.jsp view and the trendingList.jsp view which are used to generate grids of tweets and a slider of trending topics. These are placed dynamically within the home.jsp view through the use of Javascript.
