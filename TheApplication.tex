@@ -9,7 +9,7 @@ The system responds with relevant tweets from the last two weeks. It also retrie
 \subsubsection{The View}
 The view is the component of MVC-applications which receives input from the user and displays output from the controllers and model. While the model and the controllers contain logic in order to do database interactions and data manipulation the view in general only contains logic in the form of simple if-statements and loops in order to display the content assigned by the controller. The view is also the component which, in web applications, contains the HTML markup, CSS-styling and javascript needed to provide users with the intentioned graphical design and user experience.
 
-Within the context of Spring views are written in a language called JSP. JSP, Java Server Pages, is an alternative form of Java intended to be used within HTML and then compiled server side. While it is possible to write entire applications in JSP it is generally not considered good practice to do any logic outside logic specifically needed in order to display content within the objects assigned to the view. 
+Within the context of Spring views are written in a language called JSP. JSP, Java Server Pages, is an alternative form of Java intended to be used within HTML and then compiled server side. While it is possible to write entire applications in JSP it is generally not considered good practice to do any logic outside logic specifically needed in order to display content from within the objects assigned to the view.
 
 %hva MVC er
 %hvor ting er
@@ -60,11 +60,18 @@ Early concepts placed tweets in a list format. The thinking behind using a simpl
     \end{minipage}
 \end{figure}
 
-We did also experiment with using colours to display the importance of tweets. Early thoughts used a traffic light metaphor where green signalised a good ranking, yellow a neutral ranking and red a bad ranking. The colours were used as border colours.
+We did also experiment with using colours to display the importance of tweets. Early thoughts used a traffic light metaphor where green signalised a good ranking, yellow a neutral ranking and red a bad ranking. The colours were used as border colours, as seen in figure  \ref{fig:FeedJamColours}. This did however prove to be a too insignificant visual cue, as in it took too long time for us to actually determine the rating of tweets through tis colour use, we also decided that the colours cluttered the design, making it less aestethical. Another problem was that we were only able to create three ranking brackets using our traffic light metaphor, which took away from the nuances of our ranking algorithm.
 
+\begin{figure}[ht]
+    \begin{minipage}[b]{1\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/layout_transparency}
+        \caption{FeedJam concept using transparency}
+        \label{fig:FeedJamTransparency}
+    \end{minipage}
+\end{figure}
 
-
-
+Since our ranking algorithms has an output in the form of a float number (a number betweet 0.0 and 1.0) we decided that opacity, whose CSS operator can take in values in a float format, would be better since we would be able to display the nuances of our ranking algorithm to within two decimals.
 
 \subsubsection{The final layout}
 When visiting the FeedJam application homepage the users are presented with a clean layout consisting of a header containing a search form, a list of trending topics and a footer containing information about us, the creators. 
