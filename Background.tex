@@ -53,8 +53,16 @@ We used the Twitter REST API to retrieve tweets and user information. More on ho
 This section gives a short presentation of the techonologies we used in the project. 
 
 \subsubsection{Javascript/jQuery} %torstein
+This project relies heavily on client-side Twitter requests in order to provide each user with enough requests to make the application usable. Javascript is a scripting language, at the moment the only one, which is run client-side in browsers. While Javascript itself is quite straight forward, following the ECMAscript standard, there are several inconsistencies in its implementation in different browsers, leading to it demanding large amounts of experience in order to develop stable and functioning scripts. jQuery is a library written in Javascript which tries to account for these inconsistencies in addition to providing easier syntax and a large amount of prepared methods.
+
 \subsubsection{Media Queries} %torstein
+In order to customise the layout of websites for different screen resolutions one can employ the use of CSS media queries. While being a quite new innovation, media queries is supported by most browsers, including webkit and fennec based browsers, which includes most browsers used on smart phones and tablets. Media queries follow a quite simple syntax, and can be used within the standard css-document. For instance CSS written within "@media only screen and (min-width: 768px) and (max-width: 991px) \{" and "\}" would only be used in cases where the browser window has a width of between 768 and 991 pixels. 
+
+Media queries are used in FeedJam in order to make the layout more available to smart phone and tablet users.
+
 \subsubsection{AJAX}%torstein
+AJAX, standing for Asynchronous Javascript and XML, is a technique where one can enable client-server interaction after a page has been rendered and send to the user's browser. In the context of our project we use the equivalent technique, AJAJ, which uses JSON instead of XML. On an abstract level one can explain AJAX as server requests which does not cause a page load, and whose response can be used either to insert new content dynamically or for some other purpose by the client.
+
 \subsubsection{Spring} %lisa
 To develop the project we used the Spring Framework. It is a Java based open source application framework. We chose this framework because it has many modules that easily takes care of the "plumbing" of the application and makes our work easier \citep{SpringSourcec}. Some of the group members has used it before, and all wanted to get to know it better because it one of the big enterprise frameworks. The application is set up using Spring MVC architecture which allows for easy communication between the web view and the controller (more on this in section \ref{} \nameref{}) \citep{SpringSourcee}. FeedJam uses Spring's REST module for client-side HTTP access to Twitter's API. We also make user of Spring's data access module for connection to the database.
 
