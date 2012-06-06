@@ -19,9 +19,34 @@ Retweets...
 Link-based ranking is based on using structural signals (i.e. counting the number of outgoing and incoming links on a page) to rank a page or document. One ranking algorithm based on this  principle is the Google PageRank algorithm \citep{Page1999}.
 
 \subsubsection{Page Rank}
-The goal of the PageRank ranking algorithm is stated as follows: “This ranking called PageRank helps search engines and users quickly make sense of the vast heterogeneity of the World Wide Web” \citep[p. 1]{Page1999}. The PageRank algorithm exploits the structure of the web by looking at the number of backlinks and out links a web page has. The World Wide Web can thus be viewed as a graph with directed edges (backlinks and forward or outgoing links) between nodes (web pages). \citet{Page1999} note that giving high ranks just by looking at the number of backlinks (incoming links) is problematic because a site might get many backlinks from various web pages that are not very important. They provide a solution to this by proposing that not only the number of backlinks, but also the rank of the web pages for these backlinks can be used when ranking a web page. Given this solution, as shown by \citet{Page1999}, a page receives a high page rank if the sum of the sum of the page ranks of the backlinks is high.
+%something about that pagerank comes from the idea of citations counting in journals. If a journal is cited in many articles it is most likely an important article. PageRank takes this idea one step forther. 
+The goal of the PageRank ranking algorithm is stated as follows: “This ranking called PageRank helps search engines and users quickly make sense of the vast heterogeneity of the World Wide Web” \citep[p. 1]{Page1999}. It derives from citation counting which is a way tell the importance of an article. An article that is cited by many other articles is most likely an important one. 
+
+The PageRank algorithm exploits the structure of the web in the calculation of the rank. The World Wide Web can thus be viewed as a graph with directed edges between nodes. The edges are either links pointing to the page. We call them back-links. Or they are links pointing to another page. We call them outgoing-links or forward-links. Looking at the structure of the web and trying to create a ranking of web pages, Page and ... \citet{} took the idea of citations counting one step further. 
+
+In addition to the number of web pages that point to a page, it also looks at the actual pages that link to it. If the pages that link to the page in question is important, that is has a high rank, then this link is more valuable than a link from a page that doesn't have a high score. Additionally the PageRank considers how many outgoing links the "previous" page has. \citet{Page1999} noted that giving high ranks just by looking at the number of back-links (incoming links) is problematic because a site might get many back-links from various web pages that are not very important. They provide a solution to this by proposing that not only the number of back-links, but also the rank of the web pages for these back-links can be used when ranking a web page. Given this solution, as shown by \citet{Page1999}, a page receives a high page rank if the sum of the sum of the page ranks of the back-links is high.
+
+
+%Definition: Let  \emph{u} be a new page. Then let \emph{F_u} be the set of pages \emph{u} points to and \emph{B_u} be the search of pages that point to \emph{u}. Let \emph{N_u} = |\emph{F_u}| be the number of links from \emph{u} and let \emph{c} be a factor used for normalization (so that the total sank of all web page is constant). \emph{R} is the a slightly simplified version of PageRank
+
+%\[
+%R(u) = c \sum_{v \in B_u}^{} \frac{R(v)}{N_v}
+%\]
+
+%PR(A) = (1-d) + d (PR(T1)/C(T1)+...+ PR(Tn)/C(Tn))
+%PR(A) is the PageRank of page A.
+%PR(Ti) is the PageRank of pages Ti which link to page A
+%C(Ti) is the number of outbound links on pages Ti
+%d is the damping factor which can be set between 0 and 1, usually 0.85.
+
+%Explain in 
 
 %Page rank formler. vise enkel utregning... 
+{\bf PageRank applied to Twitter}\newline %flytte til twitter subsention?
+Our initial idea for this project was to try to apply PageRank to Twitter Tweets, but we soon realized that it wasn't going to work because tweets aren't connected to eachother in a network like Web pages are. Instead we found that we could use the ranking algorithm on Twitter users. As described below in subsection \ref{Twitter} \nameref{Twitter}, Twitter users has relationships between them. And the unique feature from other social networks, that is that the relationships doesn't have to be reciprocal makes the user graph in Twitter similar to the Web graph. 
+
+Another feature of Twitter users that we argue makes PageRank idea for applying to rank user, is the different types of users.  ... argues that there are 3 categories Information Source, Friend and Information Seeker. We argue that the Twitter user BBC is a an information source the same way that BBC homepage is an information source on the web. We can also see similarities between e.g bloggers and information seekers. When bloggers blog about something it can be connected to some official source like BBC and there exist a outgoing link to the source. The same way we argue that information seekers is following information sources on Twitter.
+
 %Litt mer om hvordan pagerank kan brukes på Twitterusers. Lage en graph/tegning. Vise at det i teorien skal oversettes - argumentere. Sosiale nettver er ganske like weben. 
 
 \subsubsection{User Interface}
@@ -35,6 +60,7 @@ As search engines have started to search several different content types the nee
 
 
 \subsection{Twitter}
+\label{Twitter}
 %litt om hvordan twitter kan være vanskelig å få oversikt over en strøm. finn statistikk om megden tweets i døgnet.
 %vi kan tilby noe mer enn twitter search enginen gir. Vi tilbyr en mer oversiktlig tjeneste. 
 %se om det finnes noe som sier noe om hvordna brukere bruekr twitter. 

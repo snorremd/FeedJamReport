@@ -5,11 +5,21 @@ The system responds with relevant tweets from the last two weeks. It also retrie
 %Sections
 \subsection{Structure}
 \subsubsection{MVC} %torstein view delen, lisa model og contoller
+The application is built on Spring's Web MVC framework. MVC separates the business logic from the user interface through the controller that handles the communication between the two. In Spring the dispatcherServlet...%blabla
 
+\subsubsection{The Model} %what it does. what is contains 
+The model is the part of the application that contains the domain objects or the core data structures \citep{}%find martin fowler
+It 
+Factory
+We have data access objects (DAO) 
 \subsubsection{The View}
 The view is the component of MVC-applications which receives input from the user and displays output from the controllers and model. While the model and the controllers contain logic in order to do database interactions and data manipulation the view in general only contains logic in the form of simple if-statements and loops in order to display the content assigned by the controller. The view is also the component which, in web applications, contains the HTML markup, CSS-styling and javascript needed to provide users with the intentioned graphical design and user experience.
 
 Within the context of Spring views are written in a language called JSP. JSP, Java Server Pages, is an alternative form of Java intended to be used within HTML and then compiled server side. While it is possible to write entire applications in JSP it is generally not considered good practice to do any logic outside logic specifically needed in order to display content within the objects assigned to the view. 
+
+\subsubsection{The controller}
+The controller takes the user input from the view and sends it to the business logic that handles it and sends response back to the controller.
+In Spring the Controller prepares a Map which is sent to the 
 
 %hva MVC er
 %hvor ting er
@@ -92,8 +102,8 @@ In order to ease the AJAX calls in addition to ensuring that the Javascript work
 
 
 %Backend: Spring, Spring mvc, maven,  DAO, factorys, running on java servers, db more in db section,  developement
-\subsection{Backend} %Serverside?
-The application is developed in Spring MVC framework. 
+%\subsection{Backend} %Serverside?
+%The application is developed in Spring MVC framework. 
 
 
 
@@ -103,7 +113,9 @@ The application is developed in Spring MVC framework.
 \label{ranking}
 When a user enters a search term FeedJam collects response from the Twitter search API. This API has some restrictions (read more on )%using search
 The consequences of this is that FeedJam only can present new tweets. Because of the limitations on the information that is possible to receive from the Twitter API the FeedJam TweetRanking function is very simple. There are two dimensions to our TweetRank. If the Tweet is read by many, it is considered important. But because we measuring how many actually reads the Tweets would be another project, we use the retweets count as way to see how many potentially could red the Tweet. ... claim that a tweet that is retweeted has a potential to reach an awerage of 1000 users independently of how many follower the owner of the tweet has. Based on this we made a scale... % more on the scale
+
 The other dimension consernes the markup in the Tweets. If the Tweet containing specific markup are more valuble, but if a Tweet contains to many markups it probably is a spam Tweet \citep{}.%Find spam ref 
+
 The Mentions markup is used to annotate Twitter users in at Tweet. A Tweet that mentions another user will show on the other users profile timeline.
 A Tweet receives zero points i
 
@@ -113,7 +125,7 @@ The results are ranked by the FeedJam Rank which is a combination of User Rank (
 \subsection{Database} %lisa
 \label{feedJamDatabase}
 The application uses a MySQL database to store information from Twitter. This was nececary because the Twitter API has restrictions on number of request one can make to it.
-
+We user the DAO pattern. The DAO pattern is used as an abstraction of the connection between the domain objects and datasource. The DAO interfaces TrendDAO, TweetDAO and UserDAO defines the operations that are alowed to do.  
 
 
 %TweetRank
