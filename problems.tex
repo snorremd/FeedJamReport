@@ -1,3 +1,11 @@
 %Twitter api, out of requests
+\subsection{Twitter API requests}
+
 %Server probl
+\subsection{Server Problems}
+
 %fake data probl
+\subsection{SQL/JSON injection}
+Due to the Twitter API request limit and the resulting AJAX client workaround we have in essence opened our application to fraudulent input from the client. Since we have no control over the client, and due to the fact that the users have full control, they will be able to construct fake, but valid JSON data to send to our controllers. Basically this means that they will be able to create fake users, user data (such as descriptions), and fake the tables lising followers and following. They will also be able to dictate the content to show in the tweets we display.
+
+There is no way that we can ensure that such fraudulent data does not make its way into our database outside of conducting all the queries server side, which as previously explained proved to be a bad solution due to the request limit. While it is possible to insert correctly formatted data, it is not possible to inject SQL statements due to our use of named parameters. In addition to this the fraudulent data problem is somewhat alleviated by our revisiting policy which ensures that this fraudulent data will be exchanged for new data after a period of 4 weeks.
