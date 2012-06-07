@@ -38,19 +38,19 @@ When computing the algorithm we have to consider the problem of pages with no ou
 Within the field of interaction design we have several different design guidelines and principles for creating usable artefacts. \citet{Sharp2007} name visibiity, feedback, constraints, consistency and affordance as the essential design principles.
 
 \begin{description}
-  \item[Visibility] bob kåre
-  \item[Feedback]  :D
-  \item[Constraints] :D
-  \item[Consistency] :D
-  \item[Affordance] :D
+  \item[Visibility] important controls should be visible
+  \item[Feedback] there should be some effect after performing an action
+  \item[Constraints] impossible options should be hidden/clearly disabled
+  \item[Consistency] similar operations should use similar elements and function similarily
+  \item[Affordance] one can use affordances (natural cues, e.g that a button can be clicked) where applicable in a user interface
 \end{description}
 
-In addition to exploring ranking algorithms we are going to develop a novel interface to display tweets and their rankings. In the book Interaction Design: Beyond Human-Computer Interaction Sharp et al (2007) present several factors who are paramount to good interaction design. In order to design good interaction one should take into account the usability principles as presented in the book. These are visibility (whether the functions/input mechanisms are visible or hidden), feedback (the interface should show that the system has received and used the input given), constraints (avoiding facilitating invalid user input for given contexts), consistency (similar operations use the same kinds of elements) and affordance (whether users can use familiarisation from experience in order to naturally understand what the interface element does). In addition to this the book also provides a set of metrics which can be utilised to measure the usability of an artefact.\newline
+In addition to exploring ranking algorithms we are going to develop a novel interface to display tweets and their rankings. In the book Interaction Design: Beyond Human-Computer Interaction \citet{Sharp2007} present several factors who are paramount to good interaction design. In order to design good interaction one should take into account the usability principles as presented in the book. These are visibility (whether the functions/input mechanisms are visible or hidden), feedback (the interface should show that the system has received and used the input given), constraints (avoiding facilitating invalid user input for given contexts), consistency (similar operations use the same kinds of elements) and affordance (whether users can use familiarisation from experience in order to naturally understand what the interface element does). In addition to this the book also provides a set of metrics which can be utilised to measure the usability of an artefact.\newline
 
 {\bf \noindent Classic search engine result pages}\newline
 \citet[p.480]{Baeza-Yates2011} argues that existing search engines are heavily influenced by what they call a extreme simplicity rule. Basically this rule states that search engine user experience must be simplistic enough in nature that users understand it without any previous knowledge, or else they will simply switch to another search engine. This has lead to a very prominent interface paradigm where all the most prominent search engines use the classic search engine result page (SERP) \citep{Baeza-Yates2011}. 
-As search engines have started to search several different content types the need to display several different media types in one unified result page have also emerged. This has resulted in two innovations: the “onebox” \citep{Baeza-Yates2011}, which displays specific information from one knowledge domain (e.g weather reports) and universal search results where one combines several different searches into one search result page.
 
+As search engines have started to search several different content types the need to display several different media types in one unified result page have also emerged. This has resulted in two innovations: the “onebox” \citep{Baeza-Yates2011}, which displays specific information from one knowledge domain (e.g weather reports) and universal search results where one combines several different searches into one search result page.
 
 \subsection{Twitter}
 
@@ -63,10 +63,13 @@ When deciding what information retrieval (IR) techniques we could apply to Twitt
 
 Twitter is a microblogging service available for more than 20 languages \citep{Twitter2012}. User post messages, called tweets, about what they find interesting which are read by other users. As Twitter has become popular it has received a broad user group. The difference between Twitter and other social networks is the way  that it defines the relationships in the network. On Twitters a user is following other user and is being followed by other users. The difference is that the relationship doesn't have to be reciprocal. Being a follower means you receive all the tweets of the users you follow. \citep{Kwak2010} finds that 77.9\% of the followers relationships on Twitter are non reciprocal. This is one of the features we will take advantage of in order to rank tweets. 
 
+
 \citep{boka kap11} Noe om distribusjonen av sider og linker på web i kap 11. .. noe om zipf lov. Pareto distribution similar to the power law. Many small documents Det samme gjelder for Twitter?
+
 
 %Dette var noe jeg fant i en artikkel. OG det er ikke så vanskelig å implementer noe som sier om en bruker er venn, deler eller søker. Kanskje vi skal gjøre det?
 Users use Twitter in different ways. \citet{Akshay2007} finds three man user categories: Information source, Friend and Information Seeker. Information sources are user that updates their status with regular intervals and has many followers. The number of followers is due to the value of the information they give through the Tweets. The Information Seeker is a user who rarely post Tweets, but follows other users on a regular basis. A Friend is a users with many reciprocal relationships. We may use these user categories in the UserRank. 
+
 
 Twitter also has other features that can be used in ranking. Important words in the text of a tweet can be marked with a hash tags ("\#" ). Tweets can be retweeted which is a mechanism that empowers the spreading of the tweet. \citep{Kwak2010} finds that a retweeted tweet reaches an average of 1000 users no matter what the number of followers the author of the original tweet has. 
 

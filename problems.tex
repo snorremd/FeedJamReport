@@ -1,3 +1,24 @@
 %Twitter api, out of requests
+\subsection{Twitter API requests}
+\label{twitterProblem}
+The initial plan was to use the open Twitter API at the server side to retrieve search results, user info, trending topics etc. The Twitter API consist of several APIs, one for each type of Twitter data each limited to a 150 requests an hour. We discovered quite early in the development process that this number was far too low to be usable in practice. 
+
+A first try at a solution was heavy use of caching of search results (tweets, users and trending topics). The use of caching was also required for user ranking, as we would need to have our own database of users to calculate the ranks. We soon found that the caching solution was not good enough because the ranking algorithm requires the storage of information about which users follow a user, and which users a user follows. Each search thus required up to 41 requests to the user API, almost a third of the available requests, which amounts to about three searches an hour.
+
+Finally, we decided to move all user and search requests client side. As a result, the amount of information the server can cache is only limited to the amount of users that use the system. It should be noted that the problem has only been moved client side and as a result, users are now only able to do about four searches an hour. As our database grows however, the restriction should be somewhat alleviated.
+
 %Server probl
+\subsection{Server Problems}
+We decided early on that we would make FeedJam as a web application running on the Java-based Spring MVC framework. This meant that the project required a server from which we could run the application, with all the necessary software installed. Because of various problems with having an official server set up, we configured our own server using the Ubuntu OS, a Tomcat and Jetty server etc.
+
+The machine we used as our server is quite old and has fairly weak hardware. It sports an old dual core Intel Pentium D processor, 1GB of ram and a slow ATA hard disk drive. While this machine can handle simple HTTP requests and operations such as parsing JSON strings and storing information in a database without problems, it is not quite suited for the task of ranking users. The page rank algorithm is not only quite processing intensive, it also requires a large amount of ram (several giga bytes for more connected users). This can be shown with the following example. A user with a high branching factor can yield extremely large parameter lists (i.e. a list of users), something in the order of 10000 and more. Seeing as how the page rank method produce a 2-dimensional array of double values, each value using eight bytes, the memory requirement of the matrix itself can be calculated using the following formula:
+\begin{displaymath}
+memory-requirement = no-of-users^2 \cdot 8 
+\end{displaymath}
+Given a parameter list of size 10000, the memory requirement is calculated with \(10000^2 \cdot 8\) which is about 763 mega bytes of memory. Given that the parameter list can be much bigger one can see how the server would have problems with the ranking algorithm.
+
 %fake data probl
+\subsection{SQL/JSON injection}
+Due to the Twitter API request limit and the resulting AJAX client workaround we have in essence opened our application to fraudulent input from the client. Since we have no control over the client, and due to the fact that the users have full control, they will be able to construct fake, but valid JSON data to send to our controllers. Basically this means that they will be able to create fake users, user data (such as descriptions), and fake the tables lising followers and following. They will also be able to dictate the content to show in the tweets we display.
+
+There is no way that we can ensure that such fraudulent data does not make its way into our database outside of conducting all the queries server side, which as previously explained proved to be a bad solution due to the request limit. While it is possible to insert correctly formatted data, it is not possible to inject SQL statements due to our use of named parameters. In addition to this the fraudulent data problem is somewhat alleviated by our revisiting policy which ensures that this fraudulent data will be exchanged for new data after a period of 4 weeks.

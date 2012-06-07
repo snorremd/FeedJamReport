@@ -28,6 +28,30 @@ In Spring the Controller prepares a Map which is sent to the
 %hva MVC er
 %hvor ting er
 \subsubsection{Interaction between view and controller} %snorre
+\label{viewControllerInteraction}
+When the user searches for a term on FeedJam a complex series of interactions happen between the view/the users browser and the FeedJam server. When the user enters a search term into the FeedJam searchbox and clicks the search button the entered term is snapped up by Javascript. This search term is then along with some other variables formed into a GET request to the Twitter search API. The returned JSON is then sent to the AJAJ controller, which parses the JSON and generates a list of users whom are not in the database/or have not been updated for several weeks. This list of users is then returned to the client.
+
+\begin{figure}[h!]
+\begin{lstlisting}[language=javascript]
+// sends following to controller (ajaj/processFollowing)
+function followingToServer(userId, followingData) {
+  $.post("ajaj/processFollowing", 
+  { 
+    userId: userId.toString(), // server wants userId as a string
+    following: JSON.stringify(followingData) // and JSON as a string
+  },
+  function(data) {
+    console.log("SERVER RESPONSE: added following for " + userId);
+  });
+}
+\end{lstlisting}
+\caption{Example jQuery code for sending following for a user as JSON to the controller}
+\label{ajaxRequest}
+\end{figure}
+
+The client then requests user information about all these users from Twitter. It then sends this back to the controller along with the returned tweets JSON from the previous request. The controller then processes all this and returns a finished view as HTML to the client. This finished HTML is then appended to the tweet grid.
+
+After the generated view has been inserted the client starts requesting followers and following for each of the users who were looked up. This is done this lately in the process in order to ensure that the view is returned and displayed to the FeedJam user as soon as possible in order to make the system appear faster, through using AJAX this can also be done without the user noticing. Each response from the Twitter API is then asynchronously send to the controller which in turn processes the JSON and inserts the values into our database.
 
 \subsubsection{Interaction between controller and model} %lisa
 %information flow, hvordan ting skjer
@@ -39,6 +63,7 @@ The AjajConntroller then receives a POST containing the the information on the r
 The SearchController is now used as a back up. It originally handled server side requests to Twitter. %more on this? json ++
 
 %brukt desingn patterns 
+
 {\bf packages}
 \begin{itemize}
   \item uib.info323.twitterAWSM contains the controllers
@@ -117,7 +142,7 @@ When visiting the FeedJam web application the users are presented with a clean l
 
 The search form consists of a standard, though large, search input field and a search button, thus providing both good visibility, since the form is very prominent, and affordance, since users are used to the concept of a search box and thus knows how to use it.
 
-When entering a search term and clicking the search button (or when clicking a trending topic) the front page fades out, and a loading bar appears displaying information about what is being done. While the site exhibits unusual form behaviour, e.g not causing a page reload when clicking submit, this loading bar, with its connected loading messages, shows the user that something has happened and that something is still happening, thus fulfilling the feedback design principle.
+When entering a search term and clicking the search button (or when clicking a trending topic) the front page fades out, and a loading bar appears displaying information about what is being done, which is further explained in section \ref{viewControllerInteraction}. While the site exhibits unusual form behaviour, e.g not causing a page reload when clicking submit, this loading bar, with its connected loading messages, shows the user that something has happened and that something is still happening, thus fulfilling the feedback design principle.
 
 \begin{figure}[ht]
     \begin{minipage}[b]{1\linewidth}
@@ -137,15 +162,9 @@ Beneath the grid of tweets there is a "load more" button. By clicking this butto
 
 
 \subsubsection{Coding of the layout}
-The frontend is coded using standard HTML5 for markup, CSS3 for styling and Javascript for front-end scripting. In addition we use JSPs, which are in essence compiled template files which are used to generate the views presented to the user.
+The frontend is coded using standard HTML5 for markup/structure, CSS3 for styling and Javascript coupled with jQuery for front-end scripting. In addition we use JSPs, which are in essence compiled template files, to generate the HTML displayed to the user.
 
-The frontend is organised in several views. Roughly we can divide these views into two categories: main views and views which are included into other views. FeedJam has one main view called home.jsp. This view is generates the markup which the user is presented with when he/she first visits the feedjam website. The home view also uses the views footer.jsp which contains the markup for the footer (bottom of page), htmlheader.jsp which contains javascript declarations and jQuery initialisation and header.jsp which contains the search form. Other views is the tweetList.jsp view and the trendingList.jsp view which are used to generate grids of tweets and a slider of trending topics. These are placed dynamically within the home.jsp view through the use of Javascript.
-
-In order to make the site function more dynamically we use a technique called AJAX (Asynchronous Javascript and XML) coupled with JSON and HTML. AJAX is a relatively new technique for dynamically running requests and using the returned data in some way using Javascript without causing page reloads. This also makes us able to do all the API calls to Twitter through each individual user's own browser, thus making the site able to serve up to 150 searches per user per hour as opposed to a total of 150 searches for the whole web application if we were to do these requests server-side. The data is then processed server side, and a view is returned to the client, which then inserts this dynamically into the already generated view.
-
-In order to ease the AJAX calls in addition to ensuring that the Javascript works cross-browser we use jQuery Javascript library. This library provides easy-to-use methods for initiating both POST and GET requests with JSON data in addition to providing us with a good interface for DOM-manipulation (the DOM - Document Object Model - being the data model used for web sites.
-
-FeedJam also relies on two third-party jQuery plugins. Revolver (TODO) is a jQuery plugin which provides slider functionality to any collection of HTML-elements. Masonry (todo) is a plugin which positions HTML elements properly in a grid, fixing some short-comings in the way different elements float in a standard HTML grid.
+The frontend is organised in several views. Roughly we can divide these views into two categories: main views and views which are included into other views. FeedJam has one main view called home.jsp. This view is generates the markup which the user is presented with when he/she first visits the feedjam website. The home view also uses the views footer.jsp which contains the markup for the footer (bottom of page), htmlheader.jsp which contains javascript declarations and jQuery initialisation and header.jsp which contains the search form. Other views is the tweetList.jsp view and the trendingList.jsp view which are used to generate grids of tweets and a slider of trending topics. These are placed dynamically within the home.jsp view through the use of jQuery.
 
 
 
