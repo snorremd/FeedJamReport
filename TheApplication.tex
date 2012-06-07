@@ -127,7 +127,11 @@ When entering a search term and clicking the search button (or when clicking a t
 \end{figure}
 
 
-The search result page consists of a strict grid with 4 columns (or less depending on screen resolution) where each tweet is set at a specific width. Each tweet is in its own box with varying opacity depending on the relevant rankings. In order to more clearly show where tweets are in the grid even on lower opacities the border is always at 100\% opacity. While some tweets are almost transparent they will become fully visible when pointed at by the mouse pointer or clicked on tablets and smart phones. 
+The search result page consists of a strict grid with 4 columns (or less depending on screen resolution) where each tweet is set at a specific width. Each tweet is in its own box with varying opacity depending on the relevant rankings. In order to more clearly show where tweets are in the grid even on lower opacities the border is always at 100\% opacity. While some tweets are almost transparent they will become fully visible when pointed at by the mouse pointer or clicked on tablets and smart phones in order to make them readable.
+
+When clicking a username a small modal window appears displaying information about the user, including our user rank, the number of people following the user and the number of people followed by the user, the user's description from Twitter and links to his/her web page and profile. This window can be closed either by clicking the user name itself or by clicking outside the modal window.
+
+Beneath the grid of tweets there is a "load more" button. By clicking this button the user sends an AJAX request both to twitter to get the next 20 tweets which is then sent to the server. The server in turn goes through the same steps as when using the search box, finally resulting in a generated view (a tweets grid) which is dynamically appended to the existing grid using jQuery.
 
 
 \subsubsection{Coding of the layout}

@@ -16,16 +16,51 @@
 \usepackage[colorlinks=true,allcolors=black]{hyperref}
 \usepackage{booktabs}
 \usepackage{numprint}
+\usepackage[parfill]{parskip} % linje i stedet for indent i ny paragraf
+\usepackage{setspace}
+\onehalfspacing
 
 %\usepackage{harvard}
-
-
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \begin{document}
 
-\title{FeedJam}
-\author{Snorre Davøen, Lisa Halvorsen, Torstein Thune}
- 
-\maketitle
+\begin{titlepage}
+
+\begin{center}
+
+
+% Upper part of the page
+\includegraphics[width=0.5\textwidth]{figures/feedjam.png}\\[1cm]    
+
+\textsc{\LARGE University of Bergen}\\[1.5cm]
+
+\textsc{\Large INFO323 Semester Project}\\[0.5cm]
+
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries FeedJam: a Twitter PageRank experiment}\\[0.4cm]
+
+\HRule \\[1.5cm]
+
+% Author and supervisor
+\begin{minipage}{1\textwidth}
+\begin{center} \large
+\emph{Authors:}\\
+Torstein \textsc{Thune}, Lisa \textsc{Halvorsen}, Snorre \textsc{Davøen}
+\end{center}
+\end{minipage}
+
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+
+\end{center}
+
+\end{titlepage}
+
 \begin{abstract}
 FeedJam is an experiment where we try to combine the PageRank algorithm and a novel presentation format in order to ease digestion of large conversations on Twitter. Through employing the Kanban development methodology and the Spring framework we created a fully working prototype.
 
