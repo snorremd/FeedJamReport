@@ -1,13 +1,12 @@
 \subsection{Semantic analysis of tweets} %Lisa
+\label{semtanticAnalysation}
 
-\subsection{Personalised searches} %Torstein
-Another potential future research area would be to capture the user's own preferences and interests and use these to customise the search output. For instance we could take into accout the user's location and the previous searches and the returned tweets' semantic data.
+\subsection{Mobile Application}
+Another point of future development/research would be to make the FeedJam webapplication into a mobile application for modern mobile operating systems such as iOS, Android and Windows Phone 7. There are several different ways of achieving this. 
 
-Today the major search engines, such as Google, personalise searches using metrics such as the user's browser, operating system, location, browser settings such as language and data about previous searches (Google Blog, 2012).
+One way would be to rewrite/cross-compile our current Spring application and rewrite the views in order to create a fully native mobile application for each operating system. There are however several difficulties with choosing this path. For instance the pagerank algorithm would probably be too taxing for the limited hardware of these devices. In addition we would be unable to distribute the collection of users, resulting in a severely limited application due to the Twitter API limitations outlined in \ref{twitterProblem}.
 
-Pariser, Eli: beware online “filter bubbles” | video on ted.com. Available at: %http://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html [Accessed March 7, 2012].
-
-Google Blog (04.12.2004), Personalized Search for everyone, available from <http://googleblog.blogspot.com/2009/12/personalized-search-for-everyone.html> Downloaded 31.01.2012
+Another way of creating a mobile application would in essence be to rewrite the views. Through wrapping the current Javascript/jQuery logic and a new design into for instance Apache Cordova, a tool for wrapping HTML5/Javascript/CSS applications in a native web view on smart phones/tabets \cite{ApacheCordova}, we would be able to use the same controllers and models as the current web application.
 
 \subsection{Clustering of search results and/or the cached collection} %snorre
 
