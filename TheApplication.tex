@@ -18,10 +18,35 @@ Within the context of Spring views are written in a language called JSP. JSP, Ja
 %hva MVC er
 %hvor ting er
 \subsubsection{Interaction between view and controller} %snorre
+\label{viewControllerInteraction}
+When the user searches for a term on FeedJam a complex series of interactions happen between the view/the users browser and the FeedJam server. When the user enters a search term into the FeedJam searchbox and clicks the search button the entered term is snapped up by Javascript. This search term is then along with some other variables formed into a GET request to the Twitter search API. The returned JSON is then sent to the AJAJ controller, which parses the JSON and generates a list of users whom are not in the database/or have not been updated for several weeks. This list of users is then returned to the client.
+
+\begin{figure}[h!]
+\begin{lstlisting}[language=javascript]
+// sends following to controller (ajaj/processFollowing)
+function followingToServer(userId, followingData) {
+  $.post("ajaj/processFollowing", 
+  { 
+    userId: userId.toString(), // server wants userId as a string
+    following: JSON.stringify(followingData) // and JSON as a string
+  },
+  function(data) {
+    console.log("SERVER RESPONSE: added following for " + userId);
+  });
+}
+\end{lstlisting}
+\caption{Example jQuery code for sending following for a user as JSON to the controller}
+\label{ajaxRequest}
+\end{figure}
+
+The client then requests user information about all these users from Twitter. It then sends this back to the controller along with the returned tweets JSON from the previous request. The controller then processes all this and returns a finished view as HTML to the client. This finished HTML is then appended to the tweet grid.
+
+After the generated view has been inserted the client starts requesting followers and following for each of the users who were looked up. This is done this lately in the process in order to ensure that the view is returned and displayed to the FeedJam user as soon as possible in order to make the system appear faster, through using AJAX this can also be done without the user noticing. Each response from the Twitter API is then asynchronously send to the controller which in turn processes the JSON and inserts the values into our database.
 
 \subsubsection{Interaction between controller and model} %lisa
 %information flow, hvordan ting skjer
 %brukt desingn patterns 
+
 {\bf packages}
 \begin{itemize}
   \item uib.info323.twitterAWSM contains the controllers
@@ -98,7 +123,7 @@ When visiting the FeedJam web application the users are presented with a clean l
 
 The search form consists of a standard, though large, search input field and a search button, thus providing both good visibility, since the form is very prominent, and affordance, since users are used to the concept of a search box and thus knows how to use it.
 
-When entering a search term and clicking the search button (or when clicking a trending topic) the front page fades out, and a loading bar appears displaying information about what is being done. While the site exhibits unusual form behaviour, e.g not causing a page reload when clicking submit, this loading bar, with its connected loading messages, shows the user that something has happened and that something is still happening, thus fulfilling the feedback design principle.
+When entering a search term and clicking the search button (or when clicking a trending topic) the front page fades out, and a loading bar appears displaying information about what is being done, which is further explained in section \ref{viewControllerInteraction}. While the site exhibits unusual form behaviour, e.g not causing a page reload when clicking submit, this loading bar, with its connected loading messages, shows the user that something has happened and that something is still happening, thus fulfilling the feedback design principle.
 
 \begin{figure}[ht]
     \begin{minipage}[b]{1\linewidth}

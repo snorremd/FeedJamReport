@@ -25,19 +25,19 @@ The goal of the PageRank ranking algorithm is stated as follows: “This ranking
 Within the field of interaction design we have several different design guidelines and principles for creating usable artefacts. \citet{Sharp2007} name visibiity, feedback, constraints, consistency and affordance as the essential design principles.
 
 \begin{description}
-  \item[Visibility] bob kåre
-  \item[Feedback]  :D
-  \item[Constraints] :D
-  \item[Consistency] :D
-  \item[Affordance] :D
+  \item[Visibility] important controls should be visible
+  \item[Feedback] there should be some effect after performing an action
+  \item[Constraints] impossible options should be hidden/clearly disabled
+  \item[Consistency] similar operations should use similar elements and function similarily
+  \item[Affordance] one can use affordances (natural cues, e.g that a button can be clicked) where applicable in a user interface
 \end{description}
 
-In addition to exploring ranking algorithms we are going to develop a novel interface to display tweets and their rankings. In the book Interaction Design: Beyond Human-Computer Interaction Sharp et al (2007) present several factors who are paramount to good interaction design. In order to design good interaction one should take into account the usability principles as presented in the book. These are visibility (whether the functions/input mechanisms are visible or hidden), feedback (the interface should show that the system has received and used the input given), constraints (avoiding facilitating invalid user input for given contexts), consistency (similar operations use the same kinds of elements) and affordance (whether users can use familiarisation from experience in order to naturally understand what the interface element does). In addition to this the book also provides a set of metrics which can be utilised to measure the usability of an artefact.\newline
+In addition to exploring ranking algorithms we are going to develop a novel interface to display tweets and their rankings. In the book Interaction Design: Beyond Human-Computer Interaction \citet{Sharp2007} present several factors who are paramount to good interaction design. In order to design good interaction one should take into account the usability principles as presented in the book. These are visibility (whether the functions/input mechanisms are visible or hidden), feedback (the interface should show that the system has received and used the input given), constraints (avoiding facilitating invalid user input for given contexts), consistency (similar operations use the same kinds of elements) and affordance (whether users can use familiarisation from experience in order to naturally understand what the interface element does). In addition to this the book also provides a set of metrics which can be utilised to measure the usability of an artefact.\newline
 
 {\bf \noindent Classic search engine result pages}\newline
 \citet[p.480]{Baeza-Yates2011} argues that existing search engines are heavily influenced by what they call a extreme simplicity rule. Basically this rule states that search engine user experience must be simplistic enough in nature that users understand it without any previous knowledge, or else they will simply switch to another search engine. This has lead to a very prominent interface paradigm where all the most prominent search engines use the classic search engine result page (SERP) \citep{Baeza-Yates2011}. 
-As search engines have started to search several different content types the need to display several different media types in one unified result page have also emerged. This has resulted in two innovations: the “onebox” \citep{Baeza-Yates2011}, which displays specific information from one knowledge domain (e.g weather reports) and universal search results where one combines several different searches into one search result page.
 
+As search engines have started to search several different content types the need to display several different media types in one unified result page have also emerged. This has resulted in two innovations: the “onebox” \citep{Baeza-Yates2011}, which displays specific information from one knowledge domain (e.g weather reports) and universal search results where one combines several different searches into one search result page.
 
 \subsection{Twitter}
 %litt om hvordan twitter kan være vanskelig å få oversikt over en strøm. finn statistikk om mengden tweets i døgnet.
@@ -56,13 +56,13 @@ This section gives a short presentation of some of the lesser known technologies
 This project relies heavily on client-side Twitter requests in order to provide each user with enough requests to make the application usable. Javascript is a scripting language, at the moment the only one, which is run client-side in browsers. While Javascript itself is quite straight forward, following the ECMAscript standard, there are several inconsistencies in its implementation in different browsers, leading to it demanding large amounts of experience in order to develop stable and functioning scripts. jQuery is a library written in Javascript which tries to account for these inconsistencies in addition to providing easier syntax and a large amount of prepared methods.
 
 \subsubsection{Media Queries} %torstein
-In order to customise the layout of websites for different screen resolutions, and implement what we call a responsive design, one can employ the use of CSS media queries. While being a quite new innovation, media queries is supported by most browsers, including webkit and fennec based browsers, which includes most browsers used on smart phones and tablets. Media queries follow a quite simple syntax, and can be used within the standard css-document. For instance CSS written within "@media only screen and (min-width: 768px) and (max-width: 991px) \{" and "\}" would only be used in cases where the browser window has a width of between 768 and 991 pixels. Media queries are used in FeedJam in order to make the layout more available to smart phone and tablet users.
+In order to customise the layout of websites for different screen resolutions, and implement what we call a responsive design, one can employ the use of CSS media queries. While being a quite new innovation media queries is a part of the CSS3 standard \cite{W3C}. Media queries is supported by most browsers, including webkit and fennec based browsers, which includes most browsers used on smart phones and tablets. Media queries follow a quite simple syntax, and can be used within the standard css-document. For instance CSS written within "@media only screen and (min-width: 768px) and (max-width: 991px) \{" and "\}" would only be used in cases where the browser window has a width of between 768 and 991 pixels. Media queries are used in FeedJam in order to make the layout more available to smart phone and tablet users.
 
 \subsubsection{JSON}
 JSON (JavaScript Object Notation) is a data-interchange format \cite{Crockford2011}. JSON has several benefits when compared to other data-interchange formats such as XML. For instance, since it is based on Javascript object and array notation, it can be directly imported into Javascript. It is also lighter weight and arguably easier to write and read than the equivalent XML. In our project we receive data from the Twitter APIs in a JSON format.
 
 \subsubsection{AJAX}%torstein
-AJAX, standing for Asynchronous Javascript and XML, is a technique where one can enable client-server interaction after a page has been rendered and send to the user's browser. In the context of our project we use the equivalent technique, AJAJ, which uses JSON instead of XML. On an abstract level one can explain AJAX as server requests which does not cause a page load, and whose response can be used either to insert new content dynamically or for some other purpose by the client.
+AJAX, standing for Asynchronous Javascript and XML, is a technique where one can enable client-server interaction after a page has been rendered and send to the user's browser \cite{Garrett2005}. In the context of our project we use the equivalent technique, AJAJ, which uses the JSON data format instead of XML. On an abstract level one can explain AJAX as server requests which does not cause a page load, and whose response can be used either to insert new content dynamically or for some other purpose by the client.
 
 \subsubsection{jQuery Masonry}
 Masonry is an open source jQuery plugin which enables better placement of elements within a grid.

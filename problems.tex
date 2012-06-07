@@ -10,7 +10,9 @@ Finally, we decided to move all user and search requests client side. As a resul
 \subsection{Server Problems}
 
 %fake data probl
-\subsection{SQL/JSON injection}
+\subsection{JSON data injection}
 Due to the Twitter API request limit and the resulting AJAX client workaround we have in essence opened our application to fraudulent input from the client. Since we have no control over the client, and due to the fact that the users have full control, they will be able to construct fake, but valid JSON data to send to our controllers. Basically this means that they will be able to create fake users, user data (such as descriptions), and fake the tables lising followers and following. They will also be able to dictate the content to show in the tweets we display.
+
+In order to make use of this security glitch a user would simply have to look at the data sent from the FeedJam frontend to the backend, and make a similar POST using the same JSON format. In order to find the requests one would simply have to open the developer tools in Chrome/Safari and click the network tab, which keeps track of all network usage. Here all requests sent to our server will be listed including the appropriate HTTP headers includeing the URL which the request is sent to and our JSON in plain text. After this it would be a simple matter to write a script which sends POST requests to the correct URL (which our controller is listening to) with correctly formatted data.
 
 There is no way that we can ensure that such fraudulent data does not make its way into our database outside of conducting all the queries server side, which as previously explained proved to be a bad solution due to the request limit. While it is possible to insert correctly formatted data, it is not possible to inject SQL statements due to our use of named parameters. In addition to this the fraudulent data problem is somewhat alleviated by our revisiting policy which ensures that this fraudulent data will be exchanged for new data after a period of 4 weeks.
