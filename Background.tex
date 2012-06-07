@@ -18,18 +18,16 @@ The PageRank algorithm exploits the structure of the web in the calculation of t
 took the idea of citations counting one step further. In addition to the number of web pages that point to a page, it also looks at the actual pages that link to it. 
 \citet{Page1999} noted that giving high ranks just by looking at the number of back-links (incoming links) is problematic because a site might get many back-links from various web pages that are not very important. They provide a solution to this by proposing that not only the number of back-links, but also the rank of the web pages for these back-links can be used when ranking a web page. Given this solution, as shown by \citet{Page1999}, a page receives a high page rank if the sum of the sum of the page ranks of the back-links is high.
 
-The PageRank algorithm simulates a user navigating through the web randomly. The user is currently at page a. From here she randomly clicks on one of the links on page a to get to the next page. The process is repeated. Using the pattern created by many numbers of clicks by the user, it is possible to compute the probability of which the user has visited each page. There are some restrictions to the computation. The web has pages without outgoing links and self-links where the user is not able to move on. Another hensyn we have to consider is the probability that the user moves to another page not using the links on the current page. Med disse hensyn PageRank is calcualted as follows.
-Let L(p) be the number of outgoing links of page p and let p1 . . . pn be the pages that point to page a. q is the probability that the user jumps to another page and 1-q is the probability that she follows the link.  Then the PageRank of page a is given by the probability P R(a) of ﬁnding the user in that page
-P R(a) = q/T + (1 − q)
-Xn
-i=1
-P R(pi)
-L(pi)
+The PageRank algorithm simulates a user navigating through the web randomly. The user is currently at page \emph{a}. From here she randomly clicks on one of the links on page \emph{a} to get to the next page. The process is repeated. Using the pattern created by many numbers of clicks by the user, it is possible to compute the probability of which the user has visited each page. There are some restrictions to the computation. The web has pages without outgoing links and self-links where the user is not able to move on. Another aspect we have to consider is the probability that the user moves to another page not using the links on the current page. Following we calculate PageRank:
+Let \emph{L(p)} be the number of outgoing links of page \emph{p} and let \emph{p1 ... pn} be the pages that point to page a. q is the probability that the user jumps to another page and \emph{1-q} is the probability that she follows the link.  Then the PageRank of page a is given by the probability \emph{PR(a)} of finding the user in that page
+\[
+PR(a) = \frac{q}{T} + (1 − q) \sum_{i=1}^{n} \frac{PR(p_i)}{L(p_i)}
+\]
 
 where\newline
-T: total number of pages on the Web graph\newline
-q: parameter set by the system (typical value is 0.15) \newline
-When computing the algorithm we have to consider the problem of pages with no outgoing links. \citet{Baeza-Yates2011} propose two solutions. One is to put q = 1 for thses pages, the other is to leave them out, and compute their rank at the end based on their parents rank. 
+\emph{T}: total number of pages on the Web graph\newline
+\emph{q}: parameter set by the system (typical value is 0.15) \newline
+When computing the algorithm we have to consider the problem of pages with no outgoing links. \citet{Baeza-Yates2011} propose two solutions. One is to put \emph{q = 1} for these pages, the other is to leave them out, and compute their rank at the end based on their parents rank. 
 
 
 \subsubsection{User Interface}
@@ -53,10 +51,8 @@ In addition to exploring ranking algorithms we are going to develop a novel inte
 As search engines have started to search several different content types the need to display several different media types in one unified result page have also emerged. This has resulted in two innovations: the “onebox” \citep{Baeza-Yates2011}, which displays specific information from one knowledge domain (e.g weather reports) and universal search results where one combines several different searches into one search result page.
 
 \subsection{Twitter}
-
 \label{Twitter}
 %litt om hvordan twitter kan være vanskelig å få oversikt over en strøm. finn statistikk om megden tweets i døgnet.
-
 %vi kan tilby noe mer enn twitter search enginen gir. Vi tilbyr en mer oversiktlig tjeneste. 
 %se om det finnes noe som sier noe om hvordna brukere bruekr twitter. 
 When deciding what information retrieval (IR) techniques we could apply to Twitter we found that when searching for Tweets it not easy to see what tweets are important and which are not. If you search for at certain topic on Twitter you get at feed of all tweets that match the search query. It can be some users personal diary, a conversation between users, information sharing or spam. Following we wanted to use IR techniques to make it easier to see what Tweets are important. 
