@@ -2,6 +2,8 @@
 FeedJam is a Twitter application that uses the Twitter REST API to retrieve data from Twitter. When entering the page the user can use the search field to search for their interests. The trending topics of the last 24 hours is also presented on the front page. Once the users has entered a search term the API's search method to retrieve tweets based on a query term. 
 The system responds with relevant tweets from the last two weeks. It also retrieves information about the user that wrote the tweet. The application stores tweets, user information and trending topics in a database. 
 
+Following we will give a more detailed desctiption of the appllication.
+
 %Sections
 \subsection{Structure}
 
@@ -168,6 +170,13 @@ A Tweet receives zero points i
 
 The results are ranked by the FeedJam Rank which is a combination of User Rank (based on Page Rank) and TweetRank. The UserRank uses the information about the tweeters followers and the users the tweeter follows. The relation between user/follower/following represents the link relation between pages in PageRank. The idea is that tweeters with many followers are interesting. They get many followers because they have something interesting to tweet about. 
 
+{\bf PageRank applied to Twitter}\newline %flytte til twitter subsention?
+Our initial idea for this project was to try to apply PageRank to Twitter Tweets, but we soon realized that it wasn't going to work because tweets aren't connected to eachother in a network like Web pages are. Instead we found that we could use the ranking algorithm on Twitter users. As described below in subsection \ref{Twitter} \nameref{Twitter}, Twitter users has relationships between them. And the unique feature from other social networks, that is that the relationships doesn't have to be reciprocal makes the user graph in Twitter similar to the Web graph. 
+
+Another feature of Twitter users that we argue makes PageRank idea for applying to rank user, is the different types of users.  ... argues that there are 3 categories Information Source, Friend and Information Seeker. We argue that the Twitter user BBC is a an information source the same way that BBC homepage is an information source on the web. We can also see similarities between e.g bloggers and information seekers. When bloggers blog about something it can be connected to some official source like BBC and there exist a outgoing link to the source. The same way we argue that information seekers is following information sources on Twitter.
+
+%Litt mer om hvordan pagerank kan brukes på Twitterusers. Lage en graph/tegning. Vise at det i teorien skal oversettes - argumentere. Sosiale nettver er ganske like weben. 
+
 %Optimalisation 
 cs430 users 
 before optimalization
@@ -181,6 +190,11 @@ after first optimalization
 The application uses a MySQL database to store information from Twitter. This was nececary because the Twitter API has restrictions on number of request one can make to it.
 We user the DAO pattern. The DAO pattern is used as an abstraction of the connection between the domain objects and datasource. The DAO interfaces TrendDAO, TweetDAO and UserDAO defines the operations that are alowed to do.  
 
+
+\citep{boka kap11} caching is used in search engines a a means for making the search engine be or seem faster. we do caching of Twitter information. We desided to implement chariang of information from twitter because of the restriction on requests problem (see section \ref{} \nameref{}) 
+
+We could also have used caching of query results. store the result of one query, but wouldnt have the oppdaterthet %
+one of the features of Twitter search. could have beenn used in some other function in the application like looking at the history of tweets. \citet{boka kap 11, under caching} sais that 50\% is cached
 
 
 

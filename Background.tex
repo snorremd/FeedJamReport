@@ -1,53 +1,36 @@
 %teoridel
-In this section we will present some background information about the topics that the project consist of. We'll star by introducing search engines and more specifically how page rank can be used to make a search engine better. After this we will give a short introduction to Twitter, the social media that is the domain of the project. The section will finish with a presentation of some related work and a subsection of your motivation for doing the project. The next section describes the methods that we used.
+In this section we will present some background information about the topics that the project consist of. We'll star by introducing ranking in relation to search engines. After this we will take a closer look at the algorithm that we will use in our project, the PageRank algorithm.  Following will be a short introduction to Twitter, the social media that is the domain of the project. The section will finish with a presentation of some related work and a subsection of your motivation for doing the project. The next section .....
 
 
-\subsection{Search Engines} 
-\begin{quote}Information retrieval deals with the representation, storage, organization of, and access to information items \citep[p.1]{Baeza-Yates2011}.\end{quote} It should be done in such a way that users easily can access the information they are looking for. There are many factors contributing to a information retrieval system. Our application is a kind of search engine for Twitter. It has two focus points related to the information retrieval process. The first is ranking of the search results and the second is presenting the results.  %feedjam er ikke egentlig en søkemotor, men vi rangere og presentere resultater fra twitter søkemotoren
+\subsection{Ranking} 
+In defining the goals for this project we chose to focus on two parts of the web information retrieval process, ranking and presentation of search results. Ranking is the hardest and most important function of a search engine \citep[p.469]{Baeza-Yates2011}. One of the key challenges in ranking, according to \citet{Baeza-Yates2011}, is to identify quality content on the web. Evidence of quality can be indicated by several signals such as domain names [...], text content, and various counts (such as the number of word occurrences), links (like PageRank), and Web page access patterns as monitored by the search engine” \citep[p.468]{Baeza-Yates2011}. 
+\citet{Baeza-Yates2011} go on to describe different types of signals that can be used to improve ranking of web results. These will be briefly described here. Content signals refers to the content of the document, mainly text. The signal in the content type refers to things such as word counts, vector space model-based scores and so forth. Structural signals, according to \citet{Baeza-Yates2011}, includes signals such as the links on a page, the text in anchor elements, and in and out-links to a page.  The last signal type describes is the web usage signals. User clicks is one often used signal where the relevance of a result is affected by the number of clicks it receives. Other signals mentioned are geographical location, language, technological context and temporal context (that is web usage over time gathered through cookies or user profiles)\citep{Baeza-Yates2011}.
 
+Content signals will be used in FeedJam's TweetRank. We will explain in more detail about how we use hashtags, mentions and retweets to create a score in section \ref{} \nameref{}
 
-{\bf Ranking}
-Ranking of results is an integral part of any search engine, no less in ours. But how exactly does one rank search results? “A second critical challenge is the identification of quality content in the Web. Evidence of quality can be indicated by several signals such as domain names [...], text content, and various counts (such as the number of word occurrences), links (like PageRank), and Web page access patterns as monitored by the search engine” \citep[p.468]{Baeza-Yates2011}
-\citet{Baeza-Yates2011} go on to describe different types of signals that can be used to improve ranking of web results. These will be briefly described here. Content signals refers to the content of the document, mainly text. The signal in the content type refers to things such as word counts, vector space model-based scores and so forth. Structural signals, according to \citet{Baeza-Yates2011}, includes signals such as the links on a page, the text in anchor elements, and in and out-links to a page. The last signal type describes is the web usage signals. User clicks is one often used signal where the relevance of a result is affected by the number of clicks it receives. Other signals mentioned are geographical location, language, technological context and temporal context (that is web usage over time gathered through cookies or user profiles)\citep{Baeza-Yates2011}.
-%signals kan være ting som vi trekker inn i tweet ranken (content based signals). Hashtags, firefox plugin greie--->skriv om det.
-
-In FeedJam we use content based signals in the TweetRank. Mentions indicate some kind of communication between users. %maybe this can be an indication of the friend user. Maybe we dont want to emphasis these tweets? 
-HashTags...
-Retweets...
- See more about the implementation in section \ref{} \nameref{}
-
-Link-based ranking is based on using structural signals (i.e. counting the number of outgoing and incoming links on a page) to rank a page or document. One ranking algorithm based on this  principle is the Google PageRank algorithm \citep{Page1999}.
+Link-based ranking is based on using structural signals (i.e. counting the number of outgoing and incoming links on a page) to rank a page or document. One ranking algorithm based on this  principle is the Google PageRank algorithm \citep{Page1999}. We will use this to create a UserRank for Twitter users. 
 
 \subsubsection{Page Rank}
 %something about that pagerank comes from the idea of citations counting in journals. If a journal is cited in many articles it is most likely an important article. PageRank takes this idea one step forther. 
 The goal of the PageRank ranking algorithm is stated as follows: “This ranking called PageRank helps search engines and users quickly make sense of the vast heterogeneity of the World Wide Web” \citep[p. 1]{Page1999}. It derives from citation counting which is a way tell the importance of an article. An article that is cited by many other articles is most likely an important one. 
 
-The PageRank algorithm exploits the structure of the web in the calculation of the rank. The World Wide Web can thus be viewed as a graph with directed edges between nodes. The edges are either links pointing to the page. We call them back-links. Or they are links pointing to another page. We call them outgoing-links or forward-links. Looking at the structure of the web and trying to create a ranking of web pages, Page and ... \citet{} took the idea of citations counting one step further. 
+The PageRank algorithm exploits the structure of the web in the calculation of the rank. The World Wide Web can thus be viewed as a graph with directed edges between nodes. The edges are either links pointing to the page - we call them back-links. Or they are links pointing to another page - called outgoing-links or forward-links. Looking at the structure of the web and trying to create a ranking of web pages, \citet{Page1999}%Page and ... \citet{} 
+took the idea of citations counting one step further. In addition to the number of web pages that point to a page, it also looks at the actual pages that link to it. 
+\citet{Page1999} noted that giving high ranks just by looking at the number of back-links (incoming links) is problematic because a site might get many back-links from various web pages that are not very important. They provide a solution to this by proposing that not only the number of back-links, but also the rank of the web pages for these back-links can be used when ranking a web page. Given this solution, as shown by \citet{Page1999}, a page receives a high page rank if the sum of the sum of the page ranks of the back-links is high.
 
-In addition to the number of web pages that point to a page, it also looks at the actual pages that link to it. If the pages that link to the page in question is important, that is has a high rank, then this link is more valuable than a link from a page that doesn't have a high score. Additionally the PageRank considers how many outgoing links the "previous" page has. \citet{Page1999} noted that giving high ranks just by looking at the number of back-links (incoming links) is problematic because a site might get many back-links from various web pages that are not very important. They provide a solution to this by proposing that not only the number of back-links, but also the rank of the web pages for these back-links can be used when ranking a web page. Given this solution, as shown by \citet{Page1999}, a page receives a high page rank if the sum of the sum of the page ranks of the back-links is high.
+The PageRank algorithm simulates a user navigating through the web randomly. The user is currently at page a. From here she randomly clicks on one of the links on page a to get to the next page. The process is repeated. Using the pattern created by many numbers of clicks by the user, it is possible to compute the probability of which the user has visited each page. There are some restrictions to the computation. The web has pages without outgoing links and self-links where the user is not able to move on. Another hensyn we have to consider is the probability that the user moves to another page not using the links on the current page. Med disse hensyn PageRank is calcualted as follows.
+Let L(p) be the number of outgoing links of page p and let p1 . . . pn be the pages that point to page a. q is the probability that the user jumps to another page and 1-q is the probability that she follows the link.  Then the PageRank of page a is given by the probability P R(a) of ﬁnding the user in that page
+P R(a) = q/T + (1 − q)
+Xn
+i=1
+P R(pi)
+L(pi)
 
+where\newline
+T: total number of pages on the Web graph\newline
+q: parameter set by the system (typical value is 0.15) \newline
+When computing the algorithm we have to consider the problem of pages with no outgoing links. \citet{Baeza-Yates2011} propose two solutions. One is to put q = 1 for thses pages, the other is to leave them out, and compute their rank at the end based on their parents rank. 
 
-%Definition: Let  \emph{u} be a new page. Then let \emph{F_u} be the set of pages \emph{u} points to and \emph{B_u} be the search of pages that point to \emph{u}. Let \emph{N_u} = |\emph{F_u}| be the number of links from \emph{u} and let \emph{c} be a factor used for normalization (so that the total sank of all web page is constant). \emph{R} is the a slightly simplified version of PageRank
-
-%\[
-%R(u) = c \sum_{v \in B_u}^{} \frac{R(v)}{N_v}
-%\]
-
-%PR(A) = (1-d) + d (PR(T1)/C(T1)+...+ PR(Tn)/C(Tn))
-%PR(A) is the PageRank of page A.
-%PR(Ti) is the PageRank of pages Ti which link to page A
-%C(Ti) is the number of outbound links on pages Ti
-%d is the damping factor which can be set between 0 and 1, usually 0.85.
-
-%Explain in 
-
-%Page rank formler. vise enkel utregning... 
-{\bf PageRank applied to Twitter}\newline %flytte til twitter subsention?
-Our initial idea for this project was to try to apply PageRank to Twitter Tweets, but we soon realized that it wasn't going to work because tweets aren't connected to eachother in a network like Web pages are. Instead we found that we could use the ranking algorithm on Twitter users. As described below in subsection \ref{Twitter} \nameref{Twitter}, Twitter users has relationships between them. And the unique feature from other social networks, that is that the relationships doesn't have to be reciprocal makes the user graph in Twitter similar to the Web graph. 
-
-Another feature of Twitter users that we argue makes PageRank idea for applying to rank user, is the different types of users.  ... argues that there are 3 categories Information Source, Friend and Information Seeker. We argue that the Twitter user BBC is a an information source the same way that BBC homepage is an information source on the web. We can also see similarities between e.g bloggers and information seekers. When bloggers blog about something it can be connected to some official source like BBC and there exist a outgoing link to the source. The same way we argue that information seekers is following information sources on Twitter.
-
-%Litt mer om hvordan pagerank kan brukes på Twitterusers. Lage en graph/tegning. Vise at det i teorien skal oversettes - argumentere. Sosiale nettver er ganske like weben. 
 
 \subsubsection{User Interface}
 
@@ -79,6 +62,8 @@ As search engines have started to search several different content types the nee
 When deciding what information retrieval (IR) techniques we could apply to Twitter we found that when searching for Tweets it not easy to see what tweets are important and which are not. If you search for at certain topic on Twitter you get at feed of all tweets that match the search query. It can be some users personal diary, a conversation between users, information sharing or spam. Following we wanted to use IR techniques to make it easier to see what Tweets are important. 
 
 Twitter is a microblogging service available for more than 20 languages \citep{Twitter2012}. User post messages, called tweets, about what they find interesting which are read by other users. As Twitter has become popular it has received a broad user group. The difference between Twitter and other social networks is the way  that it defines the relationships in the network. On Twitters a user is following other user and is being followed by other users. The difference is that the relationship doesn't have to be reciprocal. Being a follower means you receive all the tweets of the users you follow. \citep{Kwak2010} finds that 77.9\% of the followers relationships on Twitter are non reciprocal. This is one of the features we will take advantage of in order to rank tweets. 
+
+\citep{boka kap11} Noe om distribusjonen av sider og linker på web i kap 11. .. noe om zipf lov. Pareto distribution similar to the power law. Many small documents Det samme gjelder for Twitter?
 
 %Dette var noe jeg fant i en artikkel. OG det er ikke så vanskelig å implementer noe som sier om en bruker er venn, deler eller søker. Kanskje vi skal gjøre det?
 Users use Twitter in different ways. \citet{Akshay2007} finds three man user categories: Information source, Friend and Information Seeker. Information sources are user that updates their status with regular intervals and has many followers. The number of followers is due to the value of the information they give through the Tweets. The Information Seeker is a user who rarely post Tweets, but follows other users on a regular basis. A Friend is a users with many reciprocal relationships. We may use these user categories in the UserRank. 
