@@ -1,5 +1,6 @@
 %Twitter api, out of requests
 \subsection{Twitter API requests}
+\label{twitterProblem}
 The initial plan was to use the open Twitter API at the server side to retrieve search results, user info, trending topics etc. The Twitter API consist of several APIs, one for each type of Twitter data each limited to a 150 requests an hour. We discovered quite early in the development process that this number was far too low to be usable in practice. 
 
 A first try at a solution was heavy use of caching of search results (tweets, users and trending topics). The use of caching was also required for user ranking, as we would need to have our own database of users to calculate the ranks. We soon found that the caching solution was not good enough because the ranking algorithm requires the storage of information about which users follow a user, and which users a user follows. Each search thus required up to 41 requests to the user API, almost a third of the available requests, which amounts to about three searches an hour.
