@@ -164,6 +164,13 @@ A Tweet receives zero points i
 
 The results are ranked by the FeedJam Rank which is a combination of User Rank (based on Page Rank) and TweetRank. The UserRank uses the information about the tweeters followers and the users the tweeter follows. The relation between user/follower/following represents the link relation between pages in PageRank. The idea is that tweeters with many followers are interesting. They get many followers because they have something interesting to tweet about. 
 
+%Optimalisation 
+cs430 users 
+before optimalization
+1650 sek
+after first optimalization
+8 sek
+
 %caching DB 
 \subsection{Database} %lisa
 \label{feedJamDatabase}
@@ -171,14 +178,5 @@ The application uses a MySQL database to store information from Twitter. This wa
 We user the DAO pattern. The DAO pattern is used as an abstraction of the connection between the domain objects and datasource. The DAO interfaces TrendDAO, TweetDAO and UserDAO defines the operations that are alowed to do.  
 
 
-%TweetRank
-%A tweet is considered “good” if it’s read by many. 
-%se på retweets of antall følgere de som har retweetet har.
-%-hvis en tweet fra en bruker med lav userRank er retweetet av brukere med mange følgere/høy userRank blir tweetRank høy -> lav UserRank + høy TweetRank = middels FeedJamRank
-%-hvis en tweet er tweetet and en bruker med høy UserRank men ikke retweetet -> høy UserRank + law TweetRank = middels FeedJamRank.
-%- Høy userRank + Høy tweetRank = høy FeedJamRank
-%HashTags: 0-1 = 1, 2-3 = 2; 4++ = 0
-%Av de 100
-%TweetRank = sum(retweeters follwers rank)
-%log skala
+
 
