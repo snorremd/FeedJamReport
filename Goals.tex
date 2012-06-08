@@ -1,22 +1,19 @@
-The goal of this project is to learn more about how ranking of results and the presentation of them effects the a user's perception of the search engine. The domain of our project will be Twitter. We will try to make an application that presents Tweets in way that makes it easier for users to see what Tweets are interesting/important and which are not. In order to achieve this we will experiment with Googles PageRank and see if it is applicable to Twitter. Another sub goal will be to experiment with a user interface that make it easier to follow the Tweet feed. To evaluate these goals we will conduct a small user evaluation of the application.
+In this section we will present the goals and secondary goals of our project.
 
-A secondary will be to explore different ways to retrieve information from Twitter and implement caching of the information.
+Our main goal for FeedJam is to explore novel ways of deploying ranking algorithms, namely PageRank, and novel layouts in order to ease reading of large collections of Tweets. This goal can be split into several components:
 
+\begin{description}
+  \item[Twitter API:] Connect to and use the Twitter API.
+  \item[Ranking algorithm:] Implement a ranking algorithm, for instance PageRank.
+  \item[Novel presentation:] Create and implement a novel way of displaying tweets.
+\end{description}
 
-%main goal: finne en ny måte å presentere twitter
-%sub goal: sjekke om pagerank lar seg oversett til twitter
-%sub goal: finne nytt grensesnitt for twitter som gjøre det lettere å følge twitter stømmen
+In addition to the main goals there are several things which we wish to explore. These are our secondary goals:
 
-%{\bf Explore a novel presentation of information}\newline
-
-
-
-%{\bf Implement a ranking algorithm}\newline %
-%In order for users to easily see what Tweets are important or interesting we wish to implement a ranking algorithm. Even though the perception of what's important is subjective a general opinion is an indication of what's important. We want to implement the Google PageRank algorithm on Twitter users.
-
-%Secondary goals: caching, user evaluation
-
-%{\bf Programming}\newline
-%spring
-%ajax i spring
-
+\begin{description}
+  \item[PageRank:] We wish to explore if the PageRank algorithm works within the context of Twitter.
+  \item[Spring:] We wish to create a web application with the Spring framework.
+  \item[AJAX in Spring:] Explore the possibility of using AJAX combined with the Spring framework.
+  \item[Caching:] Implement caching for applicable items from the Twitter API.
+  \item[User evaluation:] Evaluate the resulting web application.
+\end{description}
