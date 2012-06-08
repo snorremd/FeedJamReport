@@ -58,7 +58,29 @@ After the generated view has been inserted the client starts requesting follower
 FeedJam has tree controllers. The HomeController handles the trend requests for from the front page. It finds the time of the request and uses the MySQLTrendingFactory class to search the database for trends. If the trend exist in the database they are returned to the view. If trends for the current hour don't exist in the DB, a request is sent to Twitter. The response is cached and sent to the view. More on the database structure in section \ref{feedJamDatabase} \nameref{feedJamDatabase}.
 
 AjajController handles all search requests. When the client has retrieved search results from Twitter, the Json response is posted to AjajController. Using the MySQLUserFactory, it queries the database to check if user information of the tweet owners is cached. If some users don't exist in the database, a response is sent to the view. It contains a Json array of users the client needs to retrieve information about. 
-The AjajConntroller then receives a POST containing the the information on the remaining users information. New users and the Tweets are inserted to the database and a TweetSearchResult object is created. The result contains the requested Tweets with associated user information. The result is then sent as a response to the view. When the client has received the response from the server it requests the users followers and following. The list containing these users is sent to AjajController which uses MySQLUserFactory to inserts them to the database. 
+The AjajConntroller then receives a POST containing the the information on the remaining users information. New users and the Tweets are inserted to the database and a TweetSearchResult object is created. The result contains the requested Tweets with associated user information. The result is then sent as a response to the view. When the client has received the response from the server it requests the users followers and following. The list containing these users is sent to AjajController which uses MySQLUserFactory to inserts them to the database. The application logic for this operation is listed in Figure \ref{javaProcessFollowing}
+
+\begin{figure}[h!]
+\begin{lstlisting}[language=javascript]
+@RequestMapping(value = "/processFollowing", method = RequestMethod.POST)
+	public ResponseEntity<String> processFollowing(@RequestParam String userId,
+			String following) {
+		System.out.println("processFollowing request.....");
+		long userIdLong = Long.parseLong(userId);
+		FollowersFollowingResultPage followingResultPage = JsonUserParser
+				.jsonToFollowersFollowing(userIdLong, following);
+
+		int updated = mySqlUserFactory
+				.insertBatchFollowing(followingResultPage);
+
+		System.out.println("following batchinsert " + updated);
+		return new ResponseEntity<String>(HttpStatus.OK);
+
+	}
+\end{lstlisting}
+\caption{Example Java code for receiving and inserting following into the database.}
+\label{javaProcessFollowing}
+\end{figure}
 
 The SearchController is now used as a back up. It originally handled server side requests to Twitter. %more on this? json ++
 
