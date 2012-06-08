@@ -2,7 +2,7 @@
 FeedJam is a Twitter application that uses the Twitter REST API to retrieve data from Twitter. When entering the page the user can use the search field to search for their interests. The trending topics of the last 24 hours is also presented on the front page. Once the users has entered a search term the API's search method to retrieve tweets based on a query term. 
 The system responds with relevant tweets from the last two weeks. It also retrieves information about the user that wrote the tweet. The application stores tweets, user information and trending topics in a database. 
 
-Following we will give a more detailed desctiption of the appllication.
+Following we will give a more detailed description of the application.
 
 %Sections
 \subsection{Structure}
@@ -189,72 +189,46 @@ The frontend is coded using standard HTML5 for markup/structure, CSS3 for stylin
 The frontend is organised in several views. Roughly we can divide these views into two categories: main views and views which are included into other views. FeedJam has one main view called home.jsp. This view is generates the markup which the user is presented with when he/she first visits the feedjam website. The home view also uses the views footer.jsp which contains the markup for the footer (bottom of page), htmlheader.jsp which contains javascript declarations and jQuery initialisation and header.jsp which contains the search form. Other views is the tweetList.jsp view and the trendingList.jsp view which are used to generate grids of tweets and a slider of trending topics. These are placed dynamically within the home.jsp view through the use of jQuery.
 
 
-
-%Backend: Spring, Spring mvc, maven,  DAO, factorys, running on java servers, db more in db section,  developement
-%\subsection{Backend} %Serverside?
-%The application is developed in Spring MVC framework. 
-
-
-
-
-
 %Ranking: implementation, reference
 \subsection{Ranking} %lisa
 \label{ranking}
-The FeedJam ranking consist of two parts, the TweetRank and the UserRank. It's displayed through the opacity of each tweet. The idea is that tweets tweeted by a user with high UserRank gets a good score. The tweet will have close to 0\% opacity unless the tweet itself don't contain spam signals (see more below). The FeedJam ranking will also allow for normal users who follow good tweeting practice to get a good score.
+The FeedJam ranking consist of two parts, the TweetRank and the UserRank. It's displayed through the opacity of each tweet. The idea is to give a balances score between UserRank and TweetRank. High UserRank and high TweetRank  is will be displayed with close to 100\% visibility. If one of the rankings are bad the total score will be average and the tweet will have about 50\% opacity. And if both the tweet and UserRank is bad the tweet will be invisible. Because we had a problem with ranking all users we decided to favour the TweetRank more.
 
-\subsubseciton {TweetRank}
-The TweetRank is based on the idea of using ranking signals in search engines. Even though there isn't as many content signals in a tweet as in a normal web pages we use them to make the TweetRank. "\#" symbol is used in Twitter to mark keywords or topics in a tweet \citep{Twitter}. Twitter recommends using no more than 2 hash tags in a tweet. 
+\subsubsection{TweetRank}
+The TweetRank is based on the idea of using ranking signals in search engines. Even though there isn't as many content signals in a tweet as in a normal web pages we use them to make the TweetRank. "\#" symbol is used in Twitter to mark keywords or topics in a tweet \citep{Twitter}. Twitter recommends using no more than 2 hash tags in a tweet. Filling a tweet with hashtags  is considered spam.
 Mentions are another mark-up that's used in tweets. It indicates either that the tweet is a reply to another tweet or that the tweet concerns the user mentioned in the mention \citep{Twitterb}.
 If the Tweet is read by many, it is considered important. But because we measuring how many actually reads the Tweets would be another project, we use the retweets count as way to see how many potentially could red the Tweet.
 
 \subsubsection{UserRank}
-The UserRank uses the information about the tweeters followers and the users the tweeter follows. The relation between user/follower/following represents the link relation between pages in PageRank. The idea is that tweeters with many followers are interesting. They get many followers because they have something interesting to tweet about. 
+The UserRank uses the information about the tweeters followers and the users the tweeter follows. The relation between user/follower/following represents the link relation between pages in PageRank. The idea is that tweeters with many followers are interesting. They get many followers because they have something interesting to tweet about. \newline
 
-\newline{\bf UserRank implementation}\newline
-The UserRank implementation used in FeedJam is based on \citet{Goodrarzi2009}'s implementation of Page Rank in Java. The first step when finding a user \emph{a}'s UserRank is to find all the followers of the user, then find their followers. This is repeated to all related users is found and stored in a list (params). A matrix is then generated from the users in the params-list. Then a matrix containing a multifactor-constant is created. The multifactor is calculated based on the relations between the users, how many are following them and the damping factor (see source code UserRank.getMultiFactor). After this a matrix of 1- DAMPING_FACTOR is made. These two matrixes makes out the linear equation that is the user's UserRank. The solving of the equation is left to a third party API \citep{Jama}. Lastly the rank of the user is picked out of the matrix. 
+{\bf UserRank implementation}\newline
+The UserRank implementation used in FeedJam is based on \citet{Goodrarzi2009}'s implementation of Page Rank in Java. The first step when finding a user \emph{a}'s UserRank is to find all the followers of the user, then find their followers. This is repeated to all related users is found and stored in a list (params). A matrix is then generated from the users in the params-list. Then a matrix containing a multifactor-constant is created. The multifactor is calculated based on the relations between the users, how many are following them and the damping factor (see source code UserRank.getMultiFactor). After this a matrix of 1- DAMPING\_FACTOR is made. These two matrixes makes out the linear equation that is the user's UserRank. The solving of the equation is left to a third party API \citep{Jama}. Lastly the rank of the user is picked out of the matrix. 
+
 
 %Litt mer om hvordan pagerank kan brukes på Twitterusers. Lage en graph/tegning. Vise at det i teorien skal oversettes - argumentere. Sosiale nettver er ganske like weben. 
 
 %Optimalisation 
-cs430 users 
-before optimalization
-1650 sek
-after first optimalization
-8 sek
+%cs430 users 
+%before optimalization
+%1650 sek
+%after first optimalization
+%8 sek
 
 %caching DB 
 \subsection{Database} %lisa
 \label{feedJamDatabase}
-The application uses a MySQL database to store information from Twitter. This was necessary because the Twitter API has restrictions on number of request one can make to it.
-We user the DAO pattern to create an abstraction between the domain objects and the datasource.  The DAO interfaces TrendDAO, TweetDAO and UserDAO defines the operations that are alowed to do.  
+The application uses a MySQL database to store information from Twitter. This was nececary because the Twitter API has restrictions on number of request one can make to it. To leverage these restrictions we cache trending topic and user information. \citep{boka kap11} caching is used in search engines a a means for making the search engine be or seem faster.We also store tweets, but they aren't used yet. They can be used for functionality described in the \ref{furtherResearch}\nameref{furtherResearch} section. An ER diagram of the database is found in fig \ref{fig:erDiagram}.
+We user the DAO pattern. The DAO pattern is used as an abstraction of the connection between the domain objects and datasource. The DAO interfaces TrendDAO, TweetDAO and UserDAO defines the operations that are needed.
 
-
-\citep{boka kap11} caching is used in search engines a a means for making the search engine be or seem faster. we do caching of Twitter information. We desided to implement chariang of information from twitter because of the restriction on requests problem (see section \ref{} \nameref{}) 
-
-We could also have used caching of query results. store the result of one query, but wouldnt have the oppdaterthet %
-one of the features of Twitter search. could have beenn used in some other function in the application like looking at the history of tweets. \citet{boka kap 11, under caching} sais that 50\% is cached
-
-%Litt mer om hvordan pagerank kan brukes på Twitterusers. Lage en graph/tegning. Vise at det i teorien skal oversettes - argumentere. Sosiale nettver er ganske like weben. 
-
-%Optimalisation 
-cs430 users 
-before optimalization
-1650 sek
-after first optimalization
-8 sek
-
-%caching DB 
-\subsection{Database} %lisa
-\label{feedJamDatabase}
-The application uses a MySQL database to store information from Twitter. This was nececary because the Twitter API has restrictions on number of request one can make to it.
-We user the DAO pattern. The DAO pattern is used as an abstraction of the connection between the domain objects and datasource. The DAO interfaces TrendDAO, TweetDAO and UserDAO defines the operations that are alowed to do.  
-
-
-\citep{boka kap11} caching is used in search engines a a means for making the search engine be or seem faster. we do caching of Twitter information. We desided to implement chariang of information from twitter because of the restriction on requests problem (see section \ref{} \nameref{}) 
-
-We could also have used caching of query results. store the result of one query, but wouldnt have the oppdaterthet %
-one of the features of Twitter search. could have beenn used in some other function in the application like looking at the history of tweets. \citet{boka kap 11, under caching} sais that 50\% is cached
+\begin{figure}[ht]
+    \begin{minipage}[b]{1\linewidth}
+        \centering
+        \includegraphics[width=0.5\textwidth]{figures/erDiagram}
+        \caption{ER-database diagram}
+        \label{fig:erDiagram}
+    \end{minipage}
+\end{figure}
 
 
 
