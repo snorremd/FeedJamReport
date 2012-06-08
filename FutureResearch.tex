@@ -6,7 +6,7 @@ Another point of future development/research would be to make the FeedJam webapp
 
 One way would be to rewrite/cross-compile our current Spring application and rewrite the views in order to create a fully native mobile application for each operating system. There are however several difficulties with choosing this path. For instance the pagerank algorithm would probably be too taxing for the limited hardware of these devices. In addition we would be unable to distribute the collection of users, resulting in a severely limited application due to the Twitter API limitations outlined in \ref{twitterProblem}.
 
-Another way of creating a mobile application would in essence be to rewrite the views. Through wrapping the current Javascript/jQuery logic and a new design into for instance Apache Cordova, a tool for wrapping HTML5/Javascript/CSS applications in a native web view on smart phones/tabets \cite{ApacheCordova}, we would be able to use the same controllers and models as the current web application.
+Another way of creating a mobile application would in essence be to rewrite the views. Through wrapping the current Javascript/jQuery logic and a new design into for instance Apache Cordova, a tool for wrapping HTML5/Javascript/CSS applications in a native web view on smart phones/tabets \cite{ApacheCordova}, we would be able to use the same controllers and models as the current web application. While this approach would require more of our web server we would be able to serve a sentralised database of UserRanks in addition to having a centralised database of Twitter users which in turn would reduce the number of requests required to do one search in the Twitter database.
 
 \subsection{Clustering of search results and/or the cached collection} %snorre
 
