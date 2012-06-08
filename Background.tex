@@ -20,6 +20,7 @@ took the idea of citations counting one step further. In addition to the number 
 
 The PageRank algorithm simulates a user navigating through the web randomly. The user is currently at page \emph{a}. From here she randomly clicks on one of the links on page \emph{a} to get to the next page. The process is repeated. Using the pattern created by many numbers of clicks by the user, it is possible to compute the probability of which the user has visited each page. There are some restrictions to the computation. The web has pages without outgoing links and self-links where the user is not able to move on. Another aspect we have to consider is the probability that the user moves to another page not using the links on the current page. Following we calculate PageRank:
 Let \emph{L(p)} be the number of outgoing links of page \emph{p} and let \emph{p1 ... pn} be the pages that point to page a. q is the probability that the user jumps to another page and \emph{1-q} is the probability that she follows the link.  Then the PageRank of page a is given by the probability \emph{PR(a)} of finding the user in that page
+
 \[
 PR(a) = \frac{q}{T} + (1 − q) \sum_{i=1}^{n} \frac{PR(p_i)}{L(p_i)}
 \]
