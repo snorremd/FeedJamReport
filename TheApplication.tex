@@ -204,7 +204,7 @@ The frontend is organised in several views. Roughly we can divide these views in
 \label{ranking}
 The FeedJam ranking consist of two parts, the TweetRank and the UserRank. It's displayed through the opacity of each tweet. The idea is that tweets tweeted by a user with high UserRank gets a good score. The tweet will have close to 0\% opacity unless the tweet itself don't contain spam signals (see more below). The FeedJam ranking will also allow for normal users who follow good tweeting practice to get a good score.
 
-\subsubseciton {TweetRank}
+\subsubsection{TweetRank}
 The TweetRank is based on the idea of using ranking signals in search engines. Even though there isn't as many content signals in a tweet as in a normal web pages we use them to make the TweetRank. "\#" symbol is used in Twitter to mark keywords or topics in a tweet \citep{Twitter}. Twitter recommends using no more than 2 hash tags in a tweet. 
 Mentions are another mark-up that's used in tweets. It indicates either that the tweet is a reply to another tweet or that the tweet concerns the user mentioned in the mention \citep{Twitterb}.
 If the Tweet is read by many, it is considered important. But because we measuring how many actually reads the Tweets would be another project, we use the retweets count as way to see how many potentially could red the Tweet.
@@ -212,8 +212,8 @@ If the Tweet is read by many, it is considered important. But because we measuri
 \subsubsection{UserRank}
 The UserRank uses the information about the tweeters followers and the users the tweeter follows. The relation between user/follower/following represents the link relation between pages in PageRank. The idea is that tweeters with many followers are interesting. They get many followers because they have something interesting to tweet about. 
 
-\newline{\bf UserRank implementation}\newline
-The UserRank implementation used in FeedJam is based on \citet{Goodrarzi2009}'s implementation of Page Rank in Java. The first step when finding a user \emph{a}'s UserRank is to find all the followers of the user, then find their followers. This is repeated to all related users is found and stored in a list (params). A matrix is then generated from the users in the params-list. Then a matrix containing a multifactor-constant is created. The multifactor is calculated based on the relations between the users, how many are following them and the damping factor (see source code UserRank.getMultiFactor). After this a matrix of 1- DAMPING_FACTOR is made. These two matrixes makes out the linear equation that is the user's UserRank. The solving of the equation is left to a third party API \citep{Jama}. Lastly the rank of the user is picked out of the matrix. 
+{\bf UserRank implementation}\newline
+The UserRank implementation used in FeedJam is based on \citet{Goodrarzi2009}'s implementation of Page Rank in Java. The first step when finding a user \emph{a}'s UserRank is to find all the followers of the user, then find their followers. This is repeated to all related users is found and stored in a list (params). A matrix is then generated from the users in the params-list. Then a matrix containing a multifactor-constant is created. The multifactor is calculated based on the relations between the users, how many are following them and the damping factor (see source code UserRank.getMultiFactor). After this a matrix of 1- DAMPING\_FACTOR is made. These two matrixes makes out the linear equation that is the user's UserRank. The solving of the equation is left to a third party API \citep{Jama}. Lastly the rank of the user is picked out of the matrix. 
 
 %Litt mer om hvordan pagerank kan brukes på Twitterusers. Lage en graph/tegning. Vise at det i teorien skal oversettes - argumentere. Sosiale nettver er ganske like weben. 
 
