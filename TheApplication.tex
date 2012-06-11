@@ -213,16 +213,80 @@ If the Tweet is read by many, it is considered important. But because we measuri
 The UserRank uses the information about the tweeters followers and the users the tweeter follows. The relation between user/follower/following represents the link relation between pages in PageRank. The idea is that tweeters with many followers are interesting. They get many followers because they have something interesting to tweet about. 
 
 {\bf UserRank implementation}\newline
-The UserRank implementation used in FeedJam is based on \citet{Goodrarzi2009}'s implementation of Page Rank in Java. The first step when finding a user \emph{a}'s UserRank is to find all the followers of the user, then find their followers. This is repeated to all related users is found and stored in a list (params). A matrix is then generated from the users in the params-list. Then a matrix containing a multifactor-constant is created. The multifactor is calculated based on the relations between the users, how many are following them and the damping factor (see source code UserRank.getMultiFactor). After this a matrix of 1- DAMPING\_FACTOR is made. These two matrixes makes out the linear equation that is the user's UserRank. The solving of the equation is left to a third party API \citep{Jama}. Lastly the rank of the user is picked out of the matrix. 
+The UserRank implementation used in FeedJam is based on \citet{Goodrarzi2009}'s implementation of Page Rank in Java. The first step when finding a user \emph{a}'s UserRank is to find all the followers of the user, then find their followers. This is repeated to all related users is found and stored in a list (params). A matrix is then generated from the users in the params-list. Then a matrix containing a multifactor-constant is created. The multifactor is calculated based on the relations between the users, how many are following them and the damping factor (see source code UserRank.getMultiFactor). After this a matrix of 1- DAMPING\_FACTOR is made. These two matrixes makes out the linear equation that is the user's UserRank. The solving of the equation is left to a third party API \citep{Jama}. Lastly the rank of the user is picked out of the matrix.
 
 %Litt mer om hvordan pagerank kan brukes på Twitterusers. Lage en graph/tegning. Vise at det i teorien skal oversettes - argumentere. Sosiale nettver er ganske like weben. 
-
 %Optimalisation 
-cs430 users 
-before optimalization
-1650 sek
-after first optimalization
-8 sek
+Our initial implementation of the ranking algorithm was extremely slow and ranking every user was simply  not feasible with the time requirement of the algorithm. To optimize the algorithm we performed some simple time complexity analysis to identify critical operations in the ranking algorithm which could be optimized. To explain how we optimized the algorithm it is necessary to show some of the source code used in the ranking algorithm. Figure~\ref{fig:generateMatrix} shows the code that generates the matrix used in the algorithm. The generateMatrix method gets the multi factor for each cell in the matrix. The getMultiFactor method is run \(n^2\) times where n is the number of users in the parameter list.
+
+\begin{figure}[h!]
+\begin{lstlisting}[language=java]
+private double[][] generateMatrix(){ 
+  double[][] arr = new double[params.size()][params.size()]; 
+    for(int i = 0; i < params.size(); i++){ 
+      for(int j = 0; j < params.size(); j++){ 
+        arr[i][j] = getMultFactor((String) params.get(i), (String) params.get(j));
+      }
+    } 
+  return arr;
+}
+\end{lstlisting}
+\caption{Java code for generating the linear equation parameter matrix \protect \cite{Goodrarzi2009}.}
+\label{fig:generateMatrix}
+\end{figure}
+
+If one takes a close look at the original getMultiFactor method (Figure~\ref{fig:getmultifactor}) one can see that two database operations, getInbound and getOutBound, are performed for each matrix cell. This amounts to a time complexity of O(\( n^2\)) for these two database operations. If one presupposes that each database operation takes about 50 milliseconds to complete, then the time requirement of a user with a param list of 1000 users would be  \((1000^2 \cdot 50) \cdot 2\), which is about 1666 minutes. To optimize the algorithm we moved both database operations outside the double for-loop, thereby reducing the time-complexity of these operations to O(n) which is an significant improvement (Figure~\ref{fig:getmultifactorimproved}). Using the example above the time requirement would now be \(1000 \cdot 100\) which is 100 seconds. Calculating the multi factors is still a \(n^2\) problem, but every value is now in memory which should reduce the time used by the function.
+
+\begin{figure}[h!]
+\begin{lstlisting}[language=java]
+private double getMultFactor(String sourceId, String linkId){ 
+  if(sourceId.equals(linkId)) 
+    return 1;
+  else{
+    String[] inc = getInboundLinks(sourceId); 
+    for(int i = 0; i < inc.length; i++){ 
+      if(inc[i].equals(linkId)){ 
+        return -1 *(DAMPING_FACTOR / getOutboundLinks(linkId).length);
+      } 
+    }
+  } 
+  return 0;
+}
+\end{lstlisting}
+\caption{Java code for calculating the multi factors used in the linear equation parameter matrix \protect \cite{Goodrarzi2009}.}
+\label{fig:getmultifactor}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{lstlisting}[language=java]
+private double getMultiFactor(
+  long sourceId, 
+  long linkId, 
+  Map<Long, Long[]> followers, 
+  Map<Long, Integer> allNumberOfFollowing) 
+  {
+  if (sourceId == linkId) {
+    return 1;
+  } else {
+    for (long follower : followers.get(sourceId)) {
+      if (follower == linkId) {
+        double factor = 0;
+        try {
+          long start = System.currentTimeMillis();
+          factor = -1 * (DAMPING_FACTOR / allNumberOfFollowing.get(linkId));
+        } catch (ArithmeticException ae) {
+          return DEVIDED_BY_ZERO;
+        }
+        return factor;
+      }
+    }
+  }
+  return 0;
+}
+\end{lstlisting}
+\caption{Improved getMultiFactor-method with reduced time-complexity for the database-operations.}
+\label{fig:getmultifactorimproved}
+\end{figure}
 
 %caching DB 
 \subsection{Database} %lisa
