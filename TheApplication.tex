@@ -1,3 +1,4 @@
+
 \label{sec:theApplication}
 %Short description of the posible actions in feedjam
 FeedJam is a Twitter application that uses the Twitter REST API to retrieve data from Twitter. When entering the page the user can use the search field to search for their interests. The trending topics of the last 24 hours is also presented on the front page. Once the users has entered a search term the API's search method to retrieve tweets based on a query term. 
@@ -10,22 +11,23 @@ Following we will give a more detailed description of the application.
 
 \subsubsection{MVC} %torstein view delen, lisa model og contoller
 \label{MVC}
-The application is built on Spring's Web MVC framework. MVC separates the business logic from the user interface through the controller that handles the communication between the two. In Spring the dispatcherServlet...%blabla
+The application is built on Spring's Web MVC framework. MVC separates the business logic from the user interface through the controller that handles the communication between the two. The Spring MCV is request driven and designed around Springs Front Controller the DispatcherServlet that dispatches requests to controllers and offers other functionalities that facilitates development of web apps. The request goes through following steps:
 
 %Request driven, designed around a central servlet that dispatches request to controllers and offers other functionalities that faceilities the development of web apps. The dispatcherServlet is completly integrated with spring ioc container.
 %Request process lifecycle
-%client send a request to the web container in the form of http request
-%the request is handeled by the Front controller (DispatcherServlet) which findes the appropriate Handler Mappings 
-%The Handelr MAppiing helps the DisåatcherServlet send the request to the right Controller. 
-%The controler processes the request and returns a view in the for of a ModelAndView instance that's sent to the Front Controller. 
-%The Front Controller resolves the view by consulting the View Resolver
-%The view is then returned to the client. 
+\begin{itemize}
+\item Client sends a request to the web container in the form of a http request
+\item The request is handled by the DispatcherServlet which finds the appropriate Handler Mapping
+\itmm The Handler Mapping helps the DispatcherServlet send the request to the right Controller. 
+\item The controller processes the request and returns a view in the for of a ModelAndView instance that's sent to the DispatcherServlet. 
+\item The DispatcherServlet resolves the view by consulting the View Resolver
+\item And the view is then returned to the client. 
+\end{itemize}
 
 \subsubsection{The Model} %what it does. what is contains 
 The model is the part of the application that contains the domain objects or the core data structures \citep{}%find martin fowler
-It 
-Factory
-We have data access objects (DAO) 
+In FeedJam the main interfaces are Trend, TweetInfo323 and TwitterUserInfor323. Trend represents the trending topics presented on the front page. TweetInfo323 represents a tweet and other related information. And TwitterUserInfo323 represent the user and info about the user. Trends, TweetSearchResult and FollowersFollowingResultPage are interfaces used to create the objects that are sent to the view. All the interfaces are found in uib.info323.twitterAWSM.model.interfaces, while the implementations are found in uib.info323.twitterAWSM.model.impl
+
 \subsubsection{The View}
 The view is the component of MVC-applications which receives input from the user and displays output from the controllers and model. While the model and the controllers contain logic in order to do database interactions and data manipulation the view in general only contains logic in the form of simple if-statements and loops in order to display the content assigned by the controller. The view is also the component which, in web applications, contains the HTML markup, CSS-styling and javascript needed to provide users with the intentioned graphical design and user experience.
 
@@ -106,7 +108,7 @@ The SearchController is now used as a back up. It originally handled server side
   \item uib.info323.twitterAWSM.io.rowmapper contains rowmappers used in accessing persistence layer
   \item uib.info323.twitterAWSM.model.impl contains model implementations
   \item uib.info323.twitterAWSM.model.interfaces contains model interfaces
-  \item uib.info323.twitterAWSM.model.impl contains model implementations
+
   \item uib.info323.twitterAWSM.pagerank contains PageRank/UserRank implementation
   \item uib.info323.twitterAWSM.model.utils contains parsers etc.
 \end{itemize}
@@ -218,19 +220,84 @@ The UserRank uses the information about the tweeters followers and the users the
 The UserRank implementation used in FeedJam is based on \citet{Goodrarzi2009}'s implementation of Page Rank in Java. The first step when finding a user \emph{a}'s UserRank is to find all the followers of the user, then find their followers. This is repeated to all related users is found and stored in a list (params). A matrix is then generated from the users in the params-list. Then a matrix containing a multifactor-constant is created. The multifactor is calculated based on the relations between the users, how many are following them and the damping factor (see source code UserRank.getMultiFactor). After this a matrix of 1- DAMPING\_FACTOR is made. These two matrixes makes out the linear equation that is the user's UserRank. The solving of the equation is left to a third party API \citep{Jama}. Lastly the rank of the user is picked out of the matrix. 
 
 
-%Litt mer om hvordan pagerank kan brukes på Twitterusers. Lage en graph/tegning. Vise at det i teorien skal oversettes - argumentere. Sosiale nettver er ganske like weben. 
-
 %Optimalisation 
-%cs430 users 
-%before optimalization
-%1650 sek
-%after first optimalization
-%8 sek
+Our initial implementation of the ranking algorithm was extremely slow and ranking every user was simply  not feasible with the time requirement of the algorithm. To optimize the algorithm we performed some simple time complexity analysis to identify critical operations in the ranking algorithm which could be optimized. To explain how we optimized the algorithm it is necessary to show some of the source code used in the ranking algorithm. Figure~\ref{fig:generateMatrix} shows the code that generates the matrix used in the algorithm. The generateMatrix method gets the multi factor for each cell in the matrix. The getMultiFactor method is run \(n^2\) times where n is the number of users in the parameter list.
+
+\begin{figure}[h!]
+\begin{lstlisting}[language=java]
+private double[][] generateMatrix(){ 
+  double[][] arr = new double[params.size()][params.size()]; 
+    for(int i = 0; i < params.size(); i++){ 
+      for(int j = 0; j < params.size(); j++){ 
+        arr[i][j] = getMultFactor((String) params.get(i), (String) params.get(j));
+      }
+    } 
+  return arr;
+}
+\end{lstlisting}
+\caption{Java code for generating the linear equation parameter matrix \protect \cite{Goodrarzi2009}.}
+\label{fig:generateMatrix}
+\end{figure}
+
+If one takes a close look at the original getMultiFactor method (Figure~\ref{fig:getmultifactor}) one can see that two database operations, getInbound and getOutBound, are performed for each matrix cell. This amounts to a time complexity of O(\( n^2\)) for these two database operations. If one presupposes that each database operation takes about 50 milliseconds to complete, then the time requirement of a user with a param list of 1000 users would be  \((1000^2 \cdot 50) \cdot 2\) milliseconds, which is about 1666 minutes. To optimize the algorithm we moved both database operations outside the double for-loop, thereby reducing the time-complexity of these operations to O(n) which is an significant improvement (Figure~\ref{fig:getmultifactorimproved}). Using the example above the time requirement would now be \(1000 \cdot 100\) which is 100 seconds. Calculating the multi factors is still a \(n^2\) problem, but every value is now in memory which should reduce the time used by the function. While this optimization does consume more memory, the additional memory consumption is negligible compared to the vast reduction in computing time.
+
+\begin{figure}[h!]
+\begin{lstlisting}[language=java]
+private double getMultFactor(String sourceId, String linkId){ 
+  if(sourceId.equals(linkId)) 
+    return 1;
+  else{
+    String[] inc = getInboundLinks(sourceId); 
+    for(int i = 0; i < inc.length; i++){ 
+      if(inc[i].equals(linkId)){ 
+        return -1 *(DAMPING_FACTOR / getOutboundLinks(linkId).length);
+      } 
+    }
+  } 
+  return 0;
+}
+\end{lstlisting}
+\caption{Java code for calculating the multi factors used in the linear equation parameter matrix \protect \cite{Goodrarzi2009}.}
+\label{fig:getmultifactor}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{lstlisting}[language=java]
+private double getMultiFactor(
+  long sourceId, 
+  long linkId, 
+  Map<Long, Long[]> followers, 
+  Map<Long, Integer> allNumberOfFollowing) 
+  {
+  if (sourceId == linkId) {
+    return 1;
+  } else {
+    for (long follower : followers.get(sourceId)) {
+      if (follower == linkId) {
+        double factor = 0;
+        try {
+          long start = System.currentTimeMillis();
+          factor = -1 * (DAMPING_FACTOR / allNumberOfFollowing.get(linkId));
+        } catch (ArithmeticException ae) {
+          return DEVIDED_BY_ZERO;
+        }
+        return factor;
+      }
+    }
+  }
+  return 0;
+}
+\end{lstlisting}
+\caption{Improved getMultiFactor-method with reduced time-complexity for the database-operations.}
+\label{fig:getmultifactorimproved}
+\end{figure}
+
+
 
 %caching DB 
 \subsection{Database} %lisa
 \label{feedJamDatabase}
-The application uses a MySQL database to store information from Twitter. This was nececary because the Twitter API has restrictions on number of request one can make to it. To leverage these restrictions we cache trending topic and user information. \citep{boka kap11} caching is used in search engines a a means for making the search engine be or seem faster.We also store tweets, but they aren't used yet. They can be used for functionality described in the \ref{furtherResearch}\nameref{furtherResearch} section. An ER diagram of the database is found in fig \ref{fig:erDiagram}.
+The application uses a MySQL database to store information from Twitter. This was necessary because the Twitter API has restrictions on number of request one can make to it. To leverage these restrictions we cache trending topic and user information. \citep{boka kap11} caching is used in search engines a a means for making the search engine be or seem faster.We also store tweets, but they aren't used yet. They can be used for functionality described in the \ref{furtherResearch}\nameref{furtherResearch} section. An ER diagram of the database is found in fig \ref{fig:erDiagram}.
 We user the DAO pattern. The DAO pattern is used as an abstraction of the connection between the domain objects and datasource. The DAO interfaces TrendDAO, TweetDAO and UserDAO defines the operations that are needed.
 
 \begin{figure}[ht]
@@ -241,7 +308,4 @@ We user the DAO pattern. The DAO pattern is used as an abstraction of the connec
         \label{fig:erDiagram}
     \end{minipage}
 \end{figure}
-
-
-
 
