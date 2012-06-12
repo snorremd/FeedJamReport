@@ -1,3 +1,4 @@
+\label{sec:theApplication}
 %Short description of the posible actions in feedjam
 FeedJam is a Twitter application that uses the Twitter REST API to retrieve data from Twitter. When entering the page the user can use the search field to search for their interests. The trending topics of the last 24 hours is also presented on the front page. Once the users has entered a search term the API's search method to retrieve tweets based on a query term. 
 The system responds with relevant tweets from the last two weeks. It also retrieves information about the user that wrote the tweet. The application stores tweets, user information and trending topics in a database. 
@@ -8,8 +9,17 @@ Following we will give a more detailed description of the application.
 \subsection{Structure}
 
 \subsubsection{MVC} %torstein view delen, lisa model og contoller
+\label{MVC}
 The application is built on Spring's Web MVC framework. MVC separates the business logic from the user interface through the controller that handles the communication between the two. In Spring the dispatcherServlet...%blabla
 
+%Request driven, designed around a central servlet that dispatches request to controllers and offers other functionalities that faceilities the development of web apps. The dispatcherServlet is completly integrated with spring ioc container.
+%Request process lifecycle
+%client send a request to the web container in the form of http request
+%the request is handeled by the Front controller (DispatcherServlet) which findes the appropriate Handler Mappings 
+%The Handelr MAppiing helps the DisåatcherServlet send the request to the right Controller. 
+%The controler processes the request and returns a view in the for of a ModelAndView instance that's sent to the Front Controller. 
+%The Front Controller resolves the view by consulting the View Resolver
+%The view is then returned to the client. 
 
 \subsubsection{The Model} %what it does. what is contains 
 The model is the part of the application that contains the domain objects or the core data structures \citep{}%find martin fowler
@@ -196,6 +206,7 @@ The frontend is organised in several views. Roughly we can divide these views in
 The FeedJam ranking consist of two parts, the TweetRank and the UserRank. It's displayed through the opacity of each tweet. The idea is to give a balances score between UserRank and TweetRank. High UserRank and high TweetRank  is will be displayed with close to 100\% visibility. If one of the rankings are bad the total score will be average and the tweet will have about 50\% opacity. And if both the tweet and UserRank is bad the tweet will be invisible. Because we had a problem with ranking all users we decided to favour the TweetRank more.
 
 \subsubsection{TweetRank}
+\label{sec:tweetRank}
 The TweetRank is based on the idea of using ranking signals in search engines. Even though there isn't as many content signals in a tweet as in a normal web pages we use them to make the TweetRank. "\#" symbol is used in Twitter to mark keywords or topics in a tweet \citep{Twitter}. Twitter recommends using no more than 2 hash tags in a tweet. Filling a tweet with hashtags  is considered spam.
 Mentions are another mark-up that's used in tweets. It indicates either that the tweet is a reply to another tweet or that the tweet concerns the user mentioned in the mention \citep{Twitterb}.
 If the Tweet is read by many, it is considered important. But because we measuring how many actually reads the Tweets would be another project, we use the retweets count as way to see how many potentially could red the Tweet.
