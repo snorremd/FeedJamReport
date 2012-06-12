@@ -29,7 +29,16 @@ In Spring the Controller prepares a Map which is sent to the
 %hvor ting er
 \subsubsection{Interaction between view and controller} %snorre
 \label{viewControllerInteraction}
-When the user searches for a term on FeedJam a complex series of interactions happen between the view/the users browser and the FeedJam server. When the user enters a search term into the FeedJam searchbox and clicks the search button the entered term is snapped up by Javascript. This search term is then along with some other variables formed into a GET request to the Twitter search API. The returned JSON is then sent to the AJAJ controller, which parses the JSON and generates a list of users whom are not in the database/or have not been updated for several weeks. This list of users is then returned to the client.
+When the user searches for a term on FeedJam a complex series of interactions happen between the view/the users browser and the FeedJam server. These interactions are illustrated in Figure~\ref{fig:AjaxInteractions}. When the user enters a search term into the FeedJam searchbox and clicks the search button the entered term is snapped up by Javascript. This search term is then along with some other variables formed into a GET request to the Twitter search API. The returned JSON is then sent to the AJAJ controller, which parses the JSON and generates a list of users whom are not in the database/or have not been updated for several weeks. This list of users is then returned to the client.
+
+\begin{figure}[ht]
+    \begin{minipage}[b]{1\linewidth}
+        \centering
+        \includegraphics[width=1\textwidth]{figures/sequencediagram}
+        \caption{Sequence diagram for ajax interactions between browser, server and Twitter.}
+        \label{fig:AjaxInteractions}
+    \end{minipage}
+\end{figure}
 
 \begin{figure}[h!]
 \begin{lstlisting}[language=javascript]
@@ -235,7 +244,7 @@ private double[][] generateMatrix(){
 \label{fig:generateMatrix}
 \end{figure}
 
-If one takes a close look at the original getMultiFactor method (Figure~\ref{fig:getmultifactor}) one can see that two database operations, getInbound and getOutBound, are performed for each matrix cell. This amounts to a time complexity of O(\( n^2\)) for these two database operations. If one presupposes that each database operation takes about 50 milliseconds to complete, then the time requirement of a user with a param list of 1000 users would be  \((1000^2 \cdot 50) \cdot 2\), which is about 1666 minutes. To optimize the algorithm we moved both database operations outside the double for-loop, thereby reducing the time-complexity of these operations to O(n) which is an significant improvement (Figure~\ref{fig:getmultifactorimproved}). Using the example above the time requirement would now be \(1000 \cdot 100\) which is 100 seconds. Calculating the multi factors is still a \(n^2\) problem, but every value is now in memory which should reduce the time used by the function.
+If one takes a close look at the original getMultiFactor method (Figure~\ref{fig:getmultifactor}) one can see that two database operations, getInbound and getOutBound, are performed for each matrix cell. This amounts to a time complexity of O(\( n^2\)) for these two database operations. If one presupposes that each database operation takes about 50 milliseconds to complete, then the time requirement of a user with a param list of 1000 users would be  \((1000^2 \cdot 50) \cdot 2\) milliseconds, which is about 1666 minutes. To optimize the algorithm we moved both database operations outside the double for-loop, thereby reducing the time-complexity of these operations to O(n) which is an significant improvement (Figure~\ref{fig:getmultifactorimproved}). Using the example above the time requirement would now be \(1000 \cdot 100\) which is 100 seconds. Calculating the multi factors is still a \(n^2\) problem, but every value is now in memory which should reduce the time used by the function. While this optimization does consume more memory, the additional memory consumption is negligible compared to the vast reduction in computing time.
 
 \begin{figure}[h!]
 \begin{lstlisting}[language=java]
