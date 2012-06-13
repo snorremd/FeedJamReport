@@ -1,75 +1,33 @@
-This is BibTeX, Version 0.99d (TeX Live 2011)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: SemesterAssignmentInfo323SnorreLisaTorstein.aux
-White space in argument---line 102 of file SemesterAssignmentInfo323SnorreLisaTorstein.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: SemesterAssignmentInfo323SnorreLisaTorstein.aux
+White space in argument---line 108 of file SemesterAssignmentInfo323SnorreLisaTorstein.aux
  : \citation{boka
  :                kap11}
 I'm skipping whatever remains of this command
-White space in argument---line 107 of file SemesterAssignmentInfo323SnorreLisaTorstein.aux
+White space in argument---line 109 of file SemesterAssignmentInfo323SnorreLisaTorstein.aux
  : \citation{boka
  :                kap 11,under caching}
 I'm skipping whatever remains of this command
-White space in argument---line 112 of file SemesterAssignmentInfo323SnorreLisaTorstein.aux
+White space in argument---line 116 of file SemesterAssignmentInfo323SnorreLisaTorstein.aux
  : \citation{boka
  :                kap11}
 I'm skipping whatever remains of this command
-White space in argument---line 113 of file SemesterAssignmentInfo323SnorreLisaTorstein.aux
+White space in argument---line 117 of file SemesterAssignmentInfo323SnorreLisaTorstein.aux
  : \citation{boka
  :                kap 11,under caching}
 I'm skipping whatever remains of this command
 The style file: plainnat.bst
-Database file #1: INFO323-AWSM.bib
+Database file #1: C:/Users/Torstein/Documents/bib/INFO323-AWSM.bib
+Warning--I didn't find a database entry for "Baeza-Yates2011"
 Warning--I didn't find a database entry for ""
+Warning--I didn't find a database entry for "Goodrarzi2009"
+Warning--I didn't find a database entry for "Jama"
 Warning--I didn't find a database entry for "SpringSourcec"
 Warning--I didn't find a database entry for "SpringSourcee"
 Warning--empty journal in Akshay2007
 Warning--empty year in ApacheCordova
-Warning--empty journal in Goodrarzi2009
-Warning--empty year in Jama
 Warning--can't use both volume and number fields in Sharp2007
 Warning--empty year in SpringSource
 Warning--empty year in Twitter
 Warning--empty year in Twitterb
 Warning--empty year in W3C
-You've used 20 entries,
-            2773 wiz_defined-function locations,
-            708 strings with 7530 characters,
-and the built_in function-call counts, 7315 in all, are:
-= -- 650
-> -- 309
-< -- 21
-+ -- 116
-- -- 93
-* -- 464
-:= -- 1098
-add.period$ -- 64
-call.type$ -- 20
-change.case$ -- 92
-chr.to.int$ -- 17
-cite$ -- 49
-duplicate$ -- 369
-empty$ -- 690
-format.name$ -- 115
-if$ -- 1566
-int.to.chr$ -- 4
-int.to.str$ -- 1
-missing$ -- 8
-newline$ -- 111
-num.names$ -- 80
-pop$ -- 243
-preamble$ -- 1
-purify$ -- 71
-quote$ -- 0
-skip$ -- 315
-stack$ -- 0
-substring$ -- 139
-swap$ -- 53
-text.length$ -- 5
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 215
-warning$ -- 9
-while$ -- 72
-width$ -- 0
-write$ -- 255
 (There were 4 error messages)

@@ -1,4 +1,4 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{17}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -15,14 +15,6 @@ Java Akshay, Song Xiaodan, Tim Finin, and Belle Tseng.
 \newblock {Apache Cordova}.
 \newblock URL \url{http://incubator.apache.org/cordova/}.
 
-\bibitem[Baeza-Yates and Ribeiro-Neto(2011)]{Baeza-Yates2011}
-Ricardo Baeza-Yates and Berthier Ribeiro-Neto.
-\newblock {Text Classification}.
-\newblock In \emph{Modern Information Retrieval: The Concepts and Technology
-  Behind Search (ACM Press Books)}, pages 281--335. Addison Wesley, 2 edition,
-  2011.
-\newblock ISBN 0321416910.
-
 \bibitem[Crockford(2011)]{Crockford2011}
 Douglas Crockford.
 \newblock {Introducing JSON}, 2011.
@@ -34,11 +26,6 @@ James Garrett.
 \newblock \emph{experiencezencom}, pages 1--5, 2005.
 \newblock URL
   \url{http://experiencezen.com/wp-content/uploads/2007/04/adaptive-path-ajax-a-new-approach-to-web-applications1.pdf}.
-
-\bibitem[Goodrarzi(2009)]{Goodrarzi2009}
-Nima Goodrarzi.
-\newblock {Page Ranking Implemented in Java}.
-\newblock 2009.
 
 \bibitem[Ho(2012)]{Ho2012}
 Don Ho.
@@ -61,11 +48,6 @@ Inc Infochimps.
 Inc Infochimps.
 \newblock {trst.me - PageRank for Twitter}, 2012{\natexlab{c}}.
 \newblock URL \url{http://trst.me/}.
-
-\bibitem[Jama()]{Jama}
-Jama.
-\newblock {JAMA: Java Matrix Package}.
-\newblock URL \url{http://math.nist.gov/javanumerics/jama/}.
 
 \bibitem[Kwak et~al.(2010)Kwak, Lee, Park, and Moon]{Kwak2010}
 Haewoon Kwak, Changhyun Lee, Hosung Park, and Sue Moon.
