@@ -1,13 +1,13 @@
 \select@language {english}
 \contentsline {section}{\numberline {1}Introduction}{4}{section.1}
 \contentsline {section}{\numberline {2}Goals}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Motivation}{5}{subsection.2.1}
 \contentsline {section}{\numberline {3}Background}{5}{section.3}
 \contentsline {subsection}{\numberline {3.1}Ranking}{5}{subsection.3.1}
 \contentsline {subsubsection}{\numberline {3.1.1}Page Rank}{6}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.2}User Interface}{6}{subsubsection.3.1.2}
-\contentsline {subsection}{\numberline {3.2}Twitter}{7}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.1.2}User Interface}{7}{subsubsection.3.1.2}
+\contentsline {subsection}{\numberline {3.2}Twitter}{8}{subsection.3.2}
 \contentsline {subsection}{\numberline {3.3}Related Work}{8}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Motivation}{8}{subsection.3.4}
 \contentsline {section}{\numberline {4}The application}{9}{section.4}
 \contentsline {subsection}{\numberline {4.1}Structure}{9}{subsection.4.1}
 \contentsline {subsubsection}{\numberline {4.1.1}MVC}{9}{subsubsection.4.1.1}
@@ -19,7 +19,7 @@
 \contentsline {subsection}{\numberline {4.2}Layout}{13}{subsection.4.2}
 \contentsline {subsubsection}{\numberline {4.2.1}Defining the concept}{13}{subsubsection.4.2.1}
 \contentsline {subsubsection}{\numberline {4.2.2}Early efforts}{13}{subsubsection.4.2.2}
-\contentsline {subsubsection}{\numberline {4.2.3}The final layout}{14}{subsubsection.4.2.3}
+\contentsline {subsubsection}{\numberline {4.2.3}The final layout}{15}{subsubsection.4.2.3}
 \contentsline {subsubsection}{\numberline {4.2.4}Coding of the layout}{16}{subsubsection.4.2.4}
 \contentsline {subsection}{\numberline {4.3}Ranking}{16}{subsection.4.3}
 \contentsline {subsubsection}{\numberline {4.3.1}TweetRank}{16}{subsubsection.4.3.1}
