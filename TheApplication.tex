@@ -71,22 +71,25 @@ AjajController handles all search requests. When the client has retrieved search
 The AjajConntroller then receives a POST containing the the information on the remaining users information. New users and the Tweets are inserted to the database and a TweetSearchResult object is created. The result contains the requested Tweets with associated user information. The result is then sent as a response to the view. When the client has received the response from the server it requests the users followers and following. The list containing these users is sent to AjajController which uses MySQLUserFactory to inserts them to the database. The application logic for this operation is listed in Figure \ref{javaProcessFollowing}
 
 \begin{figure}[h!]
-\begin{lstlisting}[language=javascript]
+\begin{lstlisting}[language=java]
 @RequestMapping(value = "/processFollowing", method = RequestMethod.POST)
-	public ResponseEntity<String> processFollowing(@RequestParam String userId,
-			String following) {
-		System.out.println("processFollowing request.....");
-		long userIdLong = Long.parseLong(userId);
-		FollowersFollowingResultPage followingResultPage = JsonUserParser
-				.jsonToFollowersFollowing(userIdLong, following);
+public ResponseEntity<String> processFollowing(
+  @RequestParam String userId,
+  String following) 
+  {
+    long userIdLong = Long.parseLong(userId);
+    
+    // Parse the json string and store following in result page object
+    FollowersFollowingResultPage followingResultPage = 
+      JsonUserParser.jsonToFollowersFollowing(userIdLong, following);
+    
+    // Insert following objects into database
+    int updated = 
+    mySqlUserFactory.insertBatchFollowing(followingResultPage);
 
-		int updated = mySqlUserFactory
-				.insertBatchFollowing(followingResultPage);
-
-		System.out.println("following batchinsert " + updated);
-		return new ResponseEntity<String>(HttpStatus.OK);
-
-	}
+    // Return a HTTP OK status to the client				
+    return new ResponseEntity<String>(HttpStatus.OK);
+}
 \end{lstlisting}
 \caption{Example Java code for receiving and inserting following into the database.}
 \label{javaProcessFollowing}

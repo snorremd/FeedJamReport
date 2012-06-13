@@ -1,4 +1,4 @@
-\begin{thebibliography}{19}
+\begin{thebibliography}{20}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -14,6 +14,14 @@ Java Akshay, Song Xiaodan, Tim Finin, and Belle Tseng.
 {Apache Cordova}.
 \newblock {Apache Cordova}.
 \newblock URL \url{http://incubator.apache.org/cordova/}.
+
+\bibitem[Baeza-Yates and Ribeiro-Neto(2011)]{Baeza-Yates2011}
+Ricardo Baeza-Yates and Berthier Ribeiro-Neto.
+\newblock {Text Classification}.
+\newblock In \emph{Modern Information Retrieval: The Concepts and Technology
+  Behind Search (ACM Press Books)}, pages 281--335. Addison Wesley, 2 edition,
+  2011.
+\newblock ISBN 0321416910.
 
 \bibitem[Crockford(2011)]{Crockford2011}
 Douglas Crockford.
