@@ -47,15 +47,12 @@
 \contentsline {subsection}{\numberline {6.2}Server Problems}{24}{subsection.6.2}
 \contentsline {subsection}{\numberline {6.3}SQL/JSON injection}{24}{subsection.6.3}
 \contentsline {section}{\numberline {7}Level of reached goals}{25}{section.7}
-\contentsline {section}{\numberline {8}Evaluation}{25}{section.8}
-\contentsline {subsection}{\numberline {8.1}Evaluating the layout}{25}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}Effectiveness of the ranking algorithms}{25}{subsection.8.2}
-\contentsline {section}{\numberline {9}Furture Research}{25}{section.9}
-\contentsline {subsection}{\numberline {9.1}Semantic analysis of tweets}{25}{subsection.9.1}
-\contentsline {subsection}{\numberline {9.2}Mobile Application}{25}{subsection.9.2}
-\contentsline {subsection}{\numberline {9.3}Clustering of search results and/or the cached collection}{26}{subsection.9.3}
-\contentsline {subsection}{\numberline {9.4}Permalinks for accessibility}{26}{subsection.9.4}
-\contentsline {section}{\numberline {10}Conclusion}{26}{section.10}
-\contentsline {section}{\numberline {11}Appendix}{28}{section.11}
-\contentsline {subsection}{\numberline {11.1}Connecting to the application and getting the source code}{28}{subsection.11.1}
-\contentsline {subsection}{\numberline {11.2}Screenshots}{28}{subsection.11.2}
+\contentsline {section}{\numberline {8}Furture Research}{25}{section.8}
+\contentsline {subsection}{\numberline {8.1}Semantic analysis of tweets}{25}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Mobile Application}{25}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Clustering of search results and/or the cached collection}{25}{subsection.8.3}
+\contentsline {subsection}{\numberline {8.4}Permalinks for accessibility}{26}{subsection.8.4}
+\contentsline {section}{\numberline {9}Conclusion}{26}{section.9}
+\contentsline {section}{\numberline {10}Appendix}{28}{section.10}
+\contentsline {subsection}{\numberline {10.1}Connecting to the application and getting the source code}{28}{subsection.10.1}
+\contentsline {subsection}{\numberline {10.2}Screenshots}{28}{subsection.10.2}
