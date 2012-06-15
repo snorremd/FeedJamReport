@@ -46,14 +46,11 @@
 \BOOKMARK [2][-]{subsection.6.2}{Server Problems}{section.6}% 46
 \BOOKMARK [2][-]{subsection.6.3}{SQL/JSON injection}{section.6}% 47
 \BOOKMARK [1][-]{section.7}{Level of reached goals}{}% 48
-\BOOKMARK [1][-]{section.8}{Evaluation}{}% 49
-\BOOKMARK [2][-]{subsection.8.1}{Evaluating the layout}{section.8}% 50
-\BOOKMARK [2][-]{subsection.8.2}{Effectiveness of the ranking algorithms}{section.8}% 51
-\BOOKMARK [1][-]{section.9}{Furture Research}{}% 52
-\BOOKMARK [2][-]{subsection.9.1}{Semantic analysis of tweets}{section.9}% 53
-\BOOKMARK [2][-]{subsection.9.2}{Mobile Application}{section.9}% 54
-\BOOKMARK [2][-]{subsection.9.3}{Clustering of search results and/or the cached collection}{section.9}% 55
-\BOOKMARK [2][-]{subsection.9.4}{Permalinks for accessibility}{section.9}% 56
-\BOOKMARK [1][-]{section.10}{Conclusion}{}% 57
-\BOOKMARK [1][-]{section.11}{Appendix}{}% 58
-\BOOKMARK [2][-]{subsection.11.1}{Connecting to the application and getting the source code}{section.11}% 59
+\BOOKMARK [1][-]{section.8}{Furture Research}{}% 49
+\BOOKMARK [2][-]{subsection.8.1}{Semantic analysis of tweets}{section.8}% 50
+\BOOKMARK [2][-]{subsection.8.2}{Mobile Application}{section.8}% 51
+\BOOKMARK [2][-]{subsection.8.3}{Clustering of search results and/or the cached collection}{section.8}% 52
+\BOOKMARK [2][-]{subsection.8.4}{Permalinks for accessibility}{section.8}% 53
+\BOOKMARK [1][-]{section.9}{Conclusion}{}% 54
+\BOOKMARK [1][-]{section.10}{Appendix}{}% 55
+\BOOKMARK [2][-]{subsection.10.1}{Connecting to the application and getting the source code}{section.10}% 56
