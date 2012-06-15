@@ -1,4 +1,4 @@
-This section will explain about the methodology, techologies and tools we used to develop the project. 
+This section will explain the development methodology, techologies and tools we used to develop the project. 
 \subsection{Methodology}
 %argumenter hvorfor for vi har valgt det.
 %Tilpassinger, prsaker til tilpassinger.
@@ -23,12 +23,13 @@ We used some tools and technologies in our development.
 \subsection{Tools} %snorre
 During the project life cycle a number of tools have been used for the development process, implementation of code and deployment of the web application itself. A brief description of the tools used will be provided in this section.
 
-
 \subsubsection{Workflow}
 We adopted a lean and agile development workflow for our project using a Kanban board, a version control system for rapid integration of new code/functionality and worked physically together as a team. We created a online Kanban board at Kanbanpad.com. Kanbanpad is a free and online Kanban board with a simple interface and support for multiple platforms \cite{TheHybridGroup2012}.
 
+----- TODO (skriv om git og greier) -----
+
 \subsubsection{Implementation}
-To implement the Java and Spring Framework based backend the SpringSource Tool Suite (figure~\ref{fig:springsourcetoolsuite} was used. \textit{``SpringSource Tool Suite™ (STS) provides the best Eclipse-powered development environment for building Spring-powered enterprise applications.''} \cite{SpringSource}. SpringSource Tool Suite is built on the open-source IDE framework Eclipse and provides functionality such as close integration with the Spring Framework, maven integration, automatic application deployment to web servers, debugging, code-completion and much more.
+To implement the Java and Spring Framework based backend the SpringSource Tool Suite (figure~\ref{fig:springsourcetoolsuite} was used. \textit{``SpringSource Tool Suite™ (STS) provides the best Eclipse-powered development environment for building Spring-powered enterprise applications.''} \cite{SpringSource}. SpringSource Tool Suite is based on the open-source IDE framework Eclipse and provides functionality such as close integration with the Spring Framework, maven integration, automatic application deployment to web servers, debugging, code-completion and much more.
 
 The front-end code was implemented using mainly Notepad++ (figure~\ref{fig:notepadplusplus}) for coding and Google Chrome development tools for debugging and testing. \textit{``Notepad++ is a free (as in "free speech" and also as in "free beer") source code editor and Notepad replacement that supports several languages. Running in the MS Windows environment, its use is governed by GPL License.''} \cite{Ho2012}.
 
@@ -38,8 +39,10 @@ The application is deployed on a server running the Linux distribution Ubuntu 12
 \subsection{Technology}
 This section gives a short presentation of the technologies we used in the project. 
 
-\subsubsection{HTTP Protocol}
-----------TODO--------------
+\subsubsection{HTTP Requests}
+In order to send data from a browser to a server one utilises the HTTP request methods. There are two different types of HTTP requests: HTTP GET and HTTP POST. The main differences between these two methods is that data submitted through a GET is encoded by the browser and appended to the URL while data submitted through POST is added to the HTTP request message body.
+
+The practical difference is that POST can take larger amounts of data than GET and that GET requests can be made easily through a browser through manipulating URLs. Therefore POST is mainly used to send data, while GET is mainly used to request data.
 
 \subsubsection{Javascript/jQuery} %torstein
 This project relies heavily on client-side Twitter requests in order to provide each user with enough requests to make the application usable. Javascript is a scripting language, at the moment the only one, which is run client-side in browsers. While Javascript itself is quite straight forward, following the ECMAscript standard, there are several inconsistencies in its implementation in different browsers. JavaScript thus demands large amounts of experience in order to develop stable and functioning scripts. jQuery is a library written in Javascript which tries to account for these inconsistencies in addition to providing easier syntax and a large amount of prepared methods.
@@ -57,11 +60,10 @@ In order to customise the layout of websites for different screen resolutions, a
 JSON (JavaScript Object Notation) is a data-interchange format \cite{Crockford2011}. JSON has several benefits when compared to other data-interchange formats such as XML. For instance, since it is based on Javascript object and array notation, it can be directly imported into Javascript. It is also lighter weight and arguably easier to write and read than the equivalent XML. In our project we receive data from the Twitter APIs in a JSON format.
 
 \subsubsection{jQuery Masonry}
-Masonry is an open source jQuery plugin which enables better placement of elements within a  html grid.
+Masonry is an open source jQuery plugin which enables better placement of elements within a html grid. It works through calculated the rendered size of each element in the grid, and the placing each element with absolute pixel values in the final grid.
 
 \subsubsection{jQuery Revolver}
 Revolver is an open source jQuery plugin which lets us generate a slider from a set of HTML elements.
-
 
 \subsubsection{Spring} %lisa
 To develop the project we used the Spring Framework. It is a Java based open source application framework. We chose this framework because it has many modules that easily takes care of the "plumbing" of the application and makes our work easier \citep{SpringSourcec}. Some of the group members has used it before, and all wanted to get to know it better because it one of the big enterprise frameworks. The application is set up using Spring MVC architecture which allows for easy communication between the web view and the controller (more on this in section \ref{} \nameref{}) \citep{SpringSourcee}. FeedJam uses Spring's REST module for client-side HTTP access to Twitter's API. We also make user of Spring's data access module for connection to the database.
