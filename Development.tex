@@ -3,8 +3,8 @@ This section will explain about the methodology, techologies and tools we used t
 %argumenter hvorfor for vi har valgt det.
 %Tilpassinger, prsaker til tilpassinger.
 
-This project has been developed using the Kanban-methodology which is a lean (and agile) development methodology. The nature of the project goes well with this methodology. With The goals of the project we had a high focus on making a working prototype. we focused on implementation. Something about incremental releasing. The implementation of user interface was not directly dependent on the application it self,  But in order to test it properly the rest of the application had to work. so we could work on these parts simultaneously. The ranking was implemented when the rest was more or less done. something about putting dependencies on the board we could ask the others to focus on that part. 
-this way of working made it easy to make desisions along the way. we were all new to spring and had little knowleddge about the twitter api. so it was good for us to make a quick implementation to check if it worked.something about learning at the same time as implementing. Also a small project with few team members like our don't need to hold meetings on a regular basis like e.g in scrum. better to make the disisions when we needed.
+This project has been developed using the Kanban-methodology which is a lean (and agile) development methodology. The nature of the project goes well with this methodology. With The goals of the project we had a high focus on making a working prototype. --------------- TODO we focused on implementation. Something about incremental releasing. The implementation of user interface was not directly dependent on the application it self,  But in order to test it properly the rest of the application had to work. so we could work on these parts simultaneously. The ranking was implemented when the rest was more or less done. something about putting dependencies on the board we could ask the others to focus on that part. 
+this way of working made it easy to make desisions along the way. we were all new to spring and had little knowleddge about the twitter api. so it was good for us to make a quick implementation to check if it worked.something about learning at the same time as implementing. Also a small project with few team members like our don't need to hold meetings on a regular basis like e.g in scrum. better to make the disisions when we needed.  TODO --------------------
 
 
 being able to work on different part, puting the tasks on a board to see the dependencies.
@@ -25,28 +25,27 @@ During the project life cycle a number of tools have been used for the developme
 
 
 \subsubsection{Workflow}
-We adopted a lean and agile development workflow for our project using a Kanban-board, a version control system for rapid integration of new code/functionality and worked physically together as a team. We created a online Kanban-board at Kanbanpad.com. Kanbanpad is a free and online Kanban board with a simple interface and support for multiple platforms \cite{TheHybridGroup2012}.
+We adopted a lean and agile development workflow for our project using a Kanban board, a version control system for rapid integration of new code/functionality and worked physically together as a team. We created a online Kanban board at Kanbanpad.com. Kanbanpad is a free and online Kanban board with a simple interface and support for multiple platforms \cite{TheHybridGroup2012}.
 
 \subsubsection{Implementation}
-To implement the Java and Spring Framework based backend the SpringSource Tool Suite (Figure~\ref{fig:springsourcetoolsuite} was used. \textit{``SpringSource Tool Suite™ (STS) provides the best Eclipse-powered development environment for building Spring-powered enterprise applications.''} \cite{SpringSource}. SpringSource Tool Suite is built on the open-source IDE framework Eclipse, and provides functionality such as close integration with the Spring Framework, maven integration, automatic application deployment to web servers, debugging, code-completion and much more.
+To implement the Java and Spring Framework based backend the SpringSource Tool Suite (figure~\ref{fig:springsourcetoolsuite} was used. \textit{``SpringSource Tool Suite™ (STS) provides the best Eclipse-powered development environment for building Spring-powered enterprise applications.''} \cite{SpringSource}. SpringSource Tool Suite is built on the open-source IDE framework Eclipse and provides functionality such as close integration with the Spring Framework, maven integration, automatic application deployment to web servers, debugging, code-completion and much more.
 
-The front-end code was implemented using mainly Notepad++ for coding and Google Chrome development tools for debugging and testing. \textit{``Notepad++ is a free (as in "free speech" and also as in "free beer") source code editor and Notepad replacement that supports several languages. Running in the MS Windows environment, its use is governed by GPL License.''} \cite{Ho2012}.
+The front-end code was implemented using mainly Notepad++ (figure~\ref{fig:notepadplusplus}) for coding and Google Chrome development tools for debugging and testing. \textit{``Notepad++ is a free (as in "free speech" and also as in "free beer") source code editor and Notepad replacement that supports several languages. Running in the MS Windows environment, its use is governed by GPL License.''} \cite{Ho2012}.
 
 \subsubsection{Deployment}
-The application is deployed on a server running the Linux-distro Ubuntu 12.04, a Tomcat web server, a LAMP-stack (Linux, Apache, MySQL, PHP) and Maven. Ubuntu 12.04 is the newest version of the operative system developed by Canonical and is suitable for use as a web server with desktop access. To serve the webpages of the FeedJam application we use Tomcat, an open-source webserver for Java-based web-applications. A MySQL server is used to drive the application's database of users and tweets. An Apache php server is used to provide the phpMyAdmin web interface to manage the MySQL server.
-
-%Jeg vet ikke helt hva Torstein hadde tenkt å ha med her. Ble noe rart etter at jeg merget.
+The application is deployed on a server running the Linux distribution Ubuntu 12.04, a Tomcat web server, a LAMP-stack (Linux, Apache, MySQL, PHP) and Maven. Ubuntu 12.04 is the newest version of the operative system developed by Canonical and is suitable for use as a web server with desktop access. To serve the webpages of the FeedJam application we use Tomcat, an open-source web server for Java-based web applications. A MySQL server is used to drive the application's database of users and tweets. An Apache php server is used to provide the phpMyAdmin web interface to manage the MySQL server.
 
 \subsection{Technology}
-This section gives a short presentation of the techonologies we used in the project. 
+This section gives a short presentation of the technologies we used in the project. 
+
+\subsubsection{HTTP Protocol}
+----------TODO--------------
 
 \subsubsection{Javascript/jQuery} %torstein
-This project relies heavily on client-side Twitter requests in order to provide each user with enough requests to make the application usable. Javascript is a scripting language, at the moment the only one, which is run client-side in browsers. While Javascript itself is quite straight forward, following the ECMAscript standard, there are several inconsistencies in its implementation in different browsers, leading to it demanding large amounts of experience in order to develop stable and functioning scripts. jQuery is a library written in Javascript which tries to account for these inconsistencies in addition to providing easier syntax and a large amount of prepared methods.
+This project relies heavily on client-side Twitter requests in order to provide each user with enough requests to make the application usable. Javascript is a scripting language, at the moment the only one, which is run client-side in browsers. While Javascript itself is quite straight forward, following the ECMAscript standard, there are several inconsistencies in its implementation in different browsers. JavaScript thus demands large amounts of experience in order to develop stable and functioning scripts. jQuery is a library written in Javascript which tries to account for these inconsistencies in addition to providing easier syntax and a large amount of prepared methods.
 
 \subsubsection{Media Queries} %torstein
-In order to customise the layout of websites for different screen resolutions one can employ the use of CSS media queries. While being a quite new innovation, media queries is supported by most browsers, including webkit and fennec based browsers, which includes most browsers used on smart phones and tablets. Media queries follow a quite simple syntax, and can be used within the standard css-document. For instance CSS written within "@media only screen and (min-width: 768px) and (max-width: 991px) \{" and "\}" would only be used in cases where the browser window has a width of between 768 and 991 pixels. 
-
-Media queries are used in FeedJam in order to make the layout more available to smart phone and tablet users.
+In order to customise the layout of websites for different screen resolutions one can employ the use of CSS media queries. Media queries makes it possible to determine what type of media a web page is accessed from with pure CSS code. While being a quite new innovation, media queries is supported by most browsers, including webkit and fennec based browsers, which includes most browsers used on smart phones and tablets. Media queries follow a quite simple syntax, and can be used within the standard css-document. For instance CSS written within "@media only screen and (min-width: 768px) and (max-width: 991px) \{" and "\}" would only be used in cases where the browser window has a width of between 768 and 991 pixels. Media queries are used in FeedJam in order to make the layout more available to smart phone and tablet users.
 
 \subsubsection{AJAX}%torstein
 AJAX, standing for Asynchronous Javascript and XML, is a technique where one can enable client-server interaction after a page has been rendered and send to the user's browser. In the context of our project we use the equivalent technique, AJAJ, which uses JSON instead of XML. On an abstract level one can explain AJAX as server requests which does not cause a page load, and whose response can be used either to insert new content dynamically or for some other purpose by the client.
@@ -56,9 +55,6 @@ In order to customise the layout of websites for different screen resolutions, a
 
 \subsubsection{JSON}
 JSON (JavaScript Object Notation) is a data-interchange format \cite{Crockford2011}. JSON has several benefits when compared to other data-interchange formats such as XML. For instance, since it is based on Javascript object and array notation, it can be directly imported into Javascript. It is also lighter weight and arguably easier to write and read than the equivalent XML. In our project we receive data from the Twitter APIs in a JSON format.
-
-\subsubsection{AJAX}%torstein
-AJAX, standing for Asynchronous Javascript and XML, is a technique where one can enable client-server interaction after a page has been rendered and send to the user's browser \cite{Garrett2005}. In the context of our project we use the equivalent technique, AJAJ, which uses the JSON data format instead of XML. On an abstract level one can explain AJAX as server requests which does not cause a page load, and whose response can be used either to insert new content dynamically or for some other purpose by the client.
 
 \subsubsection{jQuery Masonry}
 Masonry is an open source jQuery plugin which enables better placement of elements within a  html grid.
