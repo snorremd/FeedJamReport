@@ -63,7 +63,6 @@ The client then requests user information about all these users from Twitter. It
 After the generated view has been inserted the client starts requesting followers and following for each of the users who were looked up. This is done this lately in the process in order to ensure that the view is returned and displayed to the FeedJam user as soon as possible in order to make the system appear faster, through using AJAX this can also be done without the user noticing. Each response from the Twitter API is then asynchronously send to the controller which in turn processes the JSON and inserts the values into our database.
 
 \subsubsection{Interaction between controller and model} %lisa
-\label{interactionControllerModel}
 %information flow, hvordan ting skjer
 FeedJam has tree controllers. The HomeController handles the trend requests for from the front page. It finds the time of the request and uses the MySQLTrendingFactory class to search the database for trends. If the trend exist in the database they are returned to the view. If trends for the current hour don't exist in the DB, a request is sent to Twitter. The response is cached and sent to the view. More on the database structure in section \ref{feedJamDatabase} \nameref{feedJamDatabase}.
 
