@@ -15,15 +15,30 @@ The application is built on Spring's Web MVC framework. MVC separates the busine
 \item And the view is then returned to the client. 
 \end{itemize}
 
+
 --------- TODO ---------- 
 
 
 \subsubsection{The Model} %what it does. what is contains 
-The model is the part of the application that contains the domain objects or the core data structures. In FeedJam the main interfaces are TwitterUserInfo323, TweetInfo323 and Trend. Trend represents the trending topics presented on the front page. While TwitterUserInfo323 represents the user including the information such as name, screen name, number of followers and following, tweets count etc. It also contain a field for fitnessScore which represents the user's UserRank. TweetInfor323 represents the tweets and info related to them. Some of the fields are text, retweetCount, tags, mentions and tweetRank. The TweetObject also contains reference to the Twitter user that wrote the tweet (the field userInfo). Trends, TweetSearchResult and FollowersFollowingResultPage are interfaces used to create the object that are sent to the view. 
+The model is the part of the application that contains the domain objects or the core data structures. In FeedJam the main interfaces are TwitterUserInfo323, TweetInfo323 and Trend. Trend represents the trending topics presented on the front page. While TwitterUserInfo323 represents the user including the information such as name, screen name, number of followers and following, tweets count etc. It also contain a field for fitnessScore which represents the user's UserRank. TweetInfor323 represents the tweets and info related to them. Some of the fields are text, retweetCount, tags, mentions and tweetRank. The tweet class also contains reference to the Twitter user that wrote the tweet (the field userInfo). Trends, TweetSearchResult and FollowersFollowingResultPage are interfaces used to create the object that are sent to the view. 
 
 A factory pattern is used to create the objects needed in for the persistence layer. 
-More info about the connection can be found in section \ref{sec:feedJamDatabase} \nameref{secc::feedJamDatabase}.
+More info about the connection can be found in section \ref{sec:feedJamDatabase} \nameref{sec:feedJamDatabase}.
 
+The structure of the Java packages is as follows:
+
+\begin{itemize}
+  \item uib.info323.twitterAWSM - contains the controllers
+  \item uib.info323.twitterAWSM.exceptions - contains exceptions
+  \item uib.info323.twitterAWSM.io - contains interfaces for interacting with persistence layer (postfixed -DAO), interfaces for searching the Twitter API (postfixed -SearchFactory) and interfaces for crating model object (postfixed -Factory).
+  \item uib.info323.twitterAWSM.io.impl - contains MySql implementations, Json implementations and model implementations. 
+  \item uib.info323.twitterAWSM.io.rowmapper - contains rowmappers used in accessing persistence layer
+  \item uib.info323.twitterAWSM.model.impl - contains model implementations
+  \item uib.info323.twitterAWSM.model.interfaces - contains model interfaces
+  \item uib.info323.twitterAWSM.model.impl - contains model implementations
+  \item uib.info323.twitterAWSM.pagerank - contains PageRank/UserRank implementation
+  \item uib.info323.twitterAWSM.model.utils - contains parsers etc.
+\end{itemize}
 
 --------- TODO ---------- 
 
@@ -34,7 +49,7 @@ Within the context of Spring, views are written in a language called JSP. JSP, J
 
 \subsubsection{The Controller}
 %FeedJam has two controllers, HomeController and AjajController, one for each view in the application.
-The controller takes the user input from the view and sends it to the business logic that handles it and sends response back to the controller \cite{}. The controller receives request from the view in an JSON format. The JSON string is parsed by a JsonParser (utils-package) and the model produces a response. The controller prepares a Map (footnote java.util.Map) containing the view(s) and the response objects. A Spring InternalResoucesViewResolver generates the view with information  from the Map.
+The controller takes the user input from the view and sends it to the business logic which handles it and sends the response back to the controller which sends it to the view \citep{Oracle}. The controller receives request from the view in a JSON string. The JSON string is parsed by a JsonParser (utils-package) and the model produces a response. The controller prepares a Map \footnote{java.util.Map \citep{Oraclea}} containing the view(s) and the response objects. A Spring InternalResoucesViewResolver\footnote{org.springframework.web.servlet.view.InternalResourceViewResolver \citep{TheSpring} }  generates the view with information  from the Map.
 
 --------- TODO ---------- 
 
@@ -77,7 +92,7 @@ After the generated view has been inserted the client starts requesting follower
 
 \subsubsection{Interaction between controller and model} %lisa
 %information flow, hvordan ting skjer
-FeedJam has three controllers. The HomeController handles the trend requests for the front page. It finds the time of the request and uses the MySQLTrendingFactory class to search the database for trends. If the trends exists in the database they are returned to the view. If trends for the current hour does not exist in the DB, a request is sent to the  Twitter API. The response is stored in the database and sent to the view. More on the database in section \ref{feedJamDatabase} \nameref{feedJamDatabase}.
+FeedJam has three controllers. The HomeController handles the trend requests for the front page. It finds the time of the request and uses the MySQLTrendingFactory class to search the database for trends. If the trends exists in the database they are returned to the view. If trends for the current hour does not exist in the DB, a request is sent to the  Twitter API. The response is stored in the database and sent to the view. More on the database in section \ref{sec:feedJamDatabase} \nameref{sec:feedJamDatabase}.
 
 The AjajController handles all search requests. When the client has retrieved search results from Twitter, the JSON response is posted to AjajController. Using the MySQLUserFactory, it queries the database to check if user information of the tweet owners is cached. If some users are not recorded in the database, a response is sent to the view. It contains a JSON array of users the client needs to retrieve information about. 
 
@@ -108,23 +123,10 @@ public ResponseEntity<String> processFollowing(
 \label{javaProcessFollowing}
 \end{figure}
 
-The SearchController is now used as a backup. It originally handled server side requests to Twitter. As explained in section \label{twitterProblem} we had a large amount of problems connected with the limited amount of requests per ip-adress per hour. Since the SearchController performed API requests server-side this meant that FeedJam could serve a maximum of 150 searches per hour in total. While all API requests are handled client-side in the final FeedJam version we keep the SearchController as a backup in the cases where the users have disabled Javascript in their browser in order to provide a similar, though limited, experience for those users.
+The SearchController is now used as a backup. It originally handled server side requests to Twitter. As explained in section \ref{twitterProblem} \nameref{twitterProblem}, we had a large amount of problems connected with the limited amount of requests per ip-adress per hour. Since the SearchController performed API requests server-side this meant that FeedJam could serve a maximum of 150 searches per hour in total. While all API requests are handled client-side in the final FeedJam version we keep the SearchController as a backup in the cases where the users have disabled Javascript in their browser in order to provide a similar, though limited, experience for those users.
 
 %brukt desingn patterns 
 
-{\bf packages}
-\begin{itemize}
-  \item uib.info323.twitterAWSM contains the controllers
-  \item uib.info323.twitterAWSM.exceptions contains exceptions
-  \item uib.info323.twitterAWSM.io contains interfaces for interacting with persistence layer (postfixed -DAO), interfaces for searching the Twitter API (postfixed -SearchFactory) and interfaces for crating model object (postfixed -Factory).
-  \item uib.info323.twitterAWSM.io.impl contains MySql implementations, Json implementations and model implementations. 
-  \item uib.info323.twitterAWSM.io.rowmapper contains rowmappers used in accessing persistence layer
-  \item uib.info323.twitterAWSM.model.impl contains model implementations
-  \item uib.info323.twitterAWSM.model.interfaces contains model interfaces
-  \item uib.info323.twitterAWSM.model.impl contains model implementations
-  \item uib.info323.twitterAWSM.pagerank contains PageRank/UserRank implementation
-  \item uib.info323.twitterAWSM.model.utils contains parsers etc.
-\end{itemize}
 
 \subsection{Layout} %torstein
 A large part of our project was to develop a novel way of displaying tweets. This section will explain how we developed the layout concept in addition to explaining how we implemented it using modern standards and techniques.
@@ -223,14 +225,19 @@ The FeedJam ranking consist of two parts, the TweetRank and the UserRank. It is 
 The TweetRank is based on the idea of using ranking signals in search engines. Even though there isn't as many content signals in a tweet as in a normal web pages we use them to make the TweetRank. "\#" symbol is used in Twitter to mark keywords or topics in a tweet \citep{Twitter}. Twitter recommends using no more than 2 hash tags in a tweet. 
 Mentions are another mark-up that is used in tweets. It indicates either that a tweet is a reply to another tweet or that a tweet concerns a user \citep{Twitterb}. If a tweet is read by many, it is considered important. The Twitter API does not provide this statistic. We have decided to use the retweet count of tweets as a heuristic to get an idea of how many times a tweet might have been read.
 
+The TweetRank implementation can be found in TweetInfo323Impl class. It is calculated using the average score from tags, mentions and retweets. The points given are set by us and can be adjusted to give the desired effect. Because the opacity of the view is generated based on the tweetRank-score, both the TweetRank and the UserRank is included in this value. 
+
 \subsubsection{UserRank}
 The UserRank uses information about a user's followers and who a user follows to rank the user. The follower relation between to users represent the back-link (or inbound link) relationship in a page rank algorithm. The following relationship between two users represents the forward link (or outbound link) relationship. If you recall the three user categories described in section~\ref{Twitter}, it is clear that a user with a high user rank (i.e. high page rank) falls under the category Information source, and should therefore be regarded as an interesting user. It is probable that a highly ranked user have many followers, the followers themselves having a high user rank, because she makes interesting tweets.
+
+The relationships between the users is similar to the we structure. Even if both distributions of pages vs. users are similar the problem when calculating UserRank is the enormous amounts of followers a user can have. According to twittercounter.com \citep{TwitterCounter}, Lady Gaga who is the most popular Twitter user, has over 25 000 000 followers. While in comparison Google which is ranked as the most popular web site by alexa.com \citet{AlexaInternet2012}, has about 5 000 000 inbound links. 
 
 {\bf UserRank implementation}\newline
 The UserRank implementation used in FeedJam is based on \citet{Goodrarzi2009}'s implementation of page ranking in Java. The first step when finding a user \emph{a}'s UserRank is to find all the followers of the user, then find their followers, etc. This is repeated until all related users are found and stored in a list (params). A matrix is then generated from the users in the params-list. Then a matrix containing a multifactor-constant is created. The multifactor is calculated based on the relations between the users, how many are following them and the damping factor (see source code UserRank.getMultiFactor). After this a matrix of 1- DAMPING\_FACTOR is made. These two matrixes makes out the linear equation that is the user's UserRank. The solving of the equation is left to a third party API \citep{Jama}. Lastly the rank of the user is picked out of the matrix.
 
+ 
 %Litt mer om hvordan pagerank kan brukes på Twitterusers. Lage en graph/tegning. Vise at det i teorien skal oversettes - argumentere. Sosiale nettver er ganske like weben. 
-%Optimalisation 
+{\bf Optimalisation} \newline
 Our initial implementation of the ranking algorithm was extremely slow and ranking every user was simply not feasible due to the time requirement of the algorithm. To optimize the algorithm we performed a  simple time complexity analysis in order to identify critical operations in the ranking algorithm which could be optimised. To explain how we optimised the algorithm it is necessary to show some of the source code used in the ranking algorithm. Figure~\ref{fig:generateMatrix} shows the code that generates the matrix used in the algorithm. The generateMatrix method gets the multi factor for each cell in the matrix. The getMultiFactor method is run \(n^2\) times where n is the number of users in the parameter list.
 
 \begin{figure}[h!]
