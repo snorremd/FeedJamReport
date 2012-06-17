@@ -33,9 +33,8 @@ The view is the component of MVC-applications which receives input from the user
 Within the context of Spring, views are written in a language called JSP. JSP, Java Server Pages, is an alternative form of Java intended to be used to print variables within HTML. Unlike many other languages used for web programming like PHP, JSP pages are pre-compiled. While it is possible to write entire applications in JSP it is generally not considered good practice to write any logic outside logic specifically needed in order to display content from within the objects assigned to the view by the controller.
 
 \subsubsection{The Controller}
-The controller takes the user input from the view and sends it to the business logic that handles it and sends response back to the controller.
-In Spring the Controller prepares a Map which is sent to the 
-
+%FeedJam has two controllers, HomeController and AjajController, one for each view in the application.
+The controller takes the user input from the view and sends it to the business logic that handles it and sends response back to the controller \cite{}. The controller receives request from the view in an JSON format. The JSON string is parsed by a JsonParser (utils-package) and the model produces a response. The controller prepares a Map (footnote java.util.Map) containing the view(s) and the response objects. A Spring InternalResoucesViewResolver generates the view with information  from the Map.
 
 --------- TODO ---------- 
 
