@@ -1,5 +1,3 @@
-
-=======
 %teoridel
 In this section we will present background information relevant to our project. We will start by introducing ranking in relation to search engines. After this we will take a closer look at the Google PageRank algorithm which is the foundation of the FeedJam ranking algorithm.  Following the section on the PageRank algorithm we will shortly introduce Twitter, the social media that is the domain of our research. The background section will end with a presentation of work related to our project.
 
@@ -30,10 +28,10 @@ where:\newline
 When computing the algorithm we have to consider the problem of pages with no outgoing links. \citet{Baeza-Yates2011} propose two solutions. One is to put \emph{q = 1} for these pages, the other is to leave them out, and compute their rank at the end based on their parents rank. 
 
 
-\subsubsection{User Interface}
+\subsection{User Interface}
 In addition to applying the PageRank algorithm we aim to create a novel interface for displaying tweets.
 
-{\bf Interaction design principles and user-centered design}\newline
+\subsubsection{Interaction design principles and user-centered design}
 Within the field of interaction design we have several different design guidelines and principles for creating usable artefacts. \citet{Sharp2007} name visibiity, feedback, constraints, consistency and affordance as the essential design principles.
 
 \begin{description}
@@ -44,7 +42,7 @@ Within the field of interaction design we have several different design guidelin
   \item[Affordance] one can use affordances (natural cues, e.g that a button can be clicked) where applicable in a user interface
 \end{description}
 
-{\bf \noindent Classic search engine result pages}\newline
+\subsubsection{Classic search engine result pages}
 \citet[p.480]{Baeza-Yates2011} argues that existing search engines are heavily influenced by what they call a extreme simplicity rule. Basically this rule states that search engine user experience must be simplistic enough in nature that users understand it without any previous knowledge, or else they will simply switch to another search engine. This has lead to a very prominent interface paradigm where all the most prominent search engines use the classic search engine result page (SERP) \citep{Baeza-Yates2011}. 
 
 As search engines have started to search several different content types the need to display several different media types in one unified result page have also emerged. This has resulted in two innovations: the “onebox” \citep{Baeza-Yates2011}, which displays specific information from one knowledge domain (e.g weather reports) and universal search results where one combines several different searches into one search result page.
@@ -54,10 +52,10 @@ As search engines have started to search several different content types the nee
 %litt om hvordan twitter kan være vanskelig å få oversikt over en strøm. finn statistikk om megden tweets i døgnet.
 %vi kan tilby noe mer enn twitter search enginen gir. Vi tilbyr en mer oversiktlig tjeneste. 
 %se om det finnes noe som sier noe om hvordna brukere bruekr twitter. 
-When deciding what information retrieval (IR) techniques we could apply to Twitter we found that when searching for Tweets it not easy to see which tweets are important and which are not. If you search for at certain topic on Twitter you get a feed of all recent tweets that match the search query. It can be some users personal diary, a conversation between users, some other form of information sharing or spam. Therefore we wanted to use IR techniques to make it easier to see what Tweets are important. 
+When deciding what information retrieval (IR) techniques we could apply to Twitter we found that when searching for Tweets it not easy to see which tweets are important and which are not. If you search for at certain topic on Twitter you get a feed of all recent tweets that match the search query. It can be everything from a users personal diary, a conversation between users, some other form of information sharing or spam. Considering this, we wanted to use information retrieval (IR) techniques to make it easier to get a quick overview to see what Tweets are important. 
 
 %Find stats from twitter, stats om twitter brukere
-Twitter is a microblogging service available for more than 20 languages \citep{Twitter2012}. Users posts messages, called tweets, about what they find interesting. These tweets are in turn shared with the world and in turn potentially read by other users. As Twitter has become popular it has received a broad user group. The difference between Twitter and other social networks is the way that it defines the relationships in the network. On Twitter users follows other users and is followed by other users. The difference compared to other major social networks is that the relationship doesn't have to be reciprocal. Being a follower means you receive all the tweets of the users you follow. \citep{Kwak2010} finds that 77.9\% of the followers relationships on Twitter are non-reciprocal. This is one of the features we will take advantage of in order to rank tweets. 
+Twitter is a microblogging service with over 130 million daily visitors \cite{WolframAlpha}, available for more than 20 languages \citep{Twitter2012}. Users posts messages, called tweets, about what they find interesting. These tweets are in turn shared with the world and in turn potentially read by other users. As Twitter has become popular it has received a broad user group. The difference between Twitter and other social networks is the way that it defines the relationships in the network. On Twitter users follows other users and is followed by other users. The difference compared to other major social networks is that the relationship doesn't have to be reciprocal. Being a follower means you receive all the tweets of the users you follow. \citep{Kwak2010} finds that 77.9\% of the followers relationships on Twitter are non-reciprocal. This is one of the features we will take advantage of in order to rank tweets. 
 
 %\citep{boka kap11} Noe om distribusjonen av sider og linker på web i kap 11. .. noe om zipf lov. Pareto distribution similar to the power law. Many small documents Det samme gjelder for Twitter?
 
