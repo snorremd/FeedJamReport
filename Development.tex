@@ -8,39 +8,27 @@ This section will explain the development methodology, technologies and tools we
 %Fordi
 
 
-This project has been developed using the Kanban-methodology which is a lean (and agile) development methodology. In a nutshell, the Kanban-methodology is about three principles: 
+This project has been developed using the Kanban-methodology which is a lean (and agile) development methodology. In a nutshell, the Kanban-methodology is about three principles \citep{Kniberg2010}: 
 \begin{itemize}
 \item Visualize work flow 
 \item Limit work in progress 
 \item Measure the lead time
 \end{itemize}
 
-The nature of the project goes well with this methodology. In the goals of the project we had a high focus on making a working prototype. --------------- TODO we focused on implementation. Something about incremental releasing. The implementation of user interface was not directly dependent on the application it self,  But in order to test it properly the rest of the application had to work. so we could work on these parts simultaneously. The ranking was implemented when the rest was more or less done. something about putting dependencies on the board we could ask the others to focus on that part. 
-this way of working made it easy to make desisions along the way. we were all new to spring and had little knowleddge about the twitter api. so it was good for us to make a quick implementation to check if it worked.something about learning at the same time as implementing. Also a small project with few team members like our don't need to hold meetings on a regular basis like e.g in scrum. better to make the disisions when we needed.  TODO --------------------
+The most important aspects for our project was the flexibility this method gives. Being an agile method we could develop the project incrementally. This is good because our goal was to develop a working high fidelity prototype. We could also take advantage of the fact that it doesn't prescribe meetings, roles and practices the way Scrum or XP does \citep{Abrahamsson2002}. We (the team) could freely decide what to do, how to do it and when to do it. Because there is no rules in Kanban about what tasks to do next and it's allowed to add and remove task during the whole development. This was good as we were unsure about the "right" way to retrieve information from Twitter. The principle of measuring lead time is only important in a business situation and it didn't apply to this project.  
 
-
-In the kickoff of the project we made a backlog of User Stories. We used an electronic kanban board from Kanbanpad.com \citep{TheHybridGroup2012} to visualize the work flow. Through the development we split the stories into smaller development tasks and posted on the kanban board. This helped us limit the work in progress because we would finish a task before starting a new one. (See attachments for screen shots from the kanban board). The board also helped us keep track of what the others were doing.
-
-%What we did durring the development?
-Developing the project we split the tasks between us. The web interface was developed along side the server application. 
-We developed the backend incrementally. We built the model round the the information we could get from the Twitter API. Using Spring as our framework we initially thought to use the Spring Social API, but we soon found out that this API didn't give as good selection of responses as Twitters own REST API.
-We started with caching only user info. Then we found out we needed to cache trends, as well, to save the requests (more on this in section \ref{twitterProblem}\nameref{twitterProblem}. 
+In the "kickoff" of the project we made a backlog of User Stories. Through the development we split the stories into smaller development tasks. Each team member chose development tasks and posted them on the kanban board. The board also helped us keep track of what the others were doing. It also helped us limit the work in progress because we would finish a task before starting a new one. We used an electronic kanban board from Kanbanpad.com \citep{TheHybridGroup2012} to help us visualize the work flow. Kanbanpad is a free and online Kanban board with a simple interface and support for multiple platforms \citep{TheHybridGroup2012}. Screen shots of the kanban board from two states in the development process can be found in the attachments figure \ref{fig:kanbanScreenShot} and \ref{fig:kanbanScreenShot2}. An example of how we defined the development tasks can be found in attachments figure \ref{fig:kanbanScreenShotDevTask}. 
 
 
 \subsection{Tools}
 During the project life cycle a number of tools have been used for the development process, implementation of code and deployment of the web application itself. A brief description of the tools used will be provided in this section.
 
-\subsubsection{Workflow}
-
-We adopted a lean and agile development workflow for our project using a Kanban board, a version control system for rapid integration of new code/functionality and worked physically together as a team. We created a online Kanban board at Kanbanpad.com. Kanbanpad is a free and online Kanban board with a simple interface and support for multiple platforms \cite{TheHybridGroup2012}.
-
------ TODO (skriv om git og greier) -----
-
-
 \subsubsection{Implementation}
 To implement the Java and Spring Framework based backend the SpringSource Tool Suite (figure~\ref{fig:springsourcetoolsuite} was used. \textit{``SpringSource Tool Suite™ (STS) provides the best Eclipse-powered development environment for building Spring-powered enterprise applications.''} \cite{SpringSource}. SpringSource Tool Suite is based on the open-source IDE framework Eclipse and provides functionality such as close integration with the Spring Framework, maven integration, automatic application deployment to web servers, debugging, code-completion and much more.
 
 The front-end code was implemented using mainly Notepad++ (figure~\ref{fig:notepadplusplus}) for coding and Google Chrome development tools for debugging and testing. \textit{``Notepad++ is a free (as in "free speech" and also as in "free beer") source code editor and Notepad replacement that supports several languages. Running in the MS Windows environment, its use is governed by GPL License.''} \cite{Ho2012}.
+
+----- TODO (skriv om git og greier) er det  viktig å ha med git?-----
 
 \subsubsection{Deployment}
 
@@ -57,23 +45,26 @@ The practical difference is that POST can take larger amounts of data than GET a
 \subsubsection{Javascript/jQuery} %torstein
 This project relies heavily on client-side Twitter requests in order to provide each user with enough requests to make the application usable. Javascript is a scripting language, at the moment the only one, which is run client-side in browsers. While Javascript itself is quite straight forward, following the ECMAscript standard, there are several inconsistencies in its implementation in different browsers. JavaScript thus demands large amounts of experience in order to develop stable and functioning scripts. jQuery is a library written in Javascript which tries to account for these inconsistencies in addition to providing easier syntax and a large amount of prepared methods.
 
+\subsubsection{jQuery Masonry}
+Masonry is an open source jQuery plugin which enables better placement of elements within a html grid. It works through calculated the rendered size of each element in the grid, and the placing each element with absolute pixel values in the final grid. It is used in the layout of FeedJam to provide a smoother display of the tweets.
+
+\subsubsection{jQuery Revolver}
+Revolver is an open source jQuery plugin which lets us generate a slider from a set of HTML elements. ---Where is it used in FeedJam??---
+
 \subsubsection{Media Queries} %torstein
 In order to customise the layout of websites for different screen resolutions one can employ the use of CSS media queries. Media queries makes it possible to determine what type of media a web page is accessed from with pure CSS code. While being a quite new innovation, media queries is supported by most browsers, including webkit and fennec based browsers, which includes most browsers used on smart phones and tablets. Media queries follow a quite simple syntax, and can be used within the standard css-document. For instance CSS written within "@media only screen and (min-width: 768px) and (max-width: 991px) \{" and "\}" would only be used in cases where the browser window has a width of between 768 and 991 pixels. Media queries are used in FeedJam in order to make the layout more available to smart phone and tablet users.
 
-\subsubsection{AJAX}%torstein
-AJAX, standing for Asynchronous Javascript and XML, is a technique where one can enable client-server interaction after a page has been rendered and send to the user's browser. In the context of our project we use the equivalent technique, AJAJ, which uses JSON instead of XML. On an abstract level one can explain AJAX as server requests which does not cause a page load, and whose response can be used either to insert new content dynamically or for some other purpose by the client.
+----TODO velg hvilket media queries avsnitt som skal være med :P-----
 
 \subsubsection{Media Queries} %torstein
 In order to customise the layout of websites for different screen resolutions, and implement what we call a responsive design, one can employ the use of CSS media queries. While being a quite new innovation media queries is a part of the CSS3 standard \cite{W3C}. Media queries is supported by most browsers, including webkit and fennec based browsers, which includes most browsers used on smart phones and tablets. Media queries follow a quite simple syntax, and can be used within the standard css-document. For instance CSS written within "@media only screen and (min-width: 768px) and (max-width: 991px) \{" and "\}" would only be used in cases where the browser window has a width of between 768 and 991 pixels. Media queries are used in FeedJam in order to make the layout more available to smart phone and tablet users.
 
+
+\subsubsection{AJAX}%torstein
+AJAX, standing for Asynchronous Javascript and XML, is a technique where one can enable client-server interaction after a page has been rendered and send to the user's browser. In the context of our project we use the equivalent technique, AJAJ, which uses JSON instead of XML. On an abstract level one can explain AJAX as server requests which does not cause a page load, and whose response can be used either to insert new content dynamically or for some other purpose by the client. FeedJam uses this to, among other things, cache followers and following after the view with the search result is returned. 
+
 \subsubsection{JSON}
 JSON (JavaScript Object Notation) is a data-interchange format \cite{Crockford2011}. JSON has several benefits when compared to other data-interchange formats such as XML. For instance, since it is based on Javascript object and array notation, it can be directly imported into Javascript. It is also lighter weight and arguably easier to write and read than the equivalent XML. In our project we receive data from the Twitter APIs in a JSON format.
 
-\subsubsection{jQuery Masonry}
-Masonry is an open source jQuery plugin which enables better placement of elements within a html grid. It works through calculated the rendered size of each element in the grid, and the placing each element with absolute pixel values in the final grid.
-
-\subsubsection{jQuery Revolver}
-Revolver is an open source jQuery plugin which lets us generate a slider from a set of HTML elements.
-
 \subsubsection{Spring} %lisa
-To develop the project we used the Spring Framework. It is a Java based open source application framework. We chose this framework because it has many modules that easily takes care of the "plumbing" of the application and makes our work easier \citep{SpringSourcec}. Some of the group members has used it before, and all wanted to get to know it better because it one of the big enterprise frameworks. The application is set up using Spring MVC architecture which allows for easy communication between the web view and the controller (more on this in section \ref{sec:MVC} \nameref{sec:MVC}) \citep{SpringSourcee}. FeedJam uses Spring's REST module for client-side HTTP access to Twitter's API. We also make user of Spring's data access module for connection to the database.
+To develop the project we used the Spring Framework. It is a Java based open source application framework. We chose this framework because it has many modules that easily takes care of the "plumbing" of the application and makes our work easier \citep{SpringSourcea}. Some of the group members has used it before, and all wanted to get to know it better because it one of the big enterprise frameworks. The application is set up using Spring MVC architecture which allows for easy communication between the model, the web view and the controller (more on this in section \ref{sec:MVC} \nameref{sec:MVC}) \citep{SpringSourced}. FeedJam uses Spring's REST module for client-side HTTP access to Twitter's API. We also make user of Spring's data access module for connection to the database.
