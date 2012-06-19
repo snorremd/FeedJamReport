@@ -28,10 +28,9 @@ To implement the Java and Spring Framework based backend the SpringSource Tool S
 
 The front-end code was implemented using mainly Notepad++ (figure~\ref{fig:notepadplusplus}) for coding and Google Chrome development tools for debugging and testing. \textit{``Notepad++ is a free (as in "free speech" and also as in "free beer") source code editor and Notepad replacement that supports several languages. Running in the MS Windows environment, its use is governed by GPL License.''} \cite{Ho2012}.
 
------ TODO (skriv om git og greier) er det  viktig å ha med git?-----
+All the code was, when ready, shared with the rest of the team through a common online repository. The repository host used was GitHub.com. \textit{``GitHub is the best place to share code with friends, co-workers, classmates, and complete strangers. Over a million people use GitHub to build amazing things together.''} \cite{GitHub}. GitHub utilises the widely used source code revision and management system Git. \textit{``Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.''} \cite{Git}. Through using Git and GitHub we were able to work on any files at any time and simply merge any conflicting changes to any classes. We were also able to roll back any unwanted changes, due to GitHub storing a changelist.
 
 \subsubsection{Deployment}
-
 The application is deployed on a server running the Linux distribution Ubuntu 12.04, a Tomcat web server, a LAMP-stack (Linux, Apache, MySQL, PHP) and Maven. Ubuntu 12.04 is the newest version of the operative system developed by Canonical and is suitable for use as a web server with desktop access. To serve the webpages of the FeedJam application we use Tomcat, an open-source web server for Java-based web applications. A MySQL server is used to drive the application's database of users and tweets. An Apache php server is used to provide the phpMyAdmin web interface to manage the MySQL server.
 
 \subsection{Technology}
@@ -49,16 +48,10 @@ This project relies heavily on client-side Twitter requests in order to provide 
 Masonry is an open source jQuery plugin which enables better placement of elements within a html grid. It works through calculated the rendered size of each element in the grid, and the placing each element with absolute pixel values in the final grid. It is used in the layout of FeedJam to provide a smoother display of the tweets.
 
 \subsubsection{jQuery Revolver}
-Revolver is an open source jQuery plugin which lets us generate a slider from a set of HTML elements. ---Where is it used in FeedJam??---
+Revolver is an open source jQuery plugin which lets us generate a slider from a set of HTML elements. In the context of FeedJam jQuery Revolver is used to generate the sliding effect on the trends displayed on the front page.
 
 \subsubsection{Media Queries} %torstein
 In order to customise the layout of websites for different screen resolutions one can employ the use of CSS media queries. Media queries makes it possible to determine what type of media a web page is accessed from with pure CSS code. While being a quite new innovation, media queries is supported by most browsers, including webkit and fennec based browsers, which includes most browsers used on smart phones and tablets. Media queries follow a quite simple syntax, and can be used within the standard css-document. For instance CSS written within "@media only screen and (min-width: 768px) and (max-width: 991px) \{" and "\}" would only be used in cases where the browser window has a width of between 768 and 991 pixels. Media queries are used in FeedJam in order to make the layout more available to smart phone and tablet users.
-
-----TODO velg hvilket media queries avsnitt som skal være med :P-----
-
-\subsubsection{Media Queries} %torstein
-In order to customise the layout of websites for different screen resolutions, and implement what we call a responsive design, one can employ the use of CSS media queries. While being a quite new innovation media queries is a part of the CSS3 standard \cite{W3C}. Media queries is supported by most browsers, including webkit and fennec based browsers, which includes most browsers used on smart phones and tablets. Media queries follow a quite simple syntax, and can be used within the standard css-document. For instance CSS written within "@media only screen and (min-width: 768px) and (max-width: 991px) \{" and "\}" would only be used in cases where the browser window has a width of between 768 and 991 pixels. Media queries are used in FeedJam in order to make the layout more available to smart phone and tablet users.
-
 
 \subsubsection{AJAX}%torstein
 AJAX, standing for Asynchronous Javascript and XML, is a technique where one can enable client-server interaction after a page has been rendered and send to the user's browser. In the context of our project we use the equivalent technique, AJAJ, which uses JSON instead of XML. On an abstract level one can explain AJAX as server requests which does not cause a page load, and whose response can be used either to insert new content dynamically or for some other purpose by the client. FeedJam uses this to, among other things, cache followers and following after the view with the search result is returned. 
