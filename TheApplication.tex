@@ -5,7 +5,7 @@ In this section we will describe the finished FeedJam application.
 
 \subsubsection{MVC} %torstein view delen, lisa model og contoller
 \label{sec:MVC}
-The application is built on Spring's Web MVC framework. MVC separates the business logic from the user interface through the controller that handles the communication between the two. The Spring MCV is request driven and designed around Springs Front Controller the DispatcherServlet that dispatches requests to controllers and offers other functionalities that facilitates development of web apps. The request goes through following steps:
+The application is built on Spring's Web MVC framework. The MVC design pattern separates the business logic from the user interface through the controller that handles the communication between the two. The Spring MCV is request driven and designed around Springs Front Controller the DispatcherServlet that dispatches requests to controllers and offers other functionalities that facilitates development of web apps. The request goes through following steps:
 
 \begin{itemize}
 \item Client sends a request to the web container in the form of a http request
@@ -16,17 +16,7 @@ The application is built on Spring's Web MVC framework. MVC separates the busine
 \item And the view is then returned to the client. 
 \end{itemize}
 
-
---------- TODO ---------- 
-
-
-\subsubsection{The Model} %what it does. what is contains 
-The model is the part of the application that contains the domain objects or the core data structures. In FeedJam the main interfaces are TwitterUserInfo323, TweetInfo323 and Trend. Trend represents the trending topics presented on the front page. While TwitterUserInfo323 represents the user including the information such as name, screen name, number of followers and following, tweets count etc. It also contain a field for fitnessScore which represents the user's UserRank. TweetInfor323 represents the tweets and info related to them. Some of the fields are text, retweetCount, tags, mentions and tweetRank. The tweet class also contains reference to the Twitter user that wrote the tweet (the field userInfo). Trends, TweetSearchResult and FollowersFollowingResultPage are interfaces used to create the object that are sent to the view. 
-
-A factory pattern is used to create the objects needed in for the persistence layer. 
-More info about the connection can be found in section \ref{sec:feedJamDatabase} \nameref{sec:feedJamDatabase}.
-
-The structure of the Java packages is as follows:
+The structure of our web application is as follows:
 
 \begin{itemize}
   \item uib.info323.twitterAWSM - contains the controllers
@@ -41,7 +31,26 @@ The structure of the Java packages is as follows:
   \item uib.info323.twitterAWSM.model.utils - contains parsers etc.
 \end{itemize}
 
---------- TODO ---------- 
+\subsubsection{The Model} %what it does. what is contains 
+The model is the part of the application that contains the domain objects or the core data structures. In FeedJam the main interfaces are TwitterUserInfo323, TweetInfo323 and Trend. Trend represents the trending topics presented on the front page. While TwitterUserInfo323 represents the user including the information such as name, screen name, number of followers and following, tweets count etc. It also contain a field for fitnessScore which represents the user's UserRank. TweetInfo323 represents the tweets and info related to them. Some of the fields are text, retweetCount, tags, mentions and tweetRank. The tweet class also contains reference to the Twitter user that wrote the tweet (the field userInfo). Trends, TweetSearchResult and FollowersFollowingResultPage are interfaces used to create the object that are sent to the view. We use the DAO factory pattern to create the object models used in the application. This is explained in more detail in section \ref{sec:feedJamDatabase} \nameref{sec:feedJamDatabase}.
+
+%caching DB 
+\subsection{Database} %lisa
+\label{sec:feedJamDatabase}
+The application uses a MySQL database to store information on users and trending topics. This was necessary because the Twitter API has restrictions on the number of request one can make to it. Caching is used in search engines as a way to make the search engine be or seem faster \citep{Baeza-Yates2011}. We use it to leverage the Twitter request restrictions making the application faster. We cache trending topics and user info. We also have functionality for caching tweets that are not used at the moment, but can be used for functionality described in \nameref{sec:futureResearch} section \ref{sec:futureResearch}. An ER-diagram of the database can be found in figure \ref{fig:erDiagram}.
+
+\begin{figure}[ht]
+    \begin{minipage}[b]{1\linewidth}
+        \centering
+        \includegraphics[width=1\textwidth]{figures/erDiagram}
+        \caption{An ER diagram of the FeedJam database}
+        \label{fig:erDiagram}
+    \end{minipage}
+\end{figure}
+
+%We use the DAO pattern to create an abstraction between the domain objects and the datasource.  The DAO interfaces TrendDAO, TweetDAO and UserDAO defines the operations that are alowed to do.  
+
+The application use the Data Access Object (DAO) factory pattern to provide the interfaces for interacting with the database. FeedJam has three interfaces of this type: TweetDAO, UserDAO and TrendDAO. They define methods for different data access  operations. The corresponding MySQLUserFactory etc. classes implement the interfaces and provide functionality for selecting, updating and querying the MySQL database.
 
 \subsubsection{The View}
 The view is the component of MVC-applications which receives input from the user and displays output from the controllers and model. While the model and the controllers contain logic in order to do database interactions and data manipulation the view in general only contains logic in the form of simple if-statements and loops in order to display the content assigned by the controller. The view is also the component which, in web applications, contains the HTML markup, CSS-styling and Javascript needed to provide users with the intended graphical design and user experience.
@@ -92,6 +101,7 @@ The client then requests user information about all these users from Twitter. Th
 After the generated view has been inserted the client starts requesting followers and following for each of the users who were looked up. This is done this lately in the process in order to ensure that the view is returned and displayed to the FeedJam user as soon as possible, thus making the system appear faster. Since we are using AJAX this can be done behind the scenes without the user noticing. Each response from the Twitter API is then asynchronously sent to the controller, which in turn processes the JSON and inserts the values into our database.
 
 \subsubsection{Interaction between controller and model} %lisa
+\label{modelControllerInteraction}
 %information flow, hvordan ting skjer
 FeedJam has three controllers. The HomeController handles the trend requests for the front page. It finds the time of the request and uses the MySQLTrendingFactory class to search the database for trends. If the trends exists in the database they are returned to the view. If trends for the current hour does not exist in the DB, a request is sent to the  Twitter API. The response is stored in the database and sent to the view. More on the database in section \ref{sec:feedJamDatabase} \nameref{sec:feedJamDatabase}.
 
@@ -309,16 +319,6 @@ private double getMultiFactor(
 \caption{Improved getMultiFactor-method with reduced time-complexity for the database-operations.}
 \label{fig:getmultifactorimproved}
 \end{figure}
-
-%caching DB 
-\subsection{Database} %lisa
-\label{sec:feedJamDatabase}
-The application uses a MySQL database to store information from Twitter. This was necessary because the Twitter API has restrictions on number of request one can make to it. Caching is used in search engines as a means for making the search engine be or seem faster \citep{boka}. We use it to leverage the Twitter request restrictions making the application faster. We cache trending topics, user info and tweets. The cached tweets are not used at the moment, but can be used for functionality described in \nameref{sec:futureResearch} section \ref{sec:futureResearch}. An ER-fiagram of the database is found in fig \ref{fig:}
-
-%We use the DAO pattern to create an abstraction between the domain objects and the datasource.  The DAO interfaces TrendDAO, TweetDAO and UserDAO defines the operations that are alowed to do.  
-
-We used Data Access Object (DAO) to provide the interfaces for interacting with the database. FeedJam has three interfaces of this type: TweetDAO, UserDAO and TrendDAO. They define methods for different insert operations, selection and updataing of the rows in the database. The corresponding MySQLUserFactory etc. classes implement this functionality.
-
 
 %\citep{boka kap11} caching is used in search engines a a means for making the search engine be or seem faster. we do caching of Twitter information. We desided to implement chariang of information from twitter because of the restriction on requests problem (see section \ref{} \nameref{}) 
 
