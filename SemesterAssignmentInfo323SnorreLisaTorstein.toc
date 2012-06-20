@@ -52,6 +52,6 @@
 \contentsline {subsection}{\numberline {8.3}Clustering of search results and/or the cached collection}{27}{subsection.8.3}
 \contentsline {subsection}{\numberline {8.4}Permalinks for accessibility}{28}{subsection.8.4}
 \contentsline {section}{\numberline {9}Conclusion}{28}{section.9}
-\contentsline {section}{\numberline {10}Appendix}{31}{section.10}
-\contentsline {subsection}{\numberline {10.1}Connecting to the application and getting the source code}{31}{subsection.10.1}
-\contentsline {subsection}{\numberline {10.2}Screenshots}{31}{subsection.10.2}
+\contentsline {section}{\numberline {10}Appendix}{32}{section.10}
+\contentsline {subsection}{\numberline {10.1}Connecting to the application and getting the source code}{32}{subsection.10.1}
+\contentsline {subsection}{\numberline {10.2}Screenshots}{32}{subsection.10.2}
