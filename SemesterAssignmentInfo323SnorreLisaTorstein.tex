@@ -1,5 +1,5 @@
 \listfiles
-\documentclass[a4paper,pt12]{article}
+\documentclass[a4paper]{article}
 \usepackage[utf8x]{inputenc}
 
 \usepackage[english]{babel}
@@ -18,6 +18,7 @@
 \usepackage{numprint}
 \usepackage[parfill]{parskip} % linje i stedet for indent i ny paragraf
 \usepackage{setspace}
+
 \onehalfspacing
 
 % sånn at jeg får code highlighting (måtte legge til javascript manuelt)
@@ -44,7 +45,6 @@
 %\usepackage{harvard}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \begin{document}
-
 \begin{titlepage}
 
 \begin{center}
@@ -68,7 +68,7 @@
 \begin{minipage}{1\textwidth}
 \begin{center} \large
 \emph{Authors:}\\
-Torstein \textsc{Thune}, Lisa \textsc{Halvorsen}, Snorre \textsc{Davøen}
+Lisa \textsc{Halvorsen}, Torstein \textsc{Thune}, Snorre \textsc{Davøen}
 \end{center}
 \end{minipage}
 
@@ -83,11 +83,7 @@ Torstein \textsc{Thune}, Lisa \textsc{Halvorsen}, Snorre \textsc{Davøen}
 \end{titlepage}
 
 \begin{abstract}
-FeedJam is an experiment where we try to combine the PageRank algorithm and a novel presentation format in order to ease digestion of large conversations on Twitter. Through employing the Kanban development methodology and the Spring framework we created a fully working prototype.
-
-%The overall aim of the project is to give the user better and faster overview of tweets. To acheive this we wanted to use information retrieval techniques of ranking and user interface presentation. Jeg tenkte jeg skulle skrive om dette litt...
-
-The aim of the project is to implement a version of the PageRank rating algorithm to Twitter tweets, and present the result in a novel way. The software development method we will be using to develop the project is Kanban. We will develop a high fidelity working prototype using the Spring framework. It will retrieve tweets based on the user’s search query, rank the results using the PageRank algorithm and display the results in a website.     
+FeedJam is a project where we wanted to investigate wether page ranking was applicable to Twitter users, and if we could combine a user rank with a novel way of presenting tweets in order to improve the way in which a user consumes Twitter feeds. We implemented a web application using Java, JSP and Javascript, and a back-end ranking algorithm using modern lean development methods. We found that page ranking is indeed applicable to Twitter users, but that the algorithm requires vast computational resources and we could thus not test the algorithm properly. We managed to implement a novel interface that we find more usable for consuming Twitter feeds than the old standard search result page paradigm.
 
 \end{abstract}
 \newpage
