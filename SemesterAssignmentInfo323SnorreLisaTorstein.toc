@@ -11,6 +11,7 @@
 \contentsline {subsection}{\numberline {3.3}Twitter}{8}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}Related Work}{8}{subsection.3.4}
 \contentsline {section}{\numberline {4}The application}{9}{section.4}
+<<<<<<< HEAD
 \contentsline {subsection}{\numberline {4.1}MVC architecture}{9}{subsection.4.1}
 \contentsline {subsubsection}{\numberline {4.1.1}The Model}{9}{subsubsection.4.1.1}
 \contentsline {subsubsection}{\numberline {4.1.2}The View}{10}{subsubsection.4.1.2}
@@ -33,6 +34,31 @@
 \contentsline {subsubsection}{\numberline {5.2.2}Deployment}{22}{subsubsection.5.2.2}
 \contentsline {subsection}{\numberline {5.3}Technology}{22}{subsection.5.3}
 \contentsline {subsubsection}{\numberline {5.3.1}HTTP Requests}{22}{subsubsection.5.3.1}
+=======
+\contentsline {subsection}{\numberline {4.1}Structure}{9}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}MVC}{9}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}The Model}{10}{subsubsection.4.1.2}
+\contentsline {subsection}{\numberline {4.2}Database}{10}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}The View}{10}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}The Controller}{11}{subsubsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.3}Interaction between view and controller}{12}{subsubsection.4.2.3}
+\contentsline {subsubsection}{\numberline {4.2.4}Interaction between controller and model}{13}{subsubsection.4.2.4}
+\contentsline {subsection}{\numberline {4.3}Layout}{14}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}Defining the concept}{14}{subsubsection.4.3.1}
+\contentsline {subsubsection}{\numberline {4.3.2}Early efforts}{15}{subsubsection.4.3.2}
+\contentsline {subsubsection}{\numberline {4.3.3}The final layout}{16}{subsubsection.4.3.3}
+\contentsline {subsubsection}{\numberline {4.3.4}Coding of the layout}{18}{subsubsection.4.3.4}
+\contentsline {subsection}{\numberline {4.4}Ranking}{18}{subsection.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}TweetRank}{18}{subsubsection.4.4.1}
+\contentsline {subsubsection}{\numberline {4.4.2}UserRank}{18}{subsubsection.4.4.2}
+\contentsline {section}{\numberline {5}Development}{20}{section.5}
+\contentsline {subsection}{\numberline {5.1}Methodology}{20}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Tools}{22}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}Implementation}{22}{subsubsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.2}Deployment}{22}{subsubsection.5.2.2}
+\contentsline {subsection}{\numberline {5.3}Technology}{22}{subsection.5.3}
+\contentsline {subsubsection}{\numberline {5.3.1}HTTP Requests}{23}{subsubsection.5.3.1}
+>>>>>>> 84edef2504e9940fa9a0f641ccbe2db98c95687d
 \contentsline {subsubsection}{\numberline {5.3.2}Javascript/jQuery}{23}{subsubsection.5.3.2}
 \contentsline {subsubsection}{\numberline {5.3.3}jQuery Masonry}{23}{subsubsection.5.3.3}
 \contentsline {subsubsection}{\numberline {5.3.4}jQuery Revolver}{23}{subsubsection.5.3.4}
@@ -45,12 +71,23 @@
 \contentsline {subsection}{\numberline {6.2}Server Problems}{25}{subsection.6.2}
 \contentsline {subsection}{\numberline {6.3}SQL/JSON injection}{25}{subsection.6.3}
 \contentsline {section}{\numberline {7}Level of reached goals}{26}{section.7}
+<<<<<<< HEAD
 \contentsline {section}{\numberline {8}Future Research}{26}{section.8}
 \contentsline {subsection}{\numberline {8.1}Semantic analysis of tweets}{26}{subsection.8.1}
+=======
+\contentsline {section}{\numberline {8}Future Research}{27}{section.8}
+\contentsline {subsection}{\numberline {8.1}Semantic analysis of tweets}{27}{subsection.8.1}
+>>>>>>> 84edef2504e9940fa9a0f641ccbe2db98c95687d
 \contentsline {subsection}{\numberline {8.2}Mobile Application}{27}{subsection.8.2}
 \contentsline {subsection}{\numberline {8.3}Clustering of search results and/or the cached collection}{27}{subsection.8.3}
 \contentsline {subsection}{\numberline {8.4}Permalinks for accessibility}{28}{subsection.8.4}
 \contentsline {section}{\numberline {9}Conclusion}{28}{section.9}
+<<<<<<< HEAD
 \contentsline {section}{\numberline {10}Appendix}{31}{section.10}
 \contentsline {subsection}{\numberline {10.1}Connecting to the application and getting the source code}{31}{subsection.10.1}
 \contentsline {subsection}{\numberline {10.2}Screenshots}{31}{subsection.10.2}
+=======
+\contentsline {section}{\numberline {10}Appendix}{32}{section.10}
+\contentsline {subsection}{\numberline {10.1}Connecting to the application and getting the source code}{32}{subsection.10.1}
+\contentsline {subsection}{\numberline {10.2}Screenshots}{32}{subsection.10.2}
+>>>>>>> 84edef2504e9940fa9a0f641ccbe2db98c95687d
