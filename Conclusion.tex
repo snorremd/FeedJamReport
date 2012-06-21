@@ -1,16 +1,5 @@
-Through our work we have been able to implement a new novel way of displaying tweets, utilising information retrieval techniques and algorithms to differentiate between tweets. The application, which at the time of writing can be accessed at http://feedjam.thunemedia.no, was developed and deployed using modern frameworks, techniques and tools.
+Our two primary goals for this project was to investigate wether the page rank algorithm was applicable to users in the Twitter network and if we could implement the algorithm, and to explore a novel interface for displaying search results. Insofar as we can tell the page rank algorithm is indeed applicable to Twitter users, but we did not have sufficient hardware to test the algorithm properly. Several compromises were made to make the ranking work, mainly that we did not allow full recursion of all back links and that we did not rank very connected users. We can therefore not really test how well the algorithm actually works in terms of satisfying the information need of a user.
 
-Although the project has in most respects been a success, resulting in an application which works, there are several components which does not work optimally. For instance the combination of old hardware and our implementation of the PageRank algorithm, in addition to Twitter users seemingly being more tightly connected than webpages, has led to us being unable to rank the more popular users in our database. In addition it can be discussed whether the concept itself in its current implementation actually fulfills our goal of easing the consumption of large collections of tweets.
+We did manage to create and implement a novel interface. While we believe that the novel interface was more of a boon than a boondoggle to our users due to a generally positive attitude amongst the users who tested it, we cannot conclude that it was a success inasmuch we did not conduct a proper user evaluation.
 
-
-managed to implement pagerank
-- but limited server capacity
-- Twitter too connected
-
-managed to create a novel interface
-
-had many problems related to the twitter api
-
-no precision evaluation due to pagerank/server capaciy problems
-
-LISA WORKED ON PROJECT => A
+In conclusion it should be said that FeedJam is more of a feasibility study than a finished product. Further studies and more resources could give a more definitive answer to wether the page rank algorithm serves as a useful signal in tweet and user ranking.
