@@ -9,6 +9,7 @@ Finally, we decided to move all user and search requests client side. As a resul
 
 %Server probl
 \subsection{Server Problems}
+\label{sec:serverProblem}
 We decided early on that we would make FeedJam as a web application running on the Java-based Spring MVC framework. This meant that the project required a server from which we could run the application, with all the necessary software installed. Because of various problems with having an official server set up, we configured our own server using the Ubuntu OS, a Tomcat and Jetty server etc.
 
 The machine we used as our server is quite old and has fairly weak hardware. It sports an old dual core Intel Pentium D processor, 1GB of ram and a slow ATA hard disk drive. While this machine can handle simple HTTP requests and operations such as parsing JSON strings and storing information in a database without problems, it is not quite suited for the task of ranking users. The page rank algorithm is not only quite processing intensive, it also requires a large amount of ram (several giga bytes for more connected users). This can be shown with the following example. A user with a high branching factor can yield extremely large parameter lists (i.e. a list of users), something in the order of 10000 and more. Seeing as how the page rank method produce a 2-dimensional array of double values, each value using eight bytes, the memory requirement of the matrix itself can be calculated using the following formula:

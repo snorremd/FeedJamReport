@@ -1,11 +1,10 @@
 %Short description of the posible actions in feedjam
 In this section we will describe the finished FeedJam application.
 %Sections
-\subsection{Structure}
 
-\subsubsection{MVC} %torstein view delen, lisa model og contoller
+\subsection{MVC architecture} %torstein view delen, lisa model og contoller
 \label{sec:MVC}
-The application is built on Spring's Web MVC framework. MVC separates the business logic from the user interface through the controller that handles the communication between the two. The Spring MCV is request driven and designed around Springs Front Controller the DispatcherServlet that dispatches requests to controllers and offers other functionalities that facilitates development of web apps. The request goes through following steps:
+The application is built on Spring's Web MVC framework. MVC separates the business logic from the user interface through the controller that handles the communication between the two \citep{Oracle}. The Spring MCV is request driven and designed around Spring's Front Controller the DispatcherServlet. It dispatches requests to controllers and offers other functionalities that facilitates development of web apps. The request goes through following steps:
 
 \begin{itemize}
 \item Client sends a request to the web container in the form of a http request
@@ -17,11 +16,11 @@ The application is built on Spring's Web MVC framework. MVC separates the busine
 \end{itemize}
 
 
---------- TODO ---------- 
+%--------- TODO ---------- 
 
 
 \subsubsection{The Model} %what it does. what is contains 
-The model is the part of the application that contains the domain objects or the core data structures. In FeedJam the main interfaces are TwitterUserInfo323, TweetInfo323 and Trend. Trend represents the trending topics presented on the front page. While TwitterUserInfo323 represents the user including the information such as name, screen name, number of followers and following, tweets count etc. It also contain a field for fitnessScore which represents the user's UserRank. TweetInfor323 represents the tweets and info related to them. Some of the fields are text, retweetCount, tags, mentions and tweetRank. The tweet class also contains reference to the Twitter user that wrote the tweet (the field userInfo). Trends, TweetSearchResult and FollowersFollowingResultPage are interfaces used to create the object that are sent to the view. 
+The model is the part of the application that contains the domain objects or the core data structures. It represents the data encapsulated in the application, and the rules that govern assess to and updates them \citep{Oracle}. In FeedJam there are three main interfaces  that represent the base data in the application: TwitterUserInfo323, TweetInfo323 and Trend. Trend represents the trending topics presented on the front page. While TwitterUserInfo323 represents the user including the information such as name, screen name, number of followers and following, tweets count etc. It also contain a field for fitnessScore which represents the user's UserRank. TweetInfor323 represents the tweets and info related to them. Some of the fields are text, retweetCount, tags, mentions and tweetRank. The tweet class also contains reference to the Twitter user that wrote the tweet (the field userInfo). Trends, TweetSearchResult and FollowersFollowingResultPage are interfaces used to create the object that are sent to the view. 
 
 A factory pattern is used to create the objects needed in for the persistence layer. 
 More info about the connection can be found in section \ref{sec:feedJamDatabase} \nameref{sec:feedJamDatabase}.
@@ -41,7 +40,7 @@ The structure of the Java packages is as follows:
   \item uib.info323.twitterAWSM.model.utils - contains parsers etc.
 \end{itemize}
 
---------- TODO ---------- 
+%--------- TODO ---------- 
 
 \subsubsection{The View}
 The view is the component of MVC-applications which receives input from the user and displays output from the controllers and model. While the model and the controllers contain logic in order to do database interactions and data manipulation the view in general only contains logic in the form of simple if-statements and loops in order to display the content assigned by the controller. The view is also the component which, in web applications, contains the HTML markup, CSS-styling and Javascript needed to provide users with the intended graphical design and user experience.
@@ -52,7 +51,7 @@ Within the context of Spring, views are written in a language called JSP. JSP, J
 %FeedJam has two controllers, HomeController and AjajController, one for each view in the application.
 The controller takes the user input from the view and sends it to the business logic which handles it and sends the response back to the controller which sends it to the view \citep{Oracle}. The controller receives request from the view in a JSON string. The JSON string is parsed by a JsonParser (utils-package) and the model produces a response. The controller prepares a Map \footnote{java.util.Map \citep{Oraclea}} containing the view(s) and the response objects. A Spring InternalResoucesViewResolver\footnote{org.springframework.web.servlet.view.InternalResourceViewResolver \citep{TheSpring} }  generates the view with information  from the Map.
 
---------- TODO ---------- 
+%--------- TODO ----------  Står det ikke nok om spesifikt hva kontrollerne gjør i de to neste seksjonene?
 
 %hva MVC er
 %hvor ting er
@@ -92,6 +91,7 @@ The client then requests user information about all these users from Twitter. Th
 After the generated view has been inserted the client starts requesting followers and following for each of the users who were looked up. This is done this lately in the process in order to ensure that the view is returned and displayed to the FeedJam user as soon as possible, thus making the system appear faster. Since we are using AJAX this can be done behind the scenes without the user noticing. Each response from the Twitter API is then asynchronously sent to the controller, which in turn processes the JSON and inserts the values into our database.
 
 \subsubsection{Interaction between controller and model} %lisa
+\label{interactionControllerModel}
 %information flow, hvordan ting skjer
 FeedJam has three controllers. The HomeController handles the trend requests for the front page. It finds the time of the request and uses the MySQLTrendingFactory class to search the database for trends. If the trends exists in the database they are returned to the view. If trends for the current hour does not exist in the DB, a request is sent to the  Twitter API. The response is stored in the database and sent to the view. More on the database in section \ref{sec:feedJamDatabase} \nameref{sec:feedJamDatabase}.
 
@@ -231,7 +231,7 @@ The TweetRank implementation can be found in TweetInfo323Impl class. It is calcu
 \subsubsection{UserRank}
 The UserRank uses information about a user's followers and who a user follows to rank the user. The follower relation between to users represent the back-link (or inbound link) relationship in a page rank algorithm. The following relationship between two users represents the forward link (or outbound link) relationship. If you recall the three user categories described in section~\ref{Twitter}, it is clear that a user with a high user rank (i.e. high page rank) falls under the category Information source, and should therefore be regarded as an interesting user. It is probable that a highly ranked user have many followers, the followers themselves having a high user rank, because she makes interesting tweets.
 
-The relationships between the users is similar to the we structure. Even if both distributions of pages vs. users are similar the problem when calculating UserRank is the enormous amounts of followers a user can have. According to twittercounter.com \citep{TwitterCounter}, Lady Gaga who is the most popular Twitter user, has over 25 000 000 followers. While in comparison Google which is ranked as the most popular web site by alexa.com \citet{AlexaInternet2012}, has about 5 000 000 inbound links. 
+The relationships between the users is similar to the we structure. Even if both distributions of pages vs. users are similar the problem when calculating UserRank is the enormous amounts of followers a user can have. According to twittercounter.com \citep{TwitterCounter}, Lady Gaga who is the most popular Twitter user, has over 25 000 000 followers. While in comparison Google which is ranked as the most popular web site by alexa.com \citet{AlexaInternet2012}, has about 5 000 000 inbound links. Section \ref{sec:serverProblem} \nameref{sec:serverProblem} describes this problem in more detail. Because of the computation metrics we decided to put a temporary UserRank on the users when we insert them to the database. The temporary UserRank is based on the number of followers the user has. The number of followers can be seen as a kind of citations count measure, and it gives a good enough temporary indication of the users popularity. We do this so to be able to show the effect of different UserRank when presenting the results to the user. 
 
 {\bf UserRank implementation}\newline
 The UserRank implementation used in FeedJam is based on \citet{Goodrarzi2009}'s implementation of page ranking in Java. The first step when finding a user \emph{a}'s UserRank is to find all the followers of the user, then find their followers, etc. This is repeated until all related users are found and stored in a list (params). A matrix is then generated from the users in the params-list. Then a matrix containing a multifactor-constant is created. The multifactor is calculated based on the relations between the users, how many are following them and the damping factor (see source code UserRank.getMultiFactor). After this a matrix of 1- DAMPING\_FACTOR is made. These two matrixes makes out the linear equation that is the user's UserRank. The solving of the equation is left to a third party API \citep{Jama}. Lastly the rank of the user is picked out of the matrix.
@@ -313,22 +313,31 @@ private double getMultiFactor(
 %caching DB 
 \subsection{Database} %lisa
 \label{sec:feedJamDatabase}
-The application uses a MySQL database to store information from Twitter. This was necessary because the Twitter API has restrictions on number of request one can make to it. Caching is used in search engines as a means for making the search engine be or seem faster \citep{boka}. We use it to leverage the Twitter request restrictions making the application faster. We cache trending topics, user info and tweets. The cached tweets are not used at the moment, but can be used for functionality described in \nameref{sec:futureResearch} section \ref{sec:futureResearch}. An ER-fiagram of the database is found in fig \ref{fig:}
+The application uses a MySQL database to store information from Twitter. This was necessary because the Twitter API has restrictions on number of request one can make to it. Caching is used in search engines as a means for making the search engine be or seem faster \citep{Baeza-Yates2011}. We use it to leverage the Twitter request restrictions making the application faster. We cache trending topics, user info and tweets. The cached tweets are not used at the moment, but can be used for functionality described in \nameref{sec:futureResearch} section \ref{sec:futureResearch}. An ER-fiagram of the database is found in fig \ref{fig:erDiagram}
 
 %We use the DAO pattern to create an abstraction between the domain objects and the datasource.  The DAO interfaces TrendDAO, TweetDAO and UserDAO defines the operations that are alowed to do.  
 
 We used Data Access Object (DAO) to provide the interfaces for interacting with the database. FeedJam has three interfaces of this type: TweetDAO, UserDAO and TrendDAO. They define methods for different insert operations, selection and updataing of the rows in the database. The corresponding MySQLUserFactory etc. classes implement this functionality.
 
 
+\begin{figure}[ht]
+    \begin{minipage}[b]{1\linewidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{figures/erDiagram}
+        \caption{ER-diagram of the database in FeedJam}
+        \label{fig:erDiagram}
+    \end{minipage}
+\end{figure}
+
 %\citep{boka kap11} caching is used in search engines a a means for making the search engine be or seem faster. we do caching of Twitter information. We desided to implement chariang of information from twitter because of the restriction on requests problem (see section \ref{} \nameref{}) 
 
--------- TODO --------
+%-------- TODO --------
 
 %We could also have used caching of query results. store the result of one query, but wouldnt have the oppdaterthet %
 %one of the features of Twitter search. could have beenn used in some other function in the application like looking at the history of tweets. \citet{boka kap 11, under caching} sais that 50\% is cached
 
 
--------- TODO (kommer samme avsnitt to ganger her?) ---------
+%-------- TODO (kommer samme avsnitt to ganger her?) ---------
 
 
 
